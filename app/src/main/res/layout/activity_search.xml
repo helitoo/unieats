@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/canvas"
+    android:orientation="vertical"
+    tools:context=".activities.restaurants.SearchActivity">
+
+    <!-- Top Header Bar -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/neutral_0"
+        android:elevation="2dp"
+        android:paddingHorizontal="16dp">
+
+        <TextView
+            android:id="@+id/tvBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="8dp"
+            android:text="←"
+            android:textColor="@color/neutral_900"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvHeaderTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Tìm kiếm"
+            android:textColor="@color/neutral_900"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvHeaderSearchIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="8dp"
+            android:text="🔍"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Kết quả tìm kiếm"
+                android:textColor="@color/neutral_900"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <!-- Input Search Box -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_input_field"
+                android:paddingHorizontal="14dp">
+
+                <TextView
+                    android:id="@+id/tvSearchBoxIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:text="🔍"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/etSearchQuery"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@id/tvSearchBoxIcon"
+                    android:layout_toStartOf="@+id/tvClearQuery"
+                    android:background="@null"
+                    android:hint="bún bò, phở, cơm tấm"
+                    android:inputType="text"
+                    android:paddingHorizontal="10dp"
+                    android:singleLine="true"
+                    android:textColor="@color/neutral_900"
+                    android:textColorHint="@color/neutral_300"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvClearQuery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="6dp"
+                    android:text="✕"
+                    android:textColor="@color/neutral_500"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <!-- Result Count -->
+            <TextView
+                android:id="@+id/tvResultCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="128 quán phù hợp với bạn"
+                android:textColor="@color/neutral_500"
+                android:textSize="14sp" />
+
+            <!-- Chips Horizontal Scroll -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/llCategoryChips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- Chip 1 -->
+                    <TextView
+                        android:id="@+id/chip1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/bg_chip_selected"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:paddingHorizontal="14dp"
+                        android:paddingVertical="8dp"
+                        android:text="giá tốt"
+                        android:textColor="@color/orange_500"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <!-- Chip 2 -->
+                    <TextView
+                        android:id="@+id/chip2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/bg_chip_normal"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:paddingHorizontal="14dp"
+                        android:paddingVertical="8dp"
+                        android:text="đánh giá cao"
+                        android:textColor="@color/neutral_700"
+                        android:textSize="13sp" />
+
+                    <!-- Chip 3 -->
+                    <TextView
+                        android:id="@+id/chip3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/bg_chip_normal"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:paddingHorizontal="14dp"
+                        android:paddingVertical="8dp"
+                        android:text="gần tôi"
+                        android:textColor="@color/neutral_700"
+                        android:textSize="13sp" />
+
+                    <!-- Chip 4 -->
+                    <TextView
+                        android:id="@+id/chip4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/bg_chip_normal"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:paddingHorizontal="14dp"
+                        android:paddingVertical="8dp"
+                        android:text="đang mở"
+                        android:textColor="@color/neutral_700"
+                        android:textSize="13sp" />
+
+                    <!-- Chip 5 -->
+                    <TextView
+                        android:id="@+id/chip5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/bg_chip_normal"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:paddingHorizontal="14dp"
+                        android:paddingVertical="8dp"
+                        android:text="1 km"
+                        android:textColor="@color/neutral_700"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- Sort option row -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sắp xếp: "
+                    android:textColor="@color/neutral_700"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvSortOrder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="4dp"
+                    android:text="Tăng dần (giá) ▾"
+                    android:textColor="@color/orange_500"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Quán phù hợp header -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Quán phù hợp"
+                android:textColor="@color/neutral_900"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Matching Restaurants List -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSearchResults"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="24dp"
+                android:nestedScrollingEnabled="false" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

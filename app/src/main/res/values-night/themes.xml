@@ -1,0 +1,7 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.UniEats" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your dark theme here. -->
+    </style>
+    <style name="Base.Theme.Unieats" parent="Base.Theme.UniEats" />
+</resources>

@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/canvas"
+    android:orientation="vertical"
+    tools:context=".activities.restaurants.ContributeRestaurantActivity">
+
+    <!-- Top Header Bar -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/neutral_0"
+        android:elevation="2dp"
+        android:paddingHorizontal="16dp">
+
+        <TextView
+            android:id="@+id/tvBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="8dp"
+            android:text="←"
+            android:textColor="@color/neutral_900"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvHeaderTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Đóng góp quán ăn"
+            android:textColor="@color/neutral_900"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Field 1: Tên quán -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="6dp"
+                android:text="Tên quán"
+                android:textColor="@color/dark_700"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_input_field"
+                android:hint="Nhập tên quán"
+                android:inputType="textPersonName"
+                android:paddingHorizontal="14dp"
+                android:singleLine="true"
+                android:textColor="@color/neutral_900"
+                android:textColorHint="@color/neutral_300"
+                android:textSize="14sp" />
+
+            <!-- Field 2: Địa chỉ chi tiết -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="6dp"
+                android:text="Địa chỉ chi tiết"
+                android:textColor="@color/dark_700"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etAddress"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_input_field"
+                android:hint="Số nhà, đường, phường..."
+                android:inputType="textPostalAddress"
+                android:paddingHorizontal="14dp"
+                android:singleLine="true"
+                android:textColor="@color/neutral_900"
+                android:textColorHint="@color/neutral_300"
+                android:textSize="14sp" />
+
+            <!-- Select Coordinates Button -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSelectCoordinates"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_button_google"
+                android:text="Chọn tọa độ trên bản đồ"
+                android:textAllCaps="false"
+                android:textColor="@color/orange_500"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <!-- Field 3: Danh mục -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="6dp"
+                android:text="Danh mục"
+                android:textColor="@color/dark_700"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etCategory"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_input_field"
+                android:hint="Chọn danh mục phù hợp"
+                android:inputType="text"
+                android:paddingHorizontal="14dp"
+                android:singleLine="true"
+                android:textColor="@color/neutral_900"
+                android:textColorHint="@color/neutral_300"
+                android:textSize="14sp" />
+
+            <!-- Field 4: Khoảng giá -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dp"
+                        android:text="Giá thấp nhất (đ)"
+                        android:textColor="@color/dark_700"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etPriceMin"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:background="@drawable/bg_input_field"
+                        android:hint="20.000"
+                        android:inputType="number"
+                        android:paddingHorizontal="14dp"
+                        android:singleLine="true"
+                        android:textColor="@color/neutral_900"
+                        android:textColorHint="@color/neutral_300"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dp"
+                        android:text="Giá cao nhất (đ)"
+                        android:textColor="@color/dark_700"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etPriceMax"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:background="@drawable/bg_input_field"
+                        android:hint="50.000"
+                        android:inputType="number"
+                        android:paddingHorizontal="14dp"
+                        android:singleLine="true"
+                        android:textColor="@color/neutral_900"
+                        android:textColorHint="@color/neutral_300"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Field 5: Ảnh không gian quán -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="8dp"
+                android:text="Ảnh không gian quán"
+                android:textColor="@color/dark_700"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvUploadCover"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_input_field"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="+ Tải ảnh quán"
+                    android:textColor="#64748B"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tvUploadMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_input_field"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="+ Ảnh menu/bảng giá"
+                    android:textColor="#64748B"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- Submit Button: Gửi duyệt -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/bg_button_orange"
+                android:text="Gửi duyệt"
+                android:textAllCaps="false"
+                android:textColor="@color/neutral_0"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

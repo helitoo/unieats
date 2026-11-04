@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/canvas"
+    tools:context=".activities.restaurants.HotRestaurantsActivity">
+
+    <!-- Top Header Bar -->
+    <RelativeLayout
+        android:id="@+id/headerBar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/neutral_0"
+        android:elevation="2dp"
+        android:paddingHorizontal="16dp">
+
+        <TextView
+            android:id="@+id/tvBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="8dp"
+            android:text="←"
+            android:textColor="@color/neutral_900"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvHeaderTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Xu hướng"
+            android:textColor="@color/neutral_900"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvHeaderSearchIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="8dp"
+            android:text="🔍"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <!-- Scrollable main content -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/layoutFooter"
+        android:layout_below="@id/headerBar"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Quán HOT tuần này"
+                android:textColor="@color/neutral_900"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Địa điểm được cộng đồng yêu thích"
+                android:textColor="@color/neutral_500"
+                android:textSize="14sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvHotRestaurants"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
+                android:nestedScrollingEnabled="false" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Shared Footer Navigation (Active: TRENDING) -->
+    <include
+        android:id="@+id/layoutFooter"
+        layout="@layout/layout_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>

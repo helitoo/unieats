@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/canvas"
+    tools:context=".activities.restaurants.DetailRestaurantActivity">
+
+    <!-- Scrollable content -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/layoutFooter"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Top Banner Header -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:background="#94A3B8">
+
+                <!-- Header cover image placeholder -->
+                <ImageView
+                    android:id="@+id/ivCover"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_launcher" />
+
+                <!-- Overlay dark gradient -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#40000000" />
+
+                <!-- Title Overlay -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Chi tiết quán ăn"
+                    android:textColor="@color/neutral_0"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <!-- Circular Back Button -->
+                <TextView
+                    android:id="@+id/tvBack"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_circle_orange"
+                    android:backgroundTint="@color/neutral_0"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:text="←"
+                    android:textColor="@color/neutral_900"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <!-- Circular Bookmark Button -->
+                <TextView
+                    android:id="@+id/tvBookmark"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/bg_circle_orange"
+                    android:backgroundTint="@color/neutral_0"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:text="🔖"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <!-- Floating White Info Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="-30dp"
+                app:cardBackgroundColor="@color/neutral_0"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/tvDetailName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cơm Tấm Nhà Mình"
+                        android:textColor="@color/neutral_900"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvDetailAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="📍  Địa chỉ: Làng Đại học"
+                        android:textColor="@color/neutral_500"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvDetailOpeningTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="🕒  Giờ mở cửa: 08:00 - 22:00"
+                        android:textColor="@color/neutral_500"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvDetailPriceRange"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="👛  Giá: 20k - 50k"
+                        android:textColor="@color/neutral_500"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Rating Summary Card (Click -> ReviewActivity) -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvRatingCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="@color/neutral_0"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/tvRatingScore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:text="4.8 ⭐"
+                        android:textColor="@color/neutral_900"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvReviewCountText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:text="120+ Đánh giá  ❯"
+                        android:textColor="#64748B"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Section "Thực đơn" -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="24dp">
+
+                <TextView
+                    android:id="@+id/tvHeaderMenu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:text="Thực đơn"
+                    android:textColor="@color/neutral_900"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvMenuCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:text="3 món ngon"
+                    android:textColor="@color/neutral_500"
+                    android:textSize="13sp" />
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:nestedScrollingEnabled="false" />
+
+            <!-- Section "Chia sẻ trải nghiệm của bạn" -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="24dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chia sẻ trải nghiệm của bạn"
+                    android:textColor="@color/neutral_900"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/llWriteReviewPrompt"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_input_field"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="14dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="💬"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="Viết đánh giá..."
+                        android:textColor="@color/neutral_500"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnSubmitReview"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="32dp"
+                    android:background="@drawable/bg_button_orange"
+                    android:text="Gửi Đánh Giá"
+                    android:textAllCaps="false"
+                    android:textColor="@color/neutral_0"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Footer -->
+    <include
+        android:id="@+id/layoutFooter"
+        layout="@layout/layout_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>

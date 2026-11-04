@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/canvas"
+    android:fillViewport="true"
+    tools:context=".activities.auth.SignupActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/tvLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="UniEats"
+            android:textColor="@color/orange_500"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Tạo tài khoản"
+            android:textColor="@color/neutral_900"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Tham gia cộng đồng khám phá ẩm thực UniEats."
+            android:textColor="@color/neutral_500"
+            android:textSize="14sp" />
+
+        <!-- Field 1: Họ và tên -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="6dp"
+            android:text="Họ và tên"
+            android:textColor="@color/dark_700"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etFullName"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_input_field"
+            android:hint="Nhập họ tên"
+            android:inputType="textPersonName"
+            android:paddingHorizontal="14dp"
+            android:singleLine="true"
+            android:textColor="@color/neutral_900"
+            android:textColorHint="@color/neutral_300"
+            android:textSize="14sp" />
+
+        <!-- Field 2: Email hoặc SĐT -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="6dp"
+            android:text="Email hoặc số điện thoại"
+            android:textColor="@color/dark_700"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etEmailPhone"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_input_field"
+            android:hint="Nhập email/SĐT"
+            android:inputType="textEmailAddress"
+            android:paddingHorizontal="14dp"
+            android:singleLine="true"
+            android:textColor="@color/neutral_900"
+            android:textColorHint="@color/neutral_300"
+            android:textSize="14sp" />
+
+        <!-- Field 3: Mật khẩu -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="6dp"
+            android:text="Mật khẩu"
+            android:textColor="@color/dark_700"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_input_field"
+            android:hint="Tối thiểu 8 ký tự"
+            android:inputType="textPassword"
+            android:paddingHorizontal="14dp"
+            android:singleLine="true"
+            android:textColor="@color/neutral_900"
+            android:textColorHint="@color/neutral_300"
+            android:textSize="14sp" />
+
+        <!-- Field 4: Nhập lại mật khẩu -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="6dp"
+            android:text="Nhập lại mật khẩu"
+            android:textColor="@color/dark_700"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etConfirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_input_field"
+            android:hint="Nhập lại mật khẩu"
+            android:inputType="textPassword"
+            android:paddingHorizontal="14dp"
+            android:singleLine="true"
+            android:textColor="@color/neutral_900"
+            android:textColorHint="@color/neutral_300"
+            android:textSize="14sp" />
+
+        <!-- Checkbox terms -->
+        <CheckBox
+            android:id="@+id/cbTerms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp"
+            android:text="Tôi đồng ý với Điều khoản sử dụng và Chính sách bảo mật."
+            android:textColor="#525252"
+            android:textSize="12sp" />
+
+        <!-- Signup button -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSignup"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/bg_button_orange"
+            android:text="Tạo tài khoản"
+            android:textAllCaps="false"
+            android:textColor="@color/neutral_0"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <!-- Sign in prompt -->
+        <TextView
+            android:id="@+id/tvSignInPrompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:text="Đã có tài khoản?  Đăng nhập"
+            android:textColor="@color/orange_500"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+</ScrollView>
