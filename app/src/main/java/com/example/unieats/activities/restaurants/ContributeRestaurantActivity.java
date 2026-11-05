@@ -3,6 +3,7 @@ package com.example.unieats.activities.restaurants;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,7 +17,8 @@ import com.example.unieats.R;
 
 public class ContributeRestaurantActivity extends AppCompatActivity {
 
-    private TextView tvBack, tvUploadCover, tvUploadMenu;
+    private ImageView tvBack;
+    private TextView tvUploadCover, tvUploadMenu;
     private EditText etName, etAddress, etCategory, etPriceMin, etPriceMax;
     private Button btnSelectCoordinates, btnSubmit;
 

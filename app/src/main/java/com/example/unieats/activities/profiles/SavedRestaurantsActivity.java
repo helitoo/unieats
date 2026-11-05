@@ -1,6 +1,7 @@
 package com.example.unieats.activities.profiles;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -20,7 +21,7 @@ import java.util.List;
 
 public class SavedRestaurantsActivity extends AppCompatActivity {
 
-    private TextView tvBack;
+    private ImageView tvBack;
     private RecyclerView rvSavedRestaurants;
 
     @Override

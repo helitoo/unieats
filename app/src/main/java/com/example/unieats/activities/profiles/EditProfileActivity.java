@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,7 +19,8 @@ import com.example.unieats.activities.auth.PasswordRestoreActivity;
 
 public class EditProfileActivity extends AppCompatActivity {
 
-    private TextView tvBack, tvChangePassword;
+    private ImageView tvBack;
+    private TextView tvChangePassword;
     private EditText etName, etEmail, etPhone;
     private Button btnSave;
 

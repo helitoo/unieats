@@ -17,19 +17,19 @@
         android:elevation="2dp"
         android:paddingHorizontal="16dp">
 
-        <TextView
+        <ImageView
             android:id="@+id/tvBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
+            android:background="@drawable/bg_circle_orange"
+            android:backgroundTint="#F1F5F9"
             android:clickable="true"
             android:focusable="true"
-            android:padding="8dp"
-            android:text="←"
-            android:textColor="@color/neutral_900"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+            android:padding="10dp"
+            android:src="@drawable/ic_arrow_left"
+            app:tint="@color/neutral_900" />
 
         <TextView
             android:id="@+id/tvHeaderTitle"
@@ -88,9 +88,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="⭐ 4.8 / 5.0 (120 đánh giá)"
+                            android:gravity="center_vertical"
+                            android:text="4.8 / 5.0 (120 đánh giá)"
                             android:textColor="@color/neutral_500"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            app:drawableStartCompat="@drawable/ic_star_filled"
+                            app:drawableTint="@color/orange_500"
+                            android:drawablePadding="4dp" />
                     </LinearLayout>
 
                     <!-- "Đánh giá" Button -->

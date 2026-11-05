@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/llFooter"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -24,12 +25,12 @@
         android:paddingHorizontal="8dp"
         android:paddingVertical="10dp">
 
-        <TextView
-            android:id="@+id/tvHomeIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="🏠"
-            android:textSize="20sp" />
+        <ImageView
+            android:id="@+id/ivHomeIcon"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/ic_home"
+            app:tint="@color/orange_500" />
 
         <TextView
             android:id="@+id/tvHomeText"
@@ -56,12 +57,12 @@
         android:paddingHorizontal="8dp"
         android:paddingVertical="10dp">
 
-        <TextView
-            android:id="@+id/tvSearchIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="🔍"
-            android:textSize="20sp" />
+        <ImageView
+            android:id="@+id/ivSearchIcon"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/ic_search"
+            app:tint="#64748B" />
 
         <TextView
             android:id="@+id/tvSearchText"
@@ -87,12 +88,12 @@
         android:paddingHorizontal="8dp"
         android:paddingVertical="10dp">
 
-        <TextView
-            android:id="@+id/tvTrendingIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="🧭"
-            android:textSize="20sp" />
+        <ImageView
+            android:id="@+id/ivTrendingIcon"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/ic_trending"
+            app:tint="#64748B" />
 
         <TextView
             android:id="@+id/tvTrendingText"
@@ -118,12 +119,12 @@
         android:paddingHorizontal="8dp"
         android:paddingVertical="10dp">
 
-        <TextView
-            android:id="@+id/tvProfileIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="👤"
-            android:textSize="20sp" />
+        <ImageView
+            android:id="@+id/ivProfileIcon"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/ic_user"
+            app:tint="#64748B" />
 
         <TextView
             android:id="@+id/tvProfileText"

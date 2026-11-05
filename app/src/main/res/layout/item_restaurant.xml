@@ -58,10 +58,14 @@
                     android:id="@+id/tvRating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="⭐ 4,8"
+                    android:gravity="center_vertical"
+                    android:text="4.8"
                     android:textColor="@color/neutral_900"
                     android:textSize="13sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:drawableStartCompat="@drawable/ic_star_filled"
+                    app:drawableTint="@color/orange_500"
+                    android:drawablePadding="4dp" />
 
                 <TextView
                     android:id="@+id/tvReviewCountDistance"

@@ -51,7 +51,7 @@
                     android:textStyle="bold" />
 
                 <!-- Circular Back Button -->
-                <TextView
+                <ImageView
                     android:id="@+id/tvBack"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -63,14 +63,12 @@
                     android:backgroundTint="@color/neutral_0"
                     android:clickable="true"
                     android:focusable="true"
-                    android:gravity="center"
-                    android:text="←"
-                    android:textColor="@color/neutral_900"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:padding="10dp"
+                    android:src="@drawable/ic_arrow_left"
+                    app:tint="@color/neutral_900" />
 
                 <!-- Circular Bookmark Button -->
-                <TextView
+                <ImageView
                     android:id="@+id/tvBookmark"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -82,9 +80,9 @@
                     android:backgroundTint="@color/neutral_0"
                     android:clickable="true"
                     android:focusable="true"
-                    android:gravity="center"
-                    android:text="🔖"
-                    android:textSize="18sp" />
+                    android:padding="10dp"
+                    android:src="@drawable/ic_bookmark"
+                    app:tint="@color/orange_500" />
             </RelativeLayout>
 
             <!-- Floating White Info Card -->
@@ -117,27 +115,39 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="📍  Địa chỉ: Làng Đại học"
+                        android:gravity="center_vertical"
+                        android:text="Địa chỉ: Làng Đại học"
                         android:textColor="@color/neutral_500"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        app:drawableStartCompat="@drawable/ic_location"
+                        app:drawableTint="@color/neutral_500"
+                        android:drawablePadding="8dp" />
 
                     <TextView
                         android:id="@+id/tvDetailOpeningTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
-                        android:text="🕒  Giờ mở cửa: 08:00 - 22:00"
+                        android:gravity="center_vertical"
+                        android:text="Giờ mở cửa: 08:00 - 22:00"
                         android:textColor="@color/neutral_500"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        app:drawableStartCompat="@drawable/ic_clock"
+                        app:drawableTint="@color/neutral_500"
+                        android:drawablePadding="8dp" />
 
                     <TextView
                         android:id="@+id/tvDetailPriceRange"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
-                        android:text="👛  Giá: 20k - 50k"
+                        android:gravity="center_vertical"
+                        android:text="Giá: 20k - 50k"
                         android:textColor="@color/neutral_500"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        app:drawableStartCompat="@drawable/ic_wallet"
+                        app:drawableTint="@color/neutral_500"
+                        android:drawablePadding="8dp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -165,10 +175,14 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
-                        android:text="4.8 ⭐"
+                        android:gravity="center_vertical"
+                        android:text="4.8"
                         android:textColor="@color/neutral_900"
                         android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        app:drawableEndCompat="@drawable/ic_star_filled"
+                        app:drawableTint="@color/orange_500"
+                        android:drawablePadding="6dp" />
 
                     <TextView
                         android:id="@+id/tvReviewCountText"
@@ -176,9 +190,13 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:text="120+ Đánh giá  ❯"
+                        android:gravity="center_vertical"
+                        android:text="120+ Đánh giá"
                         android:textColor="#64748B"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        app:drawableEndCompat="@drawable/ic_chevron_right"
+                        app:drawableTint="#64748B"
+                        android:drawablePadding="6dp" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
@@ -245,11 +263,11 @@
                     android:orientation="horizontal"
                     android:paddingHorizontal="14dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="💬"
-                        android:textSize="16sp" />
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_chat"
+                        app:tint="@color/neutral_500" />
 
                     <TextView
                         android:layout_width="wrap_content"

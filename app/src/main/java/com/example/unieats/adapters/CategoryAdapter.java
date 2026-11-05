@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,9 +47,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         Category item = categoryList.get(position);
         holder.tvCategoryName.setText(item.getName());
         
-        if (item.getIconUrl() != null && !item.getIconUrl().isEmpty()) {
-            holder.tvCategoryIcon.setText(item.getIconUrl());
-        }
+        if (holder.ivCategoryIcon != null) {
+            if (item.getIconResId() != 0) {
+                holder.ivCategoryIcon.setImageResource(item.getIconResId());
+            } else if (item.getIconUrl() != null && !item.getIconUrl().isEmpty()) {
+                int resId = holder.itemView.getContext().getResources().getIdentifier(
+                        item.getIconUrl(), "drawable", holder.itemView.getContext().getPackageName()
+                );
+                if (resId != 0) {
+                    holder.ivCategoryIcon.setImageResource(resId);
+                }
+            }
+        } 
 
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {
@@ -69,11 +79,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvCategoryIcon, tvCategoryName;
+        ImageView ivCategoryIcon;
+        TextView tvCategoryName;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvCategoryIcon = itemView.findViewById(R.id.tvCategoryIcon);
+            ivCategoryIcon = itemView.findViewById(R.id.ivCategoryIcon);
+            
             tvCategoryName = itemView.findViewById(R.id.tvCategoryName);
         }
     }

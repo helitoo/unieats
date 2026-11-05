@@ -3,6 +3,7 @@ package com.example.unieats.activities.restaurants;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -23,7 +24,8 @@ import java.util.List;
 
 public class ReviewActivity extends AppCompatActivity {
 
-    private TextView tvBack, tvRestaurantName;
+    private ImageView tvBack;
+    private TextView tvRestaurantName;
     private Button btnWriteReview;
     private RecyclerView rvReviews;
     private String restaurantName;

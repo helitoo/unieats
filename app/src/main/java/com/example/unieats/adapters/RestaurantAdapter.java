@@ -38,7 +38,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         Restaurant item = restaurantList.get(position);
         holder.tvRestaurantName.setText(item.getName());
 
-        String ratingText = String.format(Locale.getDefault(), "⭐ %.1f", item.getRatingAvg());
+        String ratingText = String.format(Locale.getDefault(), "%.1f", item.getRatingAvg());
         holder.tvRating.setText(ratingText);
 
         String reviewDistance = String.format(Locale.getDefault(), " (%d đánh giá)%s",

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +28,8 @@ import java.util.Locale;
 
 public class SearchActivity extends AppCompatActivity {
 
-    private TextView tvBack, tvClearQuery, tvResultCount, tvSortOrder;
+    private ImageView tvBack, tvClearQuery, tvHeaderSearchIcon;
+    private TextView tvResultCount, tvSortOrder;
     private EditText etSearchQuery;
     private RecyclerView rvSearchResults;
     
@@ -109,10 +111,10 @@ public class SearchActivity extends AppCompatActivity {
             isAscending = !isAscending;
             sortList();
             if (isAscending) {
-                tvSortOrder.setText("Tăng dần (giá) ▾");
+                tvSortOrder.setText("Tăng dần (giá)");
                 Toast.makeText(SearchActivity.this, "Sắp xếp giá tăng dần", Toast.LENGTH_SHORT).show();
             } else {
-                tvSortOrder.setText("Giảm dần (giá) ▾");
+                tvSortOrder.setText("Giảm dần (giá)");
                 Toast.makeText(SearchActivity.this, "Sắp xếp giá giảm dần", Toast.LENGTH_SHORT).show();
             }
         });

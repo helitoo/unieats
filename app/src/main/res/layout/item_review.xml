@@ -39,12 +39,16 @@
                 android:background="@drawable/bg_chip_normal"
                 android:clickable="true"
                 android:focusable="true"
+                android:gravity="center_vertical"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="4dp"
-                android:text="👍 0"
+                android:text="0"
                 android:textColor="@color/neutral_700"
                 android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:drawableStartCompat="@drawable/ic_thumb_up"
+                app:drawableTint="@color/neutral_700"
+                android:drawablePadding="4dp" />
         </RelativeLayout>
 
         <TextView
@@ -83,11 +87,14 @@
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/bg_button_google"
                 android:paddingHorizontal="14dp"
-                android:text="✏️ Sửa"
+                android:text="Sửa"
                 android:textAllCaps="false"
                 android:textColor="@color/orange_500"
                 android:textSize="13sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:drawableStartCompat="@drawable/ic_edit"
+                app:drawableTint="@color/orange_500"
+                android:drawablePadding="6dp" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnDeleteReview"
@@ -95,11 +102,14 @@
                 android:layout_height="36dp"
                 android:background="@drawable/bg_button_facebook"
                 android:paddingHorizontal="14dp"
-                android:text="🗑️ Xóa"
+                android:text="Xóa"
                 android:textAllCaps="false"
                 android:textColor="#DC2626"
                 android:textSize="13sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:drawableStartCompat="@drawable/ic_trash"
+                app:drawableTint="#DC2626"
+                android:drawablePadding="6dp" />
         </LinearLayout>
 
         <TextView

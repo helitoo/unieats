@@ -5,6 +5,7 @@ public class Category {
     private String name;
     private String slug;
     private String iconUrl;
+    private int iconResId;
     private String description;
 
     public Category() {}
@@ -23,6 +24,12 @@ public class Category {
         this.iconUrl = iconUrl;
     }
 
+    public Category(String name, String slug, int iconResId) {
+        this.name = name;
+        this.slug = slug;
+        this.iconResId = iconResId;
+    }
+
     public int getCategoryId() { return categoryId; }
     public void setCategoryId(int categoryId) { this.categoryId = categoryId; }
 
@@ -34,6 +41,9 @@ public class Category {
 
     public String getIconUrl() { return iconUrl; }
     public void setIconUrl(String iconUrl) { this.iconUrl = iconUrl; }
+
+    public int getIconResId() { return iconResId; }
+    public void setIconResId(int iconResId) { this.iconResId = iconResId; }
 
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }

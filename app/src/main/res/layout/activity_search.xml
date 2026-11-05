@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
@@ -16,19 +17,19 @@
         android:elevation="2dp"
         android:paddingHorizontal="16dp">
 
-        <TextView
+        <ImageView
             android:id="@+id/tvBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
+            android:background="@drawable/bg_circle_orange"
+            android:backgroundTint="#F1F5F9"
             android:clickable="true"
             android:focusable="true"
-            android:padding="8dp"
-            android:text="←"
-            android:textColor="@color/neutral_900"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+            android:padding="10dp"
+            android:src="@drawable/ic_arrow_left"
+            app:tint="@color/neutral_900" />
 
         <TextView
             android:id="@+id/tvHeaderTitle"
@@ -40,15 +41,17 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <TextView
+        <ImageView
             android:id="@+id/tvHeaderSearchIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:padding="8dp"
-            android:text="🔍"
-            android:textSize="18sp" />
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="10dp"
+            android:src="@drawable/ic_search"
+            app:tint="@color/neutral_900" />
     </RelativeLayout>
 
     <ScrollView
@@ -80,14 +83,14 @@
                 android:background="@drawable/bg_input_field"
                 android:paddingHorizontal="14dp">
 
-                <TextView
+                <ImageView
                     android:id="@+id/tvSearchBoxIcon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:text="🔍"
-                    android:textSize="16sp" />
+                    android:src="@drawable/ic_search"
+                    app:tint="@color/neutral_500" />
 
                 <EditText
                     android:id="@+id/etSearchQuery"
@@ -104,18 +107,17 @@
                     android:textColorHint="@color/neutral_300"
                     android:textSize="14sp" />
 
-                <TextView
+                <ImageView
                     android:id="@+id/tvClearQuery"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:clickable="true"
                     android:focusable="true"
                     android:padding="6dp"
-                    android:text="✕"
-                    android:textColor="@color/neutral_500"
-                    android:textSize="16sp" />
+                    android:src="@drawable/ic_close"
+                    app:tint="@color/neutral_500" />
             </RelativeLayout>
 
             <!-- Result Count -->
@@ -240,12 +242,16 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="true"
+                    android:gravity="center_vertical"
                     android:paddingHorizontal="6dp"
                     android:paddingVertical="4dp"
-                    android:text="Tăng dần (giá) ▾"
+                    android:text="Tăng dần (giá)"
                     android:textColor="@color/orange_500"
                     android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:drawableEndCompat="@drawable/ic_chevron_down"
+                    app:drawableTint="@color/orange_500"
+                    android:drawablePadding="4dp" />
             </LinearLayout>
 
             <!-- Quán phù hợp header -->

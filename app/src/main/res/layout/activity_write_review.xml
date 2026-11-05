@@ -17,19 +17,19 @@
         android:elevation="2dp"
         android:paddingHorizontal="16dp">
 
-        <TextView
+        <ImageView
             android:id="@+id/tvBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
+            android:background="@drawable/bg_circle_orange"
+            android:backgroundTint="#F1F5F9"
             android:clickable="true"
             android:focusable="true"
-            android:padding="8dp"
-            android:text="←"
-            android:textColor="@color/neutral_900"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+            android:padding="10dp"
+            android:src="@drawable/ic_arrow_left"
+            app:tint="@color/neutral_900" />
 
         <TextView
             android:id="@+id/tvHeaderTitle"
@@ -41,15 +41,17 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <TextView
+        <ImageView
             android:id="@+id/tvHeaderSearchIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:padding="8dp"
-            android:text="🔍"
-            android:textSize="18sp" />
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="10dp"
+            android:src="@drawable/ic_search"
+            app:tint="@color/neutral_900" />
     </RelativeLayout>
 
     <ScrollView
@@ -91,60 +93,55 @@
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal">
 
-                <TextView
+                <ImageView
                     android:id="@+id/tvStar1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:clickable="true"
                     android:focusable="true"
-                    android:padding="6dp"
-                    android:text="★"
-                    android:textColor="@color/orange_500"
-                    android:textSize="36sp" />
+                    android:padding="4dp"
+                    android:src="@drawable/ic_star_filled"
+                    app:tint="@color/orange_500" />
 
-                <TextView
+                <ImageView
                     android:id="@+id/tvStar2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:clickable="true"
                     android:focusable="true"
-                    android:padding="6dp"
-                    android:text="★"
-                    android:textColor="@color/orange_500"
-                    android:textSize="36sp" />
+                    android:padding="4dp"
+                    android:src="@drawable/ic_star_filled"
+                    app:tint="@color/orange_500" />
 
-                <TextView
+                <ImageView
                     android:id="@+id/tvStar3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:clickable="true"
                     android:focusable="true"
-                    android:padding="6dp"
-                    android:text="★"
-                    android:textColor="@color/orange_500"
-                    android:textSize="36sp" />
+                    android:padding="4dp"
+                    android:src="@drawable/ic_star_filled"
+                    app:tint="@color/orange_500" />
 
-                <TextView
+                <ImageView
                     android:id="@+id/tvStar4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:clickable="true"
                     android:focusable="true"
-                    android:padding="6dp"
-                    android:text="★"
-                    android:textColor="@color/orange_500"
-                    android:textSize="36sp" />
+                    android:padding="4dp"
+                    android:src="@drawable/ic_star_filled"
+                    app:tint="@color/orange_500" />
 
-                <TextView
+                <ImageView
                     android:id="@+id/tvStar5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:clickable="true"
                     android:focusable="true"
-                    android:padding="6dp"
-                    android:text="☆"
-                    android:textColor="@color/neutral_300"
-                    android:textSize="36sp" />
+                    android:padding="4dp"
+                    android:src="@drawable/ic_star_outline"
+                    app:tint="@color/neutral_300" />
             </LinearLayout>
 
             <TextView

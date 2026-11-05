@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +27,8 @@ import java.util.Locale;
 
 public class DetailRestaurantActivity extends AppCompatActivity {
 
-    private TextView tvBack, tvBookmark, tvDetailName, tvDetailAddress, tvRatingScore, tvReviewCountText;
+    private ImageView tvBack, tvBookmark;
+    private TextView tvDetailName, tvDetailAddress, tvRatingScore, tvReviewCountText;
     private View cvRatingCard, llWriteReviewPrompt;
     private Button btnSubmitReview;
     private RecyclerView rvMenu;
@@ -74,14 +76,14 @@ public class DetailRestaurantActivity extends AppCompatActivity {
 
         String address = getIntent().getStringExtra("EXTRA_RESTAURANT_ADDRESS");
         if (address != null && !address.isEmpty()) {
-            tvDetailAddress.setText(String.format("📍  Địa chỉ: %s", address));
+            tvDetailAddress.setText(String.format("Địa chỉ: %s", address));
         }
 
         double rating = getIntent().getDoubleExtra("EXTRA_RESTAURANT_RATING", 4.8);
-        tvRatingScore.setText(String.format(Locale.getDefault(), "%.1f ⭐", rating));
+        tvRatingScore.setText(String.format(Locale.getDefault(), "%.1f", rating));
 
         int reviewCount = getIntent().getIntExtra("EXTRA_RESTAURANT_REVIEW_COUNT", 120);
-        tvReviewCountText.setText(String.format(Locale.getDefault(), "%d+ Đánh giá  ❯", reviewCount));
+        tvReviewCountText.setText(String.format(Locale.getDefault(), "%d+ Đánh giá", reviewCount));
     }
 
     private void setupFooter() {

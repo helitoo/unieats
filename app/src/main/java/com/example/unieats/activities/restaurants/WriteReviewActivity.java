@@ -3,6 +3,7 @@ package com.example.unieats.activities.restaurants;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,7 +17,8 @@ import com.example.unieats.R;
 
 public class WriteReviewActivity extends AppCompatActivity {
 
-    private TextView tvBack, tvRestaurantName, tvStar1, tvStar2, tvStar3, tvStar4, tvStar5;
+    private ImageView tvBack, tvStar1, tvStar2, tvStar3, tvStar4, tvStar5;
+    private TextView tvRestaurantName;
     private TextView tvAddPhoto1, tvAddPhoto2, tvAddPhoto3;
     private EditText etReviewComment;
     private Button btnPostReview;
@@ -64,7 +66,7 @@ public class WriteReviewActivity extends AppCompatActivity {
     private void setupListeners() {
         tvBack.setOnClickListener(v -> finish());
 
-        TextView[] stars = new TextView[]{tvStar1, tvStar2, tvStar3, tvStar4, tvStar5};
+        ImageView[] stars = new ImageView[]{tvStar1, tvStar2, tvStar3, tvStar4, tvStar5};
         for (int i = 0; i < stars.length; i++) {
             final int rating = i + 1;
             stars[i].setOnClickListener(v -> {
@@ -87,17 +89,17 @@ public class WriteReviewActivity extends AppCompatActivity {
     }
 
     private void updateStarRating(int rating) {
-        TextView[] stars = new TextView[]{tvStar1, tvStar2, tvStar3, tvStar4, tvStar5};
+        ImageView[] stars = new ImageView[]{tvStar1, tvStar2, tvStar3, tvStar4, tvStar5};
         int orangeColor = getResources().getColor(R.color.orange_500, getTheme());
         int grayColor = getResources().getColor(R.color.neutral_300, getTheme());
 
         for (int i = 0; i < stars.length; i++) {
             if (i < rating) {
-                stars[i].setText("★");
-                stars[i].setTextColor(orangeColor);
+                stars[i].setImageResource(R.drawable.ic_star_filled);
+                stars[i].setColorFilter(orangeColor);
             } else {
-                stars[i].setText("☆");
-                stars[i].setTextColor(grayColor);
+                stars[i].setImageResource(R.drawable.ic_star_outline);
+                stars[i].setColorFilter(grayColor);
             }
         }
     }

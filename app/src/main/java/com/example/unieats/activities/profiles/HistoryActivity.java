@@ -1,6 +1,7 @@
 package com.example.unieats.activities.profiles;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -22,7 +23,8 @@ import java.util.List;
 
 public class HistoryActivity extends AppCompatActivity {
 
-    private TextView tvBack, btnTabReviews, btnTabContributed;
+    private ImageView tvBack;
+    private TextView btnTabReviews, btnTabContributed;
     private RecyclerView rvHistoryList;
 
     private ReviewShortAdapter reviewShortAdapter;

@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.core.widget.TextViewCompat;
+import android.content.res.ColorStateList;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.unieats.R;
@@ -46,22 +48,26 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
         // Like button handling
         final int[] likes = {item.getLikeCount()};
         final boolean[] isLiked = {false};
-        holder.tvLike.setText(String.format(Locale.getDefault(), "👍 %d", likes[0]));
+        holder.tvLike.setText(String.format(Locale.getDefault(), "%d", likes[0]));
 
         holder.tvLike.setOnClickListener(v -> {
             if (!isLiked[0]) {
                 likes[0]++;
                 isLiked[0] = true;
                 holder.tvLike.setBackgroundResource(R.drawable.bg_chip_selected);
-                holder.tvLike.setTextColor(v.getContext().getResources().getColor(R.color.orange_500, v.getContext().getTheme()));
+                int activeColor = v.getContext().getResources().getColor(R.color.orange_500, v.getContext().getTheme());
+                holder.tvLike.setTextColor(activeColor);
+                TextViewCompat.setCompoundDrawableTintList(holder.tvLike, ColorStateList.valueOf(activeColor));
             } else {
                 likes[0]--;
                 isLiked[0] = false;
                 holder.tvLike.setBackgroundResource(R.drawable.bg_chip_normal);
-                holder.tvLike.setTextColor(v.getContext().getResources().getColor(R.color.neutral_700, v.getContext().getTheme()));
+                int normalColor = v.getContext().getResources().getColor(R.color.neutral_700, v.getContext().getTheme());
+                holder.tvLike.setTextColor(normalColor);
+                TextViewCompat.setCompoundDrawableTintList(holder.tvLike, ColorStateList.valueOf(normalColor));
             }
             item.setLikeCount(likes[0]);
-            holder.tvLike.setText(String.format(Locale.getDefault(), "👍 %d", likes[0]));
+            holder.tvLike.setText(String.format(Locale.getDefault(), "%d", likes[0]));
         });
 
         // Review photos handling

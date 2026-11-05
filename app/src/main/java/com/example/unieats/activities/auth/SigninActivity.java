@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +22,8 @@ import com.example.unieats.helpers.AuthManager;
 public class SigninActivity extends AppCompatActivity {
 
     private EditText etEmailPhone, etPassword;
-    private TextView tvTogglePassword, tvForgotPassword, tvSignUpPrompt;
+    private ImageView tvTogglePassword;
+    private TextView tvForgotPassword, tvSignUpPrompt;
     private Button btnSignin, btnGoogle, btnFacebook;
     private boolean isPasswordVisible = false;
 
@@ -56,9 +58,11 @@ public class SigninActivity extends AppCompatActivity {
             if (isPasswordVisible) {
                 etPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 isPasswordVisible = false;
+                tvTogglePassword.setImageResource(R.drawable.ic_eye);
             } else {
                 etPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                 isPasswordVisible = true;
+                tvTogglePassword.setImageResource(R.drawable.ic_eye_slash);
             }
             etPassword.setSelection(etPassword.getText().length());
         });

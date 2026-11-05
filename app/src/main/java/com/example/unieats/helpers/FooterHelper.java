@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -42,28 +43,42 @@ public class FooterHelper {
         int activeColor = ContextCompat.getColor(activity, R.color.orange_500);
         int inactiveColor = Color.parseColor("#64748B");
 
+        ImageView ivHomeIcon = activity.findViewById(R.id.ivHomeIcon);
+        ImageView ivSearchIcon = activity.findViewById(R.id.ivSearchIcon);
+        ImageView ivTrendingIcon = activity.findViewById(R.id.ivTrendingIcon);
+        ImageView ivProfileIcon = activity.findViewById(R.id.ivProfileIcon);
+
         tvHomeText.setTextColor(inactiveColor);
         tvSearchText.setTextColor(inactiveColor);
         tvTrendingText.setTextColor(inactiveColor);
         tvProfileText.setTextColor(inactiveColor);
+
+        if (ivHomeIcon != null) ivHomeIcon.setColorFilter(inactiveColor);
+        if (ivSearchIcon != null) ivSearchIcon.setColorFilter(inactiveColor);
+        if (ivTrendingIcon != null) ivTrendingIcon.setColorFilter(inactiveColor);
+        if (ivProfileIcon != null) ivProfileIcon.setColorFilter(inactiveColor);
 
         // Highlight active tab
         switch (activeTab) {
             case HOME:
                 llTabHome.setBackgroundResource(R.drawable.bg_footer_active_tab);
                 tvHomeText.setTextColor(activeColor);
+                if (ivHomeIcon != null) ivHomeIcon.setColorFilter(activeColor);
                 break;
             case SEARCH:
                 llTabSearch.setBackgroundResource(R.drawable.bg_footer_active_tab);
                 tvSearchText.setTextColor(activeColor);
+                if (ivSearchIcon != null) ivSearchIcon.setColorFilter(activeColor);
                 break;
             case TRENDING:
                 llTabTrending.setBackgroundResource(R.drawable.bg_footer_active_tab);
                 tvTrendingText.setTextColor(activeColor);
+                if (ivTrendingIcon != null) ivTrendingIcon.setColorFilter(activeColor);
                 break;
             case PROFILE:
                 llTabProfile.setBackgroundResource(R.drawable.bg_footer_active_tab);
                 tvProfileText.setTextColor(activeColor);
+                if (ivProfileIcon != null) ivProfileIcon.setColorFilter(activeColor);
                 break;
         }
 

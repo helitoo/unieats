@@ -84,11 +84,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupCategories() {
         List<Category> categoryList = new ArrayList<>();
-        categoryList.add(new Category("Cơm", "com", "🍱"));
-        categoryList.add(new Category("Bún/Phở/Mì", "bun-pho-mi", "🍲"));
-        categoryList.add(new Category("Ăn vặt", "an-vat", "🍕"));
-        categoryList.add(new Category("Trà sữa/Cà phê", "tra-sua-ca-phe", "🧋"));
-        categoryList.add(new Category("Lẩu & Nướng", "lau-nuong", "🥩"));
+        categoryList.add(new Category("Cơm", "com", R.drawable.ic_category_rice));
+        categoryList.add(new Category("Bún/Phở/Mì", "bun-pho-mi", R.drawable.ic_category_noodle));
+        categoryList.add(new Category("Ăn vặt", "an-vat", R.drawable.ic_category_snack));
+        categoryList.add(new Category("Trà sữa/Cà phê", "tra-sua-ca-phe", R.drawable.ic_category_coffee));
+        categoryList.add(new Category("Lẩu & Nướng", "lau-nuong", R.drawable.ic_category_bbq));
 
         rvCategories.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         CategoryAdapter categoryAdapter = new CategoryAdapter(categoryList);

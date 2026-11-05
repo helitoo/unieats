@@ -2,6 +2,7 @@ package com.example.unieats.activities.restaurants;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -22,7 +23,7 @@ import java.util.List;
 
 public class HotRestaurantsActivity extends AppCompatActivity {
 
-    private TextView tvBack, tvHeaderSearchIcon;
+    private ImageView tvBack, tvHeaderSearchIcon;
     private RecyclerView rvHotRestaurants;
 
     @Override
