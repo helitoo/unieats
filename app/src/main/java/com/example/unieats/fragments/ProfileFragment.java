@@ -22,6 +22,7 @@ import com.example.unieats.activities.profiles.MyRestaurantActivity;
 import com.example.unieats.activities.profiles.SavedRestaurantsActivity;
 import com.example.unieats.entities.User;
 import com.example.unieats.helpers.AuthManager;
+import com.example.unieats.helpers.FirebaseManager;
 
 public class ProfileFragment extends Fragment {
 
@@ -62,10 +63,35 @@ public class ProfileFragment extends Fragment {
     }
 
     private void loadUserData() {
+        if (FirebaseManager.getInstance().isLoggedIn() && FirebaseManager.getInstance().getCurrentUser() != null) {
+            String uid = FirebaseManager.getInstance().getCurrentUser().getUid();
+            FirebaseManager.getInstance().getUsersRef().document(uid)
+                    .get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            User user = documentSnapshot.toObject(User.class);
+                            if (user != null) {
+                                currentUser = user;
+                                String displayName = user.getName() != null && !user.getName().isEmpty()
+                                        ? user.getName() : "Người dùng";
+                                tvUserName.setText(String.format("Xin chào, %s!", displayName));
+                                tvUserRole.setText(user.getRole() != null ? user.getRole() : "USER");
+                                applyRolePermissions(user.getRole());
+                                return;
+                            }
+                        }
+                        setFallbackUserData();
+                    })
+                    .addOnFailureListener(e -> setFallbackUserData());
+        } else {
+            setFallbackUserData();
+        }
+    }
+
+    private void setFallbackUserData() {
         currentUser = new User("Phương", "phuong@example.com", "0901234567", "ADMIN");
         tvUserName.setText(String.format("Xin chào, %s!", currentUser.getName()));
         tvUserRole.setText(currentUser.getRole());
-
         applyRolePermissions(currentUser.getRole());
     }
 

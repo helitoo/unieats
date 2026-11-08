@@ -14,6 +14,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.unieats.R;
+import com.example.unieats.entities.Review;
+import com.example.unieats.helpers.FirebaseManager;
 
 public class WriteReviewActivity extends AppCompatActivity {
 
@@ -23,6 +25,7 @@ public class WriteReviewActivity extends AppCompatActivity {
     private EditText etReviewComment;
     private Button btnPostReview;
     private int selectedRating = 4;
+    private String restaurantId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,7 @@ public class WriteReviewActivity extends AppCompatActivity {
     }
 
     private void readIntentData() {
+        restaurantId = getIntent().getStringExtra("EXTRA_RESTAURANT_ID");
         String name = getIntent().getStringExtra("EXTRA_RESTAURANT_NAME");
         if (name != null && !name.isEmpty()) {
             tvRestaurantName.setText(name);
@@ -83,8 +87,46 @@ public class WriteReviewActivity extends AppCompatActivity {
         }
 
         btnPostReview.setOnClickListener(v -> {
-            Toast.makeText(WriteReviewActivity.this, "Đăng đánh giá thành công!", Toast.LENGTH_SHORT).show();
-            finish();
+            String comment = etReviewComment.getText().toString().trim();
+            if (comment.isEmpty()) {
+                etReviewComment.setError("Vui lòng nhập nội dung đánh giá!");
+                return;
+            }
+
+            btnPostReview.setEnabled(false);
+
+            String currentUserId = FirebaseManager.getInstance().isLoggedIn() && FirebaseManager.getInstance().getCurrentUser() != null
+                    ? FirebaseManager.getInstance().getCurrentUser().getUid()
+                    : "anonymous";
+
+            String currentUserName = "Người dùng";
+            if (FirebaseManager.getInstance().getCurrentUser() != null && FirebaseManager.getInstance().getCurrentUser().getDisplayName() != null) {
+                currentUserName = FirebaseManager.getInstance().getCurrentUser().getDisplayName();
+            }
+
+            Review review = new Review();
+            review.setUserId(currentUserId);
+            review.setUserName(currentUserName);
+            review.setRestaurantId(restaurantId != null ? restaurantId : "");
+            review.setRating(selectedRating);
+            review.setComment(comment);
+            review.setCreatedAt(String.valueOf(System.currentTimeMillis()));
+
+            if (restaurantId != null && !restaurantId.isEmpty()) {
+                FirebaseManager.getInstance().getReviewsRef(restaurantId)
+                        .add(review)
+                        .addOnSuccessListener(documentReference -> {
+                            Toast.makeText(WriteReviewActivity.this, "Đăng đánh giá thành công!", Toast.LENGTH_SHORT).show();
+                            finish();
+                        })
+                        .addOnFailureListener(e -> {
+                            btnPostReview.setEnabled(true);
+                            Toast.makeText(WriteReviewActivity.this, "Lỗi đăng bài: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        });
+            } else {
+                Toast.makeText(WriteReviewActivity.this, "Đăng đánh giá thành công!", Toast.LENGTH_SHORT).show();
+                finish();
+            }
         });
     }
 

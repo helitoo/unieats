@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 import com.example.unieats.activities.auth.SigninActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class AuthManager {
 
@@ -13,6 +14,9 @@ public class AuthManager {
     private static final String KEY_IS_LOGGED_IN = "key_is_logged_in";
 
     public static boolean isLoggedIn(Context context) {
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            return true;
+        }
         SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         return pref.getBoolean(KEY_IS_LOGGED_IN, false);
     }
@@ -23,6 +27,7 @@ public class AuthManager {
     }
 
     public static void logout(Activity activity) {
+        FirebaseAuth.getInstance().signOut();
         setLoggedIn(activity, false);
         Intent intent = new Intent(activity, SigninActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

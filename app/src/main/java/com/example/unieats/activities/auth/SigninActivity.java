@@ -3,6 +3,7 @@ package com.example.unieats.activities.auth;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -18,6 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.unieats.R;
 import com.example.unieats.activities.MainActivity;
 import com.example.unieats.helpers.AuthManager;
+import com.example.unieats.helpers.FirebaseManager;
 
 public class SigninActivity extends AppCompatActivity {
 
@@ -67,13 +69,7 @@ public class SigninActivity extends AppCompatActivity {
             etPassword.setSelection(etPassword.getText().length());
         });
 
-        btnSignin.setOnClickListener(v -> {
-            AuthManager.setLoggedIn(SigninActivity.this, true);
-            Toast.makeText(SigninActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(SigninActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
-        });
+        btnSignin.setOnClickListener(v -> performSignin());
 
         btnGoogle.setOnClickListener(v -> 
             Toast.makeText(SigninActivity.this, "Tiếp tục với Google", Toast.LENGTH_SHORT).show()
@@ -92,5 +88,37 @@ public class SigninActivity extends AppCompatActivity {
             Intent intent = new Intent(SigninActivity.this, SignupActivity.class);
             startActivity(intent);
         });
+    }
+
+    private void performSignin() {
+        String email = etEmailPhone.getText().toString().trim();
+        String password = etPassword.getText().toString().trim();
+
+        if (TextUtils.isEmpty(email)) {
+            etEmailPhone.setError("Vui lòng nhập Email");
+            return;
+        }
+        if (TextUtils.isEmpty(password)) {
+            etPassword.setError("Vui lòng nhập mật khẩu");
+            return;
+        }
+
+        btnSignin.setEnabled(false);
+
+        FirebaseManager.getInstance().getAuth()
+                .signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        AuthManager.setLoggedIn(SigninActivity.this, true);
+                        Toast.makeText(SigninActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(SigninActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        btnSignin.setEnabled(true);
+                        String errorMsg = task.getException() != null ? task.getException().getMessage() : "Đăng nhập thất bại";
+                        Toast.makeText(SigninActivity.this, "Lỗi: " + errorMsg, Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 }
