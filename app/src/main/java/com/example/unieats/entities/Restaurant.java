@@ -101,4 +101,8 @@ public class Restaurant {
 
     public String getTag() { return tag; }
     public void setTag(String tag) { this.tag = tag; }
+
+    private boolean expanded = false;
+    public boolean isExpanded() { return expanded; }
+    public void setExpanded(boolean expanded) { this.expanded = expanded; }
 }

@@ -8,6 +8,8 @@ public class User {
     private String role;
     private String status;
     private String avatarUrl;
+    private boolean active = true;
+    private boolean expanded = false;
 
     public User() {}
 
@@ -15,6 +17,7 @@ public class User {
         this.name = name;
         this.role = role;
         this.status = status;
+        this.active = !"Tạm dừng".equals(status);
     }
 
     public User(String name, String email, String phone, String role) {
@@ -23,6 +26,7 @@ public class User {
         this.phone = phone;
         this.role = role;
         this.status = "Đang hoạt động";
+        this.active = true;
     }
 
     public User(String userId, String name, String email, String phone, String role, String status, String avatarUrl) {
@@ -33,6 +37,7 @@ public class User {
         this.role = role;
         this.status = status;
         this.avatarUrl = avatarUrl;
+        this.active = !"Tạm dừng".equals(status);
     }
 
     public String getUserId() { return userId; }
@@ -55,4 +60,13 @@ public class User {
 
     public String getAvatarUrl() { return avatarUrl; }
     public void setAvatarUrl(String avatarUrl) { this.avatarUrl = avatarUrl; }
+
+    public boolean isActive() { return active; }
+    public void setActive(boolean active) {
+        this.active = active;
+        this.status = active ? "Đang hoạt động" : "Tạm dừng";
+    }
+
+    public boolean isExpanded() { return expanded; }
+    public void setExpanded(boolean expanded) { this.expanded = expanded; }
 }

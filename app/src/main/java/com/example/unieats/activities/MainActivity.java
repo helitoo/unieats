@@ -2,42 +2,27 @@ package com.example.unieats.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.unieats.R;
 import com.example.unieats.activities.auth.SigninActivity;
-import com.example.unieats.activities.restaurants.ContributeRestaurantActivity;
-import com.example.unieats.activities.restaurants.HotRestaurantsActivity;
-import com.example.unieats.activities.restaurants.SearchActivity;
-import com.example.unieats.adapters.CategoryAdapter;
-import com.example.unieats.adapters.PromotionAdapter;
-import com.example.unieats.adapters.RestaurantAdapter;
-import com.example.unieats.entities.Category;
-import com.example.unieats.entities.Promotion;
-import com.example.unieats.entities.Restaurant;
+import com.example.unieats.fragments.HomeFragment;
+import com.example.unieats.fragments.ProfileFragment;
+import com.example.unieats.fragments.SearchFragment;
+import com.example.unieats.fragments.TrendingFragment;
 import com.example.unieats.helpers.AuthManager;
 import com.example.unieats.helpers.FooterHelper;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class MainActivity extends AppCompatActivity {
 
-    private View llSearchBar, llHotSectionHeader;
-    private TextView tvAddRestaurant;
-    private RecyclerView rvCategories;
-    private RecyclerView rvNearbyRestaurants;
-    private RecyclerView rvHotRestaurants;
-    private RecyclerView rvPromotions;
+    private FooterHelper.Tab currentTab = FooterHelper.Tab.HOME;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,92 +44,69 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        initViews();
-        setupFooter();
-        setupCategories();
-        setupNearbyRestaurants();
-        setupHotRestaurants();
-        setupPromotions();
-        setupListeners();
+        FooterHelper.setupFooter(this, currentTab);
+
+        handleIntent(getIntent());
     }
 
-    private void initViews() {
-        tvAddRestaurant = findViewById(R.id.tvAddRestaurant);
-        llSearchBar = findViewById(R.id.llSearchBar);
-        llHotSectionHeader = findViewById(R.id.llHotSectionHeader);
-        rvCategories = findViewById(R.id.rvCategories);
-        rvNearbyRestaurants = findViewById(R.id.rvNearbyRestaurants);
-        rvHotRestaurants = findViewById(R.id.rvHotRestaurants);
-        rvPromotions = findViewById(R.id.rvPromotions);
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        handleIntent(intent);
     }
 
-    private void setupFooter() {
-        FooterHelper.setupFooter(this, FooterHelper.Tab.HOME);
-    }
-
-    private void setupCategories() {
-        List<Category> categoryList = new ArrayList<>();
-        categoryList.add(new Category("Cơm", "com", R.drawable.ic_category_rice));
-        categoryList.add(new Category("Bún/Phở/Mì", "bun-pho-mi", R.drawable.ic_category_noodle));
-        categoryList.add(new Category("Ăn vặt", "an-vat", R.drawable.ic_category_snack));
-        categoryList.add(new Category("Trà sữa/Cà phê", "tra-sua-ca-phe", R.drawable.ic_category_coffee));
-        categoryList.add(new Category("Lẩu & Nướng", "lau-nuong", R.drawable.ic_category_bbq));
-
-        rvCategories.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        CategoryAdapter categoryAdapter = new CategoryAdapter(categoryList);
-        rvCategories.setAdapter(categoryAdapter);
-    }
-
-    private void setupNearbyRestaurants() {
-        List<Restaurant> nearbyList = new ArrayList<>();
-        nearbyList.add(new Restaurant("Cơm nhà Góc Sân Trường", "Khu Phố 6, Linh Trung, Thủ Đức", 4.8, 128, 25000, 45000, "500 m", "Giá sinh viên"));
-        nearbyList.add(new Restaurant("Bún bò Cô Ba", "Làng Đại Học, Thủ Đức", 4.7, 96, 30000, 45000, "800 m", "Được yêu thích"));
-
-        rvNearbyRestaurants.setLayoutManager(new LinearLayoutManager(this));
-        RestaurantAdapter adapter = new RestaurantAdapter(nearbyList);
-        rvNearbyRestaurants.setAdapter(adapter);
-    }
-
-    private void setupHotRestaurants() {
-        List<Restaurant> hotList = new ArrayList<>();
-        hotList.add(new Restaurant("Bún bò Cô Ba", "Làng Đại Học, Thủ Đức", 4.7, 96, 30000, 45000, "800 m", "Được yêu thích"));
-        hotList.add(new Restaurant("Cơm Tấm Ba Ghiền", "Xa Lộ Hà Nội, Thủ Đức", 4.9, 340, 40000, 75000, "2.0 km", "Quán HOT"));
-
-        rvHotRestaurants.setLayoutManager(new LinearLayoutManager(this));
-        RestaurantAdapter adapter = new RestaurantAdapter(hotList);
-        rvHotRestaurants.setAdapter(adapter);
-    }
-
-    private void setupPromotions() {
-        List<Promotion> promoList = new ArrayList<>();
-        promoList.add(new Promotion("Giảm 20% Combo Sinh Viên", "Áp dụng cho tất cả quán cơm tại Làng Đại học", 20, "01/10/2023", "31/10/2023"));
-        promoList.add(new Promotion("Freeship Đơn Từ 50k", "Mã giảm tối đa 15.000đ phí vận chuyển", 0, "05/10/2023", "20/10/2023"));
-
-        rvPromotions.setLayoutManager(new LinearLayoutManager(this));
-        PromotionAdapter adapter = new PromotionAdapter(promoList);
-        rvPromotions.setAdapter(adapter);
-    }
-
-    private void setupListeners() {
-        if (tvAddRestaurant != null) {
-            tvAddRestaurant.setOnClickListener(v -> {
-                Intent intent = new Intent(MainActivity.this, ContributeRestaurantActivity.class);
-                startActivity(intent);
-            });
+    private void handleIntent(Intent intent) {
+        if (intent == null) {
+            switchTab(FooterHelper.Tab.HOME);
+            return;
         }
 
-        llSearchBar.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, SearchActivity.class);
-            startActivity(intent);
-        });
+        String tabExtra = intent.getStringExtra("EXTRA_TAB");
+        String queryExtra = intent.getStringExtra("EXTRA_SEARCH_QUERY");
 
-        View.OnClickListener openHotRestaurants = v -> {
-            Intent intent = new Intent(MainActivity.this, HotRestaurantsActivity.class);
-            startActivity(intent);
-        };
-
-        if (llHotSectionHeader != null) {
-            llHotSectionHeader.setOnClickListener(openHotRestaurants);
+        if (tabExtra != null) {
+            try {
+                FooterHelper.Tab tab = FooterHelper.Tab.valueOf(tabExtra);
+                switchTab(tab, queryExtra);
+            } catch (Exception e) {
+                switchTab(FooterHelper.Tab.HOME);
+            }
+        } else if (queryExtra != null) {
+            switchTab(FooterHelper.Tab.SEARCH, queryExtra);
+        } else if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) == null) {
+            switchTab(FooterHelper.Tab.HOME);
         }
+    }
+
+    public void switchTab(FooterHelper.Tab tab) {
+        switchTab(tab, null);
+    }
+
+    public void switchTab(FooterHelper.Tab tab, String query) {
+        currentTab = tab;
+        FooterHelper.highlightTab(this, tab);
+
+        Fragment fragment;
+        switch (tab) {
+            case SEARCH:
+                fragment = SearchFragment.newInstance(query);
+                break;
+            case TRENDING:
+                fragment = new TrendingFragment();
+                break;
+            case PROFILE:
+                fragment = new ProfileFragment();
+                break;
+            case HOME:
+            default:
+                fragment = new HomeFragment();
+                break;
+        }
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commit();
     }
 }

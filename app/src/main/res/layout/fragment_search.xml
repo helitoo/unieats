@@ -2,15 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/canvas"
-    android:orientation="vertical"
-    tools:context=".activities.restaurants.SearchActivity">
+    android:orientation="vertical">
 
     <!-- Top Header Bar -->
     <RelativeLayout
+        android:id="@+id/llTopHeader"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="@color/neutral_0"
@@ -54,6 +53,7 @@
             app:tint="@color/neutral_900" />
     </RelativeLayout>
 
+    <!-- Scrollable content -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -241,6 +241,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:clickable="true"
+                    android:drawablePadding="4dp"
                     android:focusable="true"
                     android:gravity="center_vertical"
                     android:paddingHorizontal="6dp"
@@ -250,8 +251,7 @@
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:drawableEndCompat="@drawable/ic_chevron_down"
-                    app:drawableTint="@color/orange_500"
-                    android:drawablePadding="4dp" />
+                    app:drawableTint="@color/orange_500" />
             </LinearLayout>
 
             <!-- Quán phù hợp header -->

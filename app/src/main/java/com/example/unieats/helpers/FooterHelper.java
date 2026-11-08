@@ -3,17 +3,14 @@ package com.example.unieats.helpers;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.widget.LinearLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
 import com.example.unieats.R;
 import com.example.unieats.activities.MainActivity;
-import com.example.unieats.activities.profiles.ProfileActivity;
-import com.example.unieats.activities.restaurants.HotRestaurantsActivity;
-import com.example.unieats.activities.restaurants.SearchActivity;
 
 public class FooterHelper {
 
@@ -22,6 +19,22 @@ public class FooterHelper {
     }
 
     public static void setupFooter(Activity activity, Tab activeTab) {
+        highlightTab(activity, activeTab);
+
+        LinearLayout llTabHome = activity.findViewById(R.id.llTabHome);
+        LinearLayout llTabSearch = activity.findViewById(R.id.llTabSearch);
+        LinearLayout llTabTrending = activity.findViewById(R.id.llTabTrending);
+        LinearLayout llTabProfile = activity.findViewById(R.id.llTabProfile);
+
+        if (llTabHome == null) return;
+
+        llTabHome.setOnClickListener(v -> navigateToTab(activity, Tab.HOME));
+        llTabSearch.setOnClickListener(v -> navigateToTab(activity, Tab.SEARCH));
+        llTabTrending.setOnClickListener(v -> navigateToTab(activity, Tab.TRENDING));
+        llTabProfile.setOnClickListener(v -> navigateToTab(activity, Tab.PROFILE));
+    }
+
+    public static void highlightTab(Activity activity, Tab activeTab) {
         LinearLayout llTabHome = activity.findViewById(R.id.llTabHome);
         LinearLayout llTabSearch = activity.findViewById(R.id.llTabSearch);
         LinearLayout llTabTrending = activity.findViewById(R.id.llTabTrending);
@@ -48,10 +61,10 @@ public class FooterHelper {
         ImageView ivTrendingIcon = activity.findViewById(R.id.ivTrendingIcon);
         ImageView ivProfileIcon = activity.findViewById(R.id.ivProfileIcon);
 
-        tvHomeText.setTextColor(inactiveColor);
-        tvSearchText.setTextColor(inactiveColor);
-        tvTrendingText.setTextColor(inactiveColor);
-        tvProfileText.setTextColor(inactiveColor);
+        if (tvHomeText != null) tvHomeText.setTextColor(inactiveColor);
+        if (tvSearchText != null) tvSearchText.setTextColor(inactiveColor);
+        if (tvTrendingText != null) tvTrendingText.setTextColor(inactiveColor);
+        if (tvProfileText != null) tvProfileText.setTextColor(inactiveColor);
 
         if (ivHomeIcon != null) ivHomeIcon.setColorFilter(inactiveColor);
         if (ivSearchIcon != null) ivSearchIcon.setColorFilter(inactiveColor);
@@ -62,53 +75,36 @@ public class FooterHelper {
         switch (activeTab) {
             case HOME:
                 llTabHome.setBackgroundResource(R.drawable.bg_footer_active_tab);
-                tvHomeText.setTextColor(activeColor);
+                if (tvHomeText != null) tvHomeText.setTextColor(activeColor);
                 if (ivHomeIcon != null) ivHomeIcon.setColorFilter(activeColor);
                 break;
             case SEARCH:
                 llTabSearch.setBackgroundResource(R.drawable.bg_footer_active_tab);
-                tvSearchText.setTextColor(activeColor);
+                if (tvSearchText != null) tvSearchText.setTextColor(activeColor);
                 if (ivSearchIcon != null) ivSearchIcon.setColorFilter(activeColor);
                 break;
             case TRENDING:
                 llTabTrending.setBackgroundResource(R.drawable.bg_footer_active_tab);
-                tvTrendingText.setTextColor(activeColor);
+                if (tvTrendingText != null) tvTrendingText.setTextColor(activeColor);
                 if (ivTrendingIcon != null) ivTrendingIcon.setColorFilter(activeColor);
                 break;
             case PROFILE:
                 llTabProfile.setBackgroundResource(R.drawable.bg_footer_active_tab);
-                tvProfileText.setTextColor(activeColor);
+                if (tvProfileText != null) tvProfileText.setTextColor(activeColor);
                 if (ivProfileIcon != null) ivProfileIcon.setColorFilter(activeColor);
                 break;
         }
+    }
 
-        // Setup click listeners
-        llTabHome.setOnClickListener(v -> {
-            if (!(activity instanceof MainActivity)) {
-                Intent intent = new Intent(activity, MainActivity.class);
-                activity.startActivity(intent);
-            }
-        });
-
-        llTabSearch.setOnClickListener(v -> {
-            if (!(activity instanceof SearchActivity)) {
-                Intent intent = new Intent(activity, SearchActivity.class);
-                activity.startActivity(intent);
-            }
-        });
-
-        llTabTrending.setOnClickListener(v -> {
-            if (!(activity instanceof HotRestaurantsActivity)) {
-                Intent intent = new Intent(activity, HotRestaurantsActivity.class);
-                activity.startActivity(intent);
-            }
-        });
-
-        llTabProfile.setOnClickListener(v -> {
-            if (!(activity instanceof ProfileActivity)) {
-                Intent intent = new Intent(activity, ProfileActivity.class);
-                activity.startActivity(intent);
-            }
-        });
+    private static void navigateToTab(Activity activity, Tab targetTab) {
+        if (activity instanceof MainActivity) {
+            ((MainActivity) activity).switchTab(targetTab);
+        } else {
+            Intent intent = new Intent(activity, MainActivity.class);
+            intent.putExtra("EXTRA_TAB", targetTab.name());
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            activity.startActivity(intent);
+            activity.finish();
+        }
     }
 }

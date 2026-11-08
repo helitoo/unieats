@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/canvas"
-    tools:context=".activities.restaurants.HotRestaurantsActivity">
+    android:orientation="vertical">
 
     <!-- Top Header Bar -->
     <RelativeLayout
         android:id="@+id/headerBar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:layout_alignParentTop="true"
         android:background="@color/neutral_0"
         android:elevation="2dp"
         android:paddingHorizontal="16dp">
@@ -59,8 +57,6 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/layoutFooter"
-        android:layout_below="@id/headerBar"
         android:fillViewport="true">
 
         <LinearLayout
@@ -98,13 +94,4 @@
 
         </LinearLayout>
     </ScrollView>
-
-    <!-- Shared Footer Navigation (Active: TRENDING) -->
-    <include
-        android:id="@+id/layoutFooter"
-        layout="@layout/layout_footer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" />
-
-</RelativeLayout>
+</LinearLayout>

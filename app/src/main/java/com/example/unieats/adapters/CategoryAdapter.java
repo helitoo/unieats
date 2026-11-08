@@ -12,8 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.unieats.R;
-import com.example.unieats.activities.restaurants.SearchActivity;
+import com.example.unieats.activities.MainActivity;
 import com.example.unieats.entities.Category;
+import com.example.unieats.helpers.FooterHelper;
 
 import java.util.List;
 
@@ -65,10 +66,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                 listener.onCategoryClick(item);
             } else {
                 Context context = v.getContext();
-                Intent intent = new Intent(context, SearchActivity.class);
-                intent.putExtra("EXTRA_CATEGORY_SLUG", item.getSlug());
-                intent.putExtra("EXTRA_CATEGORY_NAME", item.getName());
-                context.startActivity(intent);
+                if (context instanceof MainActivity) {
+                    ((MainActivity) context).switchTab(FooterHelper.Tab.SEARCH, item.getName());
+                } else {
+                    Intent intent = new Intent(context, MainActivity.class);
+                    intent.putExtra("EXTRA_TAB", FooterHelper.Tab.SEARCH.name());
+                    intent.putExtra("EXTRA_SEARCH_QUERY", item.getName());
+                    context.startActivity(intent);
+                }
             }
         });
     }
@@ -85,7 +90,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ivCategoryIcon = itemView.findViewById(R.id.ivCategoryIcon);
-            
             tvCategoryName = itemView.findViewById(R.id.tvCategoryName);
         }
     }

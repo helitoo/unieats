@@ -38,11 +38,6 @@
             android:windowSoftInputMode="adjustResize" />
 
         <activity
-            android:name=".activities.restaurants.SearchActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-
-        <activity
             android:name=".activities.restaurants.DetailRestaurantActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
@@ -58,17 +53,7 @@
             android:windowSoftInputMode="adjustResize" />
 
         <activity
-            android:name=".activities.restaurants.HotRestaurantsActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-
-        <activity
             android:name=".activities.restaurants.ContributeRestaurantActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-
-        <activity
-            android:name=".activities.profiles.ProfileActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
@@ -84,6 +69,26 @@
 
         <activity
             android:name=".activities.profiles.SavedRestaurantsActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".activities.profiles.ManageUserActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".activities.profiles.ManageStatisticsActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".activities.profiles.ManageRestaurantActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".activities.profiles.MyRestaurantActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 

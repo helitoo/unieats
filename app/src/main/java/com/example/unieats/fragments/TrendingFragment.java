@@ -1,19 +1,19 @@
-package com.example.unieats.activities.restaurants;
+package com.example.unieats.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.unieats.R;
+import com.example.unieats.activities.MainActivity;
 import com.example.unieats.adapters.RestaurantAdapter;
 import com.example.unieats.entities.Restaurant;
 import com.example.unieats.helpers.FooterHelper;
@@ -21,38 +21,31 @@ import com.example.unieats.helpers.FooterHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HotRestaurantsActivity extends AppCompatActivity {
+public class TrendingFragment extends Fragment {
 
     private ImageView tvBack, tvHeaderSearchIcon;
     private RecyclerView rvHotRestaurants;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_hot_restaurants);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_trending, container, false);
+    }
 
-        initViews();
-        setupFooter();
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initViews(view);
         setupHotRestaurants();
         setupListeners();
     }
 
-    private void initViews() {
-        tvBack = findViewById(R.id.tvBack);
-        tvHeaderSearchIcon = findViewById(R.id.tvHeaderSearchIcon);
-        rvHotRestaurants = findViewById(R.id.rvHotRestaurants);
+    private void initViews(View view) {
+        tvBack = view.findViewById(R.id.tvBack);
+        tvHeaderSearchIcon = view.findViewById(R.id.tvHeaderSearchIcon);
+        rvHotRestaurants = view.findViewById(R.id.rvHotRestaurants);
 
-        rvHotRestaurants.setLayoutManager(new LinearLayoutManager(this));
-    }
-
-    private void setupFooter() {
-        FooterHelper.setupFooter(this, FooterHelper.Tab.TRENDING);
+        rvHotRestaurants.setLayoutManager(new LinearLayoutManager(requireContext()));
     }
 
     private void setupHotRestaurants() {
@@ -67,11 +60,16 @@ public class HotRestaurantsActivity extends AppCompatActivity {
     }
 
     private void setupListeners() {
-        tvBack.setOnClickListener(v -> finish());
+        tvBack.setOnClickListener(v -> {
+            if (getActivity() instanceof MainActivity) {
+                ((MainActivity) getActivity()).switchTab(FooterHelper.Tab.HOME);
+            }
+        });
 
         tvHeaderSearchIcon.setOnClickListener(v -> {
-            Intent intent = new Intent(HotRestaurantsActivity.this, SearchActivity.class);
-            startActivity(intent);
+            if (getActivity() instanceof MainActivity) {
+                ((MainActivity) getActivity()).switchTab(FooterHelper.Tab.SEARCH);
+            }
         });
     }
 }
