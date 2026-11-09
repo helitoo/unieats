@@ -19,7 +19,6 @@ import java.util.Locale;
 public class MyRestaurantAdapter extends RecyclerView.Adapter<MyRestaurantAdapter.ViewHolder> {
 
     public interface OnRestaurantActionListener {
-        void onEdit(Restaurant restaurant, int position);
         void onDelete(Restaurant restaurant, int position);
     }
 
@@ -61,13 +60,6 @@ public class MyRestaurantAdapter extends RecyclerView.Adapter<MyRestaurantAdapte
             holder.tvTag.setVisibility(View.GONE);
         }
 
-        holder.btnEdit.setOnClickListener(v -> {
-            int pos = holder.getBindingAdapterPosition();
-            if (pos != RecyclerView.NO_POSITION && actionListener != null) {
-                actionListener.onEdit(item, pos);
-            }
-        });
-
         holder.btnDelete.setOnClickListener(v -> {
             int pos = holder.getBindingAdapterPosition();
             if (pos != RecyclerView.NO_POSITION && actionListener != null) {
@@ -83,7 +75,7 @@ public class MyRestaurantAdapter extends RecyclerView.Adapter<MyRestaurantAdapte
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvRestaurantName, tvRestaurantAddress, tvTag, tvRating, tvPriceRange;
-        Button btnEdit, btnDelete;
+        Button btnDelete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -92,7 +84,6 @@ public class MyRestaurantAdapter extends RecyclerView.Adapter<MyRestaurantAdapte
             tvTag = itemView.findViewById(R.id.tvTag);
             tvRating = itemView.findViewById(R.id.tvRating);
             tvPriceRange = itemView.findViewById(R.id.tvPriceRange);
-            btnEdit = itemView.findViewById(R.id.btnEdit);
             btnDelete = itemView.findViewById(R.id.btnDelete);
         }
     }

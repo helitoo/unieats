@@ -20,10 +20,20 @@ import java.util.List;
 
 public class ManageRestaurantAdapter extends RecyclerView.Adapter<ManageRestaurantAdapter.ViewHolder> {
 
+    public interface OnStatusChangeListener {
+        void onStatusChanged();
+    }
+
     private final List<Restaurant> restaurantList;
+    private OnStatusChangeListener statusChangeListener;
 
     public ManageRestaurantAdapter(List<Restaurant> restaurantList) {
         this.restaurantList = restaurantList;
+    }
+
+    public ManageRestaurantAdapter(List<Restaurant> restaurantList, OnStatusChangeListener listener) {
+        this.restaurantList = restaurantList;
+        this.statusChangeListener = listener;
     }
 
     @NonNull
@@ -95,6 +105,7 @@ public class ManageRestaurantAdapter extends RecyclerView.Adapter<ManageRestaura
             if (pos != RecyclerView.NO_POSITION) {
                 item.setStatus("APPROVED");
                 notifyItemChanged(pos);
+                if (statusChangeListener != null) statusChangeListener.onStatusChanged();
             }
         });
 
@@ -103,6 +114,7 @@ public class ManageRestaurantAdapter extends RecyclerView.Adapter<ManageRestaura
             if (pos != RecyclerView.NO_POSITION) {
                 item.setStatus("REJECTED");
                 notifyItemChanged(pos);
+                if (statusChangeListener != null) statusChangeListener.onStatusChanged();
             }
         });
 
@@ -111,6 +123,7 @@ public class ManageRestaurantAdapter extends RecyclerView.Adapter<ManageRestaura
             if (pos != RecyclerView.NO_POSITION) {
                 item.setStatus("CLOSED");
                 notifyItemChanged(pos);
+                if (statusChangeListener != null) statusChangeListener.onStatusChanged();
             }
         });
     }

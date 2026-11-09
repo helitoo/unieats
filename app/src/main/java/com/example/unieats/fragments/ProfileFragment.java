@@ -16,7 +16,6 @@ import com.example.unieats.R;
 import com.example.unieats.activities.profiles.EditProfileActivity;
 import com.example.unieats.activities.profiles.HistoryActivity;
 import com.example.unieats.activities.profiles.ManageRestaurantActivity;
-import com.example.unieats.activities.profiles.ManageStatisticsActivity;
 import com.example.unieats.activities.profiles.ManageUserActivity;
 import com.example.unieats.activities.profiles.MyRestaurantActivity;
 import com.example.unieats.activities.profiles.SavedRestaurantsActivity;
@@ -27,7 +26,7 @@ public class ProfileFragment extends Fragment {
 
     private TextView tvUserName, tvUserRole;
     private View cvEditProfile, cvHistory, cvSavedRestaurants, cvMyRestaurants;
-    private View llManagementSection, cvManageUsers, cvManageStatistics, cvManageRestaurants;
+    private View llManagementSection, cvManageUsers, cvManageRestaurants;
     private Button btnLogout;
     private User currentUser;
 
@@ -55,7 +54,6 @@ public class ProfileFragment extends Fragment {
 
         llManagementSection = view.findViewById(R.id.llManagementSection);
         cvManageUsers = view.findViewById(R.id.cvManageUsers);
-        cvManageStatistics = view.findViewById(R.id.cvManageStatistics);
         cvManageRestaurants = view.findViewById(R.id.cvManageRestaurants);
 
         btnLogout = view.findViewById(R.id.btnLogout);
@@ -76,12 +74,10 @@ public class ProfileFragment extends Fragment {
         if (upperRole.contains("ADMIN")) {
             llManagementSection.setVisibility(View.VISIBLE);
             cvManageUsers.setVisibility(View.VISIBLE);
-            cvManageStatistics.setVisibility(View.VISIBLE);
             cvManageRestaurants.setVisibility(View.VISIBLE);
         } else if (upperRole.contains("MODERATOR")) {
             llManagementSection.setVisibility(View.VISIBLE);
             cvManageUsers.setVisibility(View.GONE);
-            cvManageStatistics.setVisibility(View.GONE);
             cvManageRestaurants.setVisibility(View.VISIBLE);
         } else {
             llManagementSection.setVisibility(View.GONE);
@@ -111,11 +107,6 @@ public class ProfileFragment extends Fragment {
 
         cvManageUsers.setOnClickListener(v -> {
             Intent intent = new Intent(requireContext(), ManageUserActivity.class);
-            startActivity(intent);
-        });
-
-        cvManageStatistics.setOnClickListener(v -> {
-            Intent intent = new Intent(requireContext(), ManageStatisticsActivity.class);
             startActivity(intent);
         });
 

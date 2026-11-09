@@ -25,6 +25,7 @@ public class ManageRestaurantActivity extends AppCompatActivity {
     private ImageView tvBack;
     private RecyclerView rvManageRestaurants;
     private TextView chipAll, chipPending, chipApproved, chipRejected, chipClosed;
+    private TextView tvTotalRestaurantsCount, tvPendingCount, tvApprovedCount, tvRejectedCount;
 
     private final List<Restaurant> fullList = new ArrayList<>();
     private final List<Restaurant> filteredList = new ArrayList<>();
@@ -56,6 +57,11 @@ public class ManageRestaurantActivity extends AppCompatActivity {
         chipApproved = findViewById(R.id.chipApproved);
         chipRejected = findViewById(R.id.chipRejected);
         chipClosed = findViewById(R.id.chipClosed);
+
+        tvTotalRestaurantsCount = findViewById(R.id.tvTotalRestaurantsCount);
+        tvPendingCount = findViewById(R.id.tvPendingCount);
+        tvApprovedCount = findViewById(R.id.tvApprovedCount);
+        tvRejectedCount = findViewById(R.id.tvRejectedCount);
     }
 
     private void setupRestaurantList() {
@@ -91,8 +97,37 @@ public class ManageRestaurantActivity extends AppCompatActivity {
         fullList.add(r5);
 
         filteredList.addAll(fullList);
-        adapter = new ManageRestaurantAdapter(filteredList);
+        adapter = new ManageRestaurantAdapter(filteredList, this::updateStatistics);
         rvManageRestaurants.setAdapter(adapter);
+
+        updateStatistics();
+    }
+
+    private void updateStatistics() {
+        int total = fullList.size();
+        int pending = 0;
+        int approved = 0;
+        int rejected = 0;
+
+        for (Restaurant r : fullList) {
+            String status = r.getStatus() != null ? r.getStatus().toUpperCase() : "";
+            switch (status) {
+                case "PENDING":
+                    pending++;
+                    break;
+                case "APPROVED":
+                    approved++;
+                    break;
+                case "REJECTED":
+                    rejected++;
+                    break;
+            }
+        }
+
+        if (tvTotalRestaurantsCount != null) tvTotalRestaurantsCount.setText(String.valueOf(total));
+        if (tvPendingCount != null) tvPendingCount.setText(String.valueOf(pending));
+        if (tvApprovedCount != null) tvApprovedCount.setText(String.valueOf(approved));
+        if (tvRejectedCount != null) tvRejectedCount.setText(String.valueOf(rejected));
     }
 
     private void setupListeners() {

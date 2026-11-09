@@ -3,6 +3,8 @@ package com.example.unieats.activities.profiles;
 import android.os.Bundle;
 import android.widget.ImageView;
 
+import android.widget.TextView;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -22,6 +24,7 @@ public class ManageUserActivity extends AppCompatActivity {
 
     private ImageView tvBack;
     private RecyclerView rvUsers;
+    private TextView tvTotalUsersCount, tvActiveUsersCount, tvDisabledUsersCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,10 @@ public class ManageUserActivity extends AppCompatActivity {
         tvBack = findViewById(R.id.tvBack);
         rvUsers = findViewById(R.id.rvUsers);
         rvUsers.setLayoutManager(new LinearLayoutManager(this));
+
+        tvTotalUsersCount = findViewById(R.id.tvTotalUsersCount);
+        tvActiveUsersCount = findViewById(R.id.tvActiveUsersCount);
+        tvDisabledUsersCount = findViewById(R.id.tvDisabledUsersCount);
     }
 
     private void setupUserList() {
@@ -53,8 +60,28 @@ public class ManageUserActivity extends AppCompatActivity {
         userList.add(new User("4", "Phạm Hoàng Dung", "hoangdung@gmail.com", "0971122334", "ADMIN", "Đang hoạt động", null));
         userList.add(new User("5", "Đỗ Quốc Emp", "quocemp@gmail.com", "0934455667", "USER", "Đang hoạt động", null));
 
+        updateStatistics(userList);
+
         ManageUserAdapter adapter = new ManageUserAdapter(userList);
         rvUsers.setAdapter(adapter);
+    }
+
+    private void updateStatistics(List<User> userList) {
+        int total = userList.size();
+        int activeCount = 0;
+        int disabledCount = 0;
+
+        for (User u : userList) {
+            if ("Đang hoạt động".equalsIgnoreCase(u.getStatus()) || u.isActive()) {
+                activeCount++;
+            } else {
+                disabledCount++;
+            }
+        }
+
+        if (tvTotalUsersCount != null) tvTotalUsersCount.setText(String.valueOf(total));
+        if (tvActiveUsersCount != null) tvActiveUsersCount.setText(String.valueOf(activeCount));
+        if (tvDisabledUsersCount != null) tvDisabledUsersCount.setText(String.valueOf(disabledCount));
     }
 
     private void setupListeners() {

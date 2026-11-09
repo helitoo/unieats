@@ -78,11 +78,6 @@
             android:windowSoftInputMode="adjustResize" />
 
         <activity
-            android:name=".activities.profiles.ManageStatisticsActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-
-        <activity
             android:name=".activities.profiles.ManageRestaurantActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
