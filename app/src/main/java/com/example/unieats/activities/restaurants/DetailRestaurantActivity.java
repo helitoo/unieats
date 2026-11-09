@@ -1,6 +1,7 @@
 package com.example.unieats.activities.restaurants;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.unieats.R;
 import com.example.unieats.adapters.MenuAdapter;
 import com.example.unieats.entities.Menu;
+import com.example.unieats.entities.Restaurant;
 import com.example.unieats.helpers.FooterHelper;
 import com.example.unieats.helpers.MockData;
 
@@ -31,7 +33,7 @@ public class DetailRestaurantActivity extends AppCompatActivity {
     private ImageView tvBack, tvBookmark;
     private TextView tvDetailName, tvDetailAddress, tvRatingScore, tvReviewCountText;
     private View cvRatingCard, llWriteReviewPrompt;
-    private Button btnSubmitReview;
+    private Button btnSubmitReview, btnDirections;
     private RecyclerView rvMenu;
     private String restaurantName;
 
@@ -63,6 +65,7 @@ public class DetailRestaurantActivity extends AppCompatActivity {
         cvRatingCard = findViewById(R.id.cvRatingCard);
         llWriteReviewPrompt = findViewById(R.id.llWriteReviewPrompt);
         btnSubmitReview = findViewById(R.id.btnSubmitReview);
+        btnDirections = findViewById(R.id.btnDirections);
         rvMenu = findViewById(R.id.rvMenu);
 
         rvMenu.setLayoutManager(new LinearLayoutManager(this));
@@ -101,9 +104,49 @@ public class DetailRestaurantActivity extends AppCompatActivity {
     private void setupListeners() {
         tvBack.setOnClickListener(v -> finish());
 
-        tvBookmark.setOnClickListener(v -> 
-            Toast.makeText(DetailRestaurantActivity.this, "Đã lưu quán ăn", Toast.LENGTH_SHORT).show()
-        );
+        tvBookmark.setOnClickListener(v -> {
+            String address = tvDetailAddress.getText().toString().replace("Địa chỉ: ", "").trim();
+            Restaurant currentRest = null;
+            for (Restaurant r : MockData.getRestaurants()) {
+                if (r.getName().equalsIgnoreCase(restaurantName)) {
+                    currentRest = r;
+                    break;
+                }
+            }
+
+            if (currentRest == null) {
+                currentRest = new Restaurant(restaurantName, address, 4.8, 120, 25000, 50000, "500 m", "Đã lưu");
+                MockData.addRestaurant(currentRest);
+            }
+
+            boolean wasSaved = MockData.isRestaurantSaved(currentRest);
+            MockData.toggleSaveRestaurant(currentRest);
+
+            if (wasSaved) {
+                Toast.makeText(DetailRestaurantActivity.this, "Đã hủy lưu quán ăn", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(DetailRestaurantActivity.this, "Đã lưu quán ăn thành công", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        if (btnDirections != null) {
+            btnDirections.setOnClickListener(v -> {
+                String fullAddressText = tvDetailAddress.getText().toString();
+                String address = fullAddressText.replace("Địa chỉ: ", "").trim();
+                String query = address.isEmpty() ? restaurantName : address;
+
+                Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + Uri.encode(query));
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+
+                try {
+                    startActivity(mapIntent);
+                } catch (Exception e) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/maps/search/?api=1&query=" + Uri.encode(query)));
+                    startActivity(browserIntent);
+                }
+            });
+        }
 
         // Click on rating card -> ReviewActivity
         cvRatingCard.setOnClickListener(v -> {

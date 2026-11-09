@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import android.widget.Toast;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -23,6 +25,8 @@ public class SavedRestaurantsActivity extends AppCompatActivity {
 
     private ImageView tvBack;
     private RecyclerView rvSavedRestaurants;
+    private RestaurantAdapter adapter;
+    private List<Restaurant> savedList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +44,12 @@ public class SavedRestaurantsActivity extends AppCompatActivity {
         setupListeners();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setupSavedList();
+    }
+
     private void initViews() {
         tvBack = findViewById(R.id.tvBack);
         rvSavedRestaurants = findViewById(R.id.rvSavedRestaurants);
@@ -48,9 +58,18 @@ public class SavedRestaurantsActivity extends AppCompatActivity {
     }
 
     private void setupSavedList() {
-        List<Restaurant> savedList = MockData.getSavedRestaurants();
+        savedList = MockData.getSavedRestaurants();
 
-        RestaurantAdapter adapter = new RestaurantAdapter(savedList);
+        adapter = new RestaurantAdapter(savedList, (restaurant, position) -> {
+            MockData.toggleSaveRestaurant(restaurant);
+            if (position >= 0 && position < savedList.size()) {
+                adapter.notifyItemRemoved(position);
+                adapter.notifyItemRangeChanged(position, savedList.size());
+            } else {
+                adapter.notifyDataSetChanged();
+            }
+            Toast.makeText(SavedRestaurantsActivity.this, String.format("Đã hủy lưu \"%s\"", restaurant.getName()), Toast.LENGTH_SHORT).show();
+        });
         rvSavedRestaurants.setAdapter(adapter);
     }
 
