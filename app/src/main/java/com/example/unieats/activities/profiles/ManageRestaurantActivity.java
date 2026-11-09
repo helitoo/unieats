@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.unieats.R;
 import com.example.unieats.adapters.ManageRestaurantAdapter;
 import com.example.unieats.entities.Restaurant;
+import com.example.unieats.helpers.MockData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,37 +66,10 @@ public class ManageRestaurantActivity extends AppCompatActivity {
     }
 
     private void setupRestaurantList() {
-        Restaurant r1 = new Restaurant("Bún bò Huế An Nhiên", "123 Đường Xô Viết Nghệ Tĩnh, Bình Thạnh", 4.5, 32, 35000, 55000);
-        r1.setStatus("PENDING");
-        r1.setOpeningTime("06:30");
-        r1.setClosingTime("21:30");
+        fullList.clear();
+        fullList.addAll(MockData.getRestaurants());
 
-        Restaurant r2 = new Restaurant("Cơm tấm Đêm Làng Đại Học", "Khu Phố 6, Linh Trung, Thủ Đức", 4.8, 120, 25000, 45000);
-        r2.setStatus("APPROVED");
-        r2.setOpeningTime("17:00");
-        r2.setClosingTime("02:00");
-
-        Restaurant r3 = new Restaurant("Lẩu Thái Xóm Trọ", "45 Đường Số 8, Linh Trung, Thủ Đức", 4.2, 18, 70000, 150000);
-        r3.setStatus("REJECTED");
-        r3.setOpeningTime("10:00");
-        r3.setClosingTime("22:00");
-
-        Restaurant r4 = new Restaurant("Quán Trà Sữa Học Bài", "88 Võ Văn Ngân, Thủ Đức", 4.6, 95, 25000, 50000);
-        r4.setStatus("CLOSED");
-        r4.setOpeningTime("08:00");
-        r4.setClosingTime("22:30");
-
-        Restaurant r5 = new Restaurant("Gà Rán Chợ Đêm", "Cổng A Làng Đại Học, Thủ Đức", 4.3, 45, 30000, 60000);
-        r5.setStatus("PENDING");
-        r5.setOpeningTime("15:00");
-        r5.setClosingTime("23:00");
-
-        fullList.add(r1);
-        fullList.add(r2);
-        fullList.add(r3);
-        fullList.add(r4);
-        fullList.add(r5);
-
+        filteredList.clear();
         filteredList.addAll(fullList);
         adapter = new ManageRestaurantAdapter(filteredList, this::updateStatistics);
         rvManageRestaurants.setAdapter(adapter);

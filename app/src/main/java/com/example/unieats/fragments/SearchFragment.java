@@ -22,6 +22,7 @@ import com.example.unieats.activities.MainActivity;
 import com.example.unieats.adapters.RestaurantAdapter;
 import com.example.unieats.entities.Restaurant;
 import com.example.unieats.helpers.FooterHelper;
+import com.example.unieats.helpers.MockData;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -87,12 +88,7 @@ public class SearchFragment extends Fragment {
     }
 
     private void setupData() {
-        fullList = new ArrayList<>();
-        fullList.add(new Restaurant("Cơm nhà Góc Sân Trường", "Khu Phố 6, Linh Trung, Thủ Đức", 4.8, 128, 25000, 45000, "500 m", "Giá sinh viên"));
-        fullList.add(new Restaurant("Bún bò Cô Ba", "Làng Đại Học, Thủ Đức", 4.7, 96, 30000, 45000, "800 m", "Được yêu thích"));
-        fullList.add(new Restaurant("Trà sữa Gong Cha", "Đường Võ Văn Ngân, Thủ Đức", 4.5, 210, 35000, 60000, "1.2 km", "Giảm 20%"));
-        fullList.add(new Restaurant("Bún đậu Mắm Tôm Phố Cổ", "Đường Đặng Văn Bi, Thủ Đức", 4.6, 85, 35000, 55000, "1.5 km", "Gần tôi"));
-        fullList.add(new Restaurant("Cơm Tấm Ba Ghiền", "Xa Lộ Hà Nội, Thủ Đức", 4.9, 340, 40000, 75000, "2.0 km", "Quán HOT"));
+        fullList = MockData.getRestaurants();
 
         filteredList = new ArrayList<>(fullList);
         adapter = new RestaurantAdapter(filteredList);

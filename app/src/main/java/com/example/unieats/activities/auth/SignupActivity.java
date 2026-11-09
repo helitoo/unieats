@@ -16,7 +16,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.unieats.R;
 import com.example.unieats.activities.MainActivity;
+import com.example.unieats.entities.User;
 import com.example.unieats.helpers.AuthManager;
+import com.example.unieats.helpers.MockData;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -52,6 +54,17 @@ public class SignupActivity extends AppCompatActivity {
 
     private void setupListeners() {
         btnSignup.setOnClickListener(v -> {
+            String name = etFullName.getText().toString().trim();
+            String emailPhone = etEmailPhone.getText().toString().trim();
+
+            if (name.isEmpty()) {
+                name = "Người dùng mới";
+            }
+
+            User newUser = new User(String.valueOf(System.currentTimeMillis()), name, emailPhone.contains("@") ? emailPhone : "user@example.com", emailPhone, "USER", "Đang hoạt động", null);
+            MockData.addUser(newUser);
+            MockData.setCurrentUser(newUser);
+
             AuthManager.setLoggedIn(SignupActivity.this, true);
             Toast.makeText(SignupActivity.this, "Tạo tài khoản thành công!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(SignupActivity.this, MainActivity.class);

@@ -21,6 +21,7 @@ import com.example.unieats.activities.profiles.MyRestaurantActivity;
 import com.example.unieats.activities.profiles.SavedRestaurantsActivity;
 import com.example.unieats.entities.User;
 import com.example.unieats.helpers.AuthManager;
+import com.example.unieats.helpers.MockData;
 
 public class ProfileFragment extends Fragment {
 
@@ -59,12 +60,19 @@ public class ProfileFragment extends Fragment {
         btnLogout = view.findViewById(R.id.btnLogout);
     }
 
-    private void loadUserData() {
-        currentUser = new User("Phương", "phuong@example.com", "0901234567", "ADMIN");
-        tvUserName.setText(String.format("Xin chào, %s!", currentUser.getName()));
-        tvUserRole.setText(currentUser.getRole());
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadUserData();
+    }
 
-        applyRolePermissions(currentUser.getRole());
+    private void loadUserData() {
+        currentUser = MockData.getCurrentUser();
+        if (currentUser != null) {
+            tvUserName.setText(String.format("Xin chào, %s!", currentUser.getName()));
+            tvUserRole.setText(currentUser.getRole());
+            applyRolePermissions(currentUser.getRole());
+        }
     }
 
     private void applyRolePermissions(String role) {

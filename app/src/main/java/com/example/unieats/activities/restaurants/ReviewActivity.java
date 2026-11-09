@@ -17,9 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.unieats.R;
 import com.example.unieats.adapters.ReviewAdapter;
 import com.example.unieats.entities.Review;
-import com.example.unieats.entities.ReviewPhoto;
+import com.example.unieats.helpers.MockData;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ReviewActivity extends AppCompatActivity {
@@ -43,8 +42,13 @@ public class ReviewActivity extends AppCompatActivity {
 
         initViews();
         readIntentData();
-        setupReviews();
         setupListeners();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setupReviews();
     }
 
     private void initViews() {
@@ -65,25 +69,7 @@ public class ReviewActivity extends AppCompatActivity {
     }
 
     private void setupReviews() {
-        List<Review> reviewList = new ArrayList<>();
-
-        List<ReviewPhoto> photos1 = new ArrayList<>();
-        photos1.add(new ReviewPhoto("photo_1"));
-        photos1.add(new ReviewPhoto("photo_2"));
-
-        Review review1 = new Review("Phương (Tôi)", "Quán phục vụ rất nhanh, cơm tấm sườn nướng mỡ hành thơm nức mũi!", 5, photos1);
-        review1.setLikeCount(24);
-        review1.setAuthor(true); // User is the author of this review
-
-        Review review2 = new Review("Lê Thu Hà", "Món ăn ngon hợp vị sinh viên, giá rẻ và chất lượng tuyệt vời.", 5, new ArrayList<>());
-        review2.setLikeCount(12);
-
-        Review review3 = new Review("Người dùng · 1", "Quán này tệ, phục vụ rất kém...", "Ngôn từ xúc phạm");
-        review3.setLikeCount(2);
-
-        reviewList.add(review1);
-        reviewList.add(review2);
-        reviewList.add(review3);
+        List<Review> reviewList = MockData.getReviews();
 
         ReviewAdapter adapter = new ReviewAdapter(reviewList);
         rvReviews.setAdapter(adapter);

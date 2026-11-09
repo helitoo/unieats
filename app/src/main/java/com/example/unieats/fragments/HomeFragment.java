@@ -21,6 +21,7 @@ import com.example.unieats.adapters.RestaurantAdapter;
 import com.example.unieats.entities.Category;
 import com.example.unieats.entities.Restaurant;
 import com.example.unieats.helpers.FooterHelper;
+import com.example.unieats.helpers.MockData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,9 +77,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void setupNearbyRestaurants() {
-        List<Restaurant> nearbyList = new ArrayList<>();
-        nearbyList.add(new Restaurant("Cơm nhà Góc Sân Trường", "Khu Phố 6, Linh Trung, Thủ Đức", 4.8, 128, 25000, 45000, "500 m", "Giá sinh viên"));
-        nearbyList.add(new Restaurant("Bún bò Cô Ba", "Làng Đại Học, Thủ Đức", 4.7, 96, 30000, 45000, "800 m", "Được yêu thích"));
+        List<Restaurant> nearbyList = MockData.getNearbyRestaurants();
 
         rvNearbyRestaurants.setLayoutManager(new LinearLayoutManager(requireContext()));
         RestaurantAdapter adapter = new RestaurantAdapter(nearbyList);
@@ -86,9 +85,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void setupHotRestaurants() {
-        List<Restaurant> hotList = new ArrayList<>();
-        hotList.add(new Restaurant("Bún bò Cô Ba", "Làng Đại Học, Thủ Đức", 4.7, 96, 30000, 45000, "800 m", "Được yêu thích"));
-        hotList.add(new Restaurant("Cơm Tấm Ba Ghiền", "Xa Lộ Hà Nội, Thủ Đức", 4.9, 340, 40000, 75000, "2.0 km", "Quán HOT"));
+        List<Restaurant> hotList = MockData.getHotRestaurants();
 
         rvHotRestaurants.setLayoutManager(new LinearLayoutManager(requireContext()));
         RestaurantAdapter adapter = new RestaurantAdapter(hotList);

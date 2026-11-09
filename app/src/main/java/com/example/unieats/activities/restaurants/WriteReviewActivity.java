@@ -14,6 +14,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.unieats.R;
+import com.example.unieats.entities.Review;
+import com.example.unieats.entities.User;
+import com.example.unieats.helpers.MockData;
+
+import java.util.ArrayList;
 
 public class WriteReviewActivity extends AppCompatActivity {
 
@@ -83,6 +88,17 @@ public class WriteReviewActivity extends AppCompatActivity {
         }
 
         btnPostReview.setOnClickListener(v -> {
+            String comment = etReviewComment.getText().toString().trim();
+            if (comment.isEmpty()) {
+                comment = "Chất lượng quán tốt, phục vụ chu đáo!";
+            }
+
+            User currentUser = MockData.getCurrentUser();
+            String authorName = (currentUser != null && currentUser.getName() != null) ? currentUser.getName() + " (Tôi)" : "Phương (Tôi)";
+
+            Review newReview = new Review(authorName, comment, selectedRating, true, new ArrayList<>());
+            MockData.addReview(newReview);
+
             Toast.makeText(WriteReviewActivity.this, "Đăng đánh giá thành công!", Toast.LENGTH_SHORT).show();
             finish();
         });

@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.unieats.R;
 import com.example.unieats.adapters.RestaurantAdapter;
 import com.example.unieats.entities.Restaurant;
+import com.example.unieats.helpers.MockData;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SavedRestaurantsActivity extends AppCompatActivity {
@@ -48,10 +48,7 @@ public class SavedRestaurantsActivity extends AppCompatActivity {
     }
 
     private void setupSavedList() {
-        List<Restaurant> savedList = new ArrayList<>();
-        savedList.add(new Restaurant("Cơm nhà Góc Sân Trường", "Khu Phố 6, Linh Trung, Thủ Đức", 4.8, 128, 25000, 45000, "500 m", "Giá sinh viên"));
-        savedList.add(new Restaurant("Bún bò Cô Ba", "Làng Đại Học, Thủ Đức", 4.7, 96, 30000, 45000, "800 m", "Được yêu thích"));
-        savedList.add(new Restaurant("Trà sữa Gong Cha", "Đường Võ Văn Ngân, Thủ Đức", 4.5, 210, 35000, 60000, "1.2 km", "Giảm 20%"));
+        List<Restaurant> savedList = MockData.getSavedRestaurants();
 
         RestaurantAdapter adapter = new RestaurantAdapter(savedList);
         rvSavedRestaurants.setAdapter(adapter);

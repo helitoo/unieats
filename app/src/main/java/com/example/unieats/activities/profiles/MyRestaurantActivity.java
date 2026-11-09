@@ -16,8 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.unieats.R;
 import com.example.unieats.adapters.MyRestaurantAdapter;
 import com.example.unieats.entities.Restaurant;
+import com.example.unieats.helpers.MockData;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MyRestaurantActivity extends AppCompatActivity implements MyRestaurantAdapter.OnRestaurantActionListener {
@@ -50,10 +50,7 @@ public class MyRestaurantActivity extends AppCompatActivity implements MyRestaur
     }
 
     private void setupList() {
-        myRestaurantList = new ArrayList<>();
-        myRestaurantList.add(new Restaurant("Cơm nhà Góc Sân Trường", "Khu Phố 6, Linh Trung, Thủ Đức", 4.8, 128, 25000, 45000, "500 m", "Giá sinh viên"));
-        myRestaurantList.add(new Restaurant("Bún bò Cô Ba", "Làng Đại Học, Thủ Đức", 4.7, 96, 30000, 45000, "800 m", "Được yêu thích"));
-        myRestaurantList.add(new Restaurant("Trà sữa Gong Cha", "Đường Võ Văn Ngân, Thủ Đức", 4.5, 210, 35000, 60000, "1.2 km", "Giảm 20%"));
+        myRestaurantList = MockData.getMyRestaurants();
 
         adapter = new MyRestaurantAdapter(myRestaurantList, this);
         rvMyRestaurants.setAdapter(adapter);
@@ -73,7 +70,7 @@ public class MyRestaurantActivity extends AppCompatActivity implements MyRestaur
                 .setTitle("Xác nhận xóa")
                 .setMessage(String.format("Bạn có chắc chắn muốn xóa \"%s\" không?", restaurant.getName()))
                 .setPositiveButton("Xóa", (dialog, which) -> {
-                    myRestaurantList.remove(position);
+                    MockData.deleteMyRestaurant(restaurant);
                     adapter.notifyItemRemoved(position);
                     adapter.notifyItemRangeChanged(position, myRestaurantList.size());
                     Toast.makeText(this, "Đã xóa quán ăn", Toast.LENGTH_SHORT).show();

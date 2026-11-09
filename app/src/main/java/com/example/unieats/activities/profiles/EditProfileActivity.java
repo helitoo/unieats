@@ -16,6 +16,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.unieats.R;
 import com.example.unieats.activities.auth.PasswordRestoreActivity;
+import com.example.unieats.entities.User;
+import com.example.unieats.helpers.MockData;
 
 public class EditProfileActivity extends AppCompatActivity {
 
@@ -36,6 +38,7 @@ public class EditProfileActivity extends AppCompatActivity {
         });
 
         initViews();
+        loadProfileData();
         setupListeners();
     }
 
@@ -48,6 +51,15 @@ public class EditProfileActivity extends AppCompatActivity {
         btnSave = findViewById(R.id.btnSave);
     }
 
+    private void loadProfileData() {
+        User u = MockData.getCurrentUser();
+        if (u != null) {
+            etName.setText(u.getName());
+            etEmail.setText(u.getEmail());
+            etPhone.setText(u.getPhone());
+        }
+    }
+
     private void setupListeners() {
         tvBack.setOnClickListener(v -> finish());
 
@@ -57,6 +69,22 @@ public class EditProfileActivity extends AppCompatActivity {
         });
 
         btnSave.setOnClickListener(v -> {
+            String newName = etName.getText().toString().trim();
+            String newEmail = etEmail.getText().toString().trim();
+            String newPhone = etPhone.getText().toString().trim();
+
+            if (newName.isEmpty()) {
+                etName.setError("Vui lòng nhập họ tên!");
+                return;
+            }
+
+            User u = MockData.getCurrentUser();
+            if (u != null) {
+                u.setName(newName);
+                u.setEmail(newEmail);
+                u.setPhone(newPhone);
+            }
+
             Toast.makeText(EditProfileActivity.this, "Cập nhật hồ sơ thành công!", Toast.LENGTH_SHORT).show();
             finish();
         });

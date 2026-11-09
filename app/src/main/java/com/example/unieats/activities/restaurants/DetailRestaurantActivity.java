@@ -20,6 +20,7 @@ import com.example.unieats.R;
 import com.example.unieats.adapters.MenuAdapter;
 import com.example.unieats.entities.Menu;
 import com.example.unieats.helpers.FooterHelper;
+import com.example.unieats.helpers.MockData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,10 +92,7 @@ public class DetailRestaurantActivity extends AppCompatActivity {
     }
 
     private void setupMenu() {
-        List<Menu> menuList = new ArrayList<>();
-        menuList.add(new Menu("Cơm Tấm Sườn", "Sườn nướng, mỡ hành", 35000));
-        menuList.add(new Menu("Cơm Gà Xối Mỡ", "Da giòn, cơm vàng thơm", 40000));
-        menuList.add(new Menu("Cơm Sườn Bì Chả", "Sườn nướng, bì, chả trứng", 45000));
+        List<Menu> menuList = MockData.getMenus();
 
         MenuAdapter adapter = new MenuAdapter(menuList);
         rvMenu.setAdapter(adapter);

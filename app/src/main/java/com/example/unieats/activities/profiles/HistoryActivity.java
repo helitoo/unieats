@@ -17,8 +17,8 @@ import com.example.unieats.adapters.RestaurantAdapter;
 import com.example.unieats.adapters.ReviewShortAdapter;
 import com.example.unieats.entities.Restaurant;
 import com.example.unieats.entities.ReviewShort;
+import com.example.unieats.helpers.MockData;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HistoryActivity extends AppCompatActivity {
@@ -59,18 +59,11 @@ public class HistoryActivity extends AppCompatActivity {
 
     private void setupAdapters() {
         // Tab 1 Data: ReviewShort list
-        List<ReviewShort> reviewShortList = new ArrayList<>();
-        reviewShortList.add(new ReviewShort("Cơm nhà Góc Sân Trường", "Khu Phố 6, Linh Trung, Thủ Đức", 5, "Ngon và hợp túi tiền"));
-        reviewShortList.add(new ReviewShort("Bún bò Cô Ba", "Làng Đại Học, Thủ Đức", 4, "Nước dùng đậm đà"));
-        reviewShortList.add(new ReviewShort("Bún bò Huế An Nhiên", "Làng Đại học, Thủ Đức", 5, "Quán sạch sẽ"));
-
+        List<ReviewShort> reviewShortList = MockData.getReviewShorts();
         reviewShortAdapter = new ReviewShortAdapter(reviewShortList);
 
         // Tab 2 Data: Restaurant list
-        List<Restaurant> contributedList = new ArrayList<>();
-        contributedList.add(new Restaurant("Cơm nhà Góc Sân Trường", "Khu Phố 6, Linh Trung, Thủ Đức", 4.8, 128, 25000, 45000, "500 m", "Đã duyệt"));
-        contributedList.add(new Restaurant("Quán Lẩu Sinh Viên 99k", "Làng Đại Học, Thủ Đức", 4.6, 42, 99000, 150000, "1.0 km", "Chờ duyệt"));
-
+        List<Restaurant> contributedList = MockData.getContributedRestaurants();
         restaurantAdapter = new RestaurantAdapter(contributedList);
     }
 

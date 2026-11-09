@@ -16,8 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.unieats.R;
 import com.example.unieats.adapters.ManageUserAdapter;
 import com.example.unieats.entities.User;
+import com.example.unieats.helpers.MockData;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ManageUserActivity extends AppCompatActivity {
@@ -53,12 +53,7 @@ public class ManageUserActivity extends AppCompatActivity {
     }
 
     private void setupUserList() {
-        List<User> userList = new ArrayList<>();
-        userList.add(new User("1", "Nguyễn Minh Anh", "minhanh@gmail.com", "0901234567", "USER", "Đang hoạt động", null));
-        userList.add(new User("2", "Trần Thị Bình", "thibinh@gmail.com", "0912345678", "MODERATOR", "Đang hoạt động", null));
-        userList.add(new User("3", "Lê Hoài Cường", "hoaicuong@gmail.com", "0987654321", "USER", "Tạm dừng", null));
-        userList.add(new User("4", "Phạm Hoàng Dung", "hoangdung@gmail.com", "0971122334", "ADMIN", "Đang hoạt động", null));
-        userList.add(new User("5", "Đỗ Quốc Emp", "quocemp@gmail.com", "0934455667", "USER", "Đang hoạt động", null));
+        List<User> userList = MockData.getUsers();
 
         updateStatistics(userList);
 

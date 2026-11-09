@@ -14,6 +14,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.unieats.R;
+import com.example.unieats.entities.Restaurant;
+import com.example.unieats.helpers.MockData;
 
 public class ContributeRestaurantActivity extends AppCompatActivity {
 
@@ -67,10 +69,27 @@ public class ContributeRestaurantActivity extends AppCompatActivity {
 
         btnSubmit.setOnClickListener(v -> {
             String name = etName.getText().toString().trim();
+            String address = etAddress.getText().toString().trim();
+            String minStr = etPriceMin.getText().toString().trim();
+            String maxStr = etPriceMax.getText().toString().trim();
+            String category = etCategory.getText().toString().trim();
+
             if (name.isEmpty()) {
                 Toast.makeText(ContributeRestaurantActivity.this, "Vui lòng nhập tên quán!", Toast.LENGTH_SHORT).show();
                 return;
             }
+
+            if (address.isEmpty()) {
+                address = "Làng Đại Học, Thủ Đức";
+            }
+
+            double minPrice = minStr.isEmpty() ? 25000 : Double.parseDouble(minStr);
+            double maxPrice = maxStr.isEmpty() ? 50000 : Double.parseDouble(maxStr);
+
+            Restaurant newRest = new Restaurant(name, address, 5.0, 1, minPrice, maxPrice, "500 m", category.isEmpty() ? "Mới tạo" : category);
+            newRest.setStatus("PENDING");
+
+            MockData.addContributedRestaurant(newRest);
 
             Toast.makeText(ContributeRestaurantActivity.this, "Đã gửi thông tin quán chờ duyệt!", Toast.LENGTH_LONG).show();
             finish();
