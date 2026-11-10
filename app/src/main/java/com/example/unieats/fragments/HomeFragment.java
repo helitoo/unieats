@@ -29,7 +29,7 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     private View llSearchBar, llHotSectionHeader;
-    private TextView tvAddRestaurant;
+    private TextView tvAddRestaurant, tvSeeAllNearby;
     private RecyclerView rvCategories;
     private RecyclerView rvNearbyRestaurants;
     private RecyclerView rvHotRestaurants;
@@ -52,6 +52,7 @@ public class HomeFragment extends Fragment {
 
     private void initViews(View view) {
         tvAddRestaurant = view.findViewById(R.id.tvAddRestaurant);
+        tvSeeAllNearby = view.findViewById(R.id.tvSeeAllNearby);
         llSearchBar = view.findViewById(R.id.llSearchBar);
         llHotSectionHeader = view.findViewById(R.id.llHotSectionHeader);
         rvCategories = view.findViewById(R.id.rvCategories);
@@ -111,6 +112,14 @@ public class HomeFragment extends Fragment {
                 ((MainActivity) getActivity()).switchTab(FooterHelper.Tab.TRENDING);
             }
         };
+
+        if (tvSeeAllNearby != null) {
+            tvSeeAllNearby.setOnClickListener(v -> {
+                if (getActivity() instanceof MainActivity) {
+                    ((MainActivity) getActivity()).switchTab(FooterHelper.Tab.SEARCH);
+                }
+            });
+        }
 
         if (llHotSectionHeader != null) {
             llHotSectionHeader.setOnClickListener(openTrending);

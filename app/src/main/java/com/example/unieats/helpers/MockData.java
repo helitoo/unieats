@@ -37,7 +37,7 @@ public class MockData {
 
         // Users
         usersList.add(new User("1", "Nguyễn Minh Anh", "minhanh@gmail.com", "0901234567", "USER", "Đang hoạt động", null));
-        usersList.add(new User("2", "Trần Thị Bình", "thibinh@gmail.com", "0912345678", "MODERATOR", "Đang hoạt động", null));
+        usersList.add(new User("2", "Trần Thị Bình", "thibinh@gmail.com", "0912345678", "USER", "Đang hoạt động", null));
         usersList.add(new User("3", "Lê Hoài Cường", "hoaicuong@gmail.com", "0987654321", "USER", "Tạm dừng", null));
         usersList.add(new User("4", "Phạm Hoàng Dung", "hoangdung@gmail.com", "0971122334", "ADMIN", "Đang hoạt động", null));
         usersList.add(new User("5", "Đỗ Quốc Emp", "quocemp@gmail.com", "0934455667", "USER", "Đang hoạt động", null));
@@ -78,6 +78,15 @@ public class MockData {
         r7.setOpeningTime("15:00");
         r7.setClosingTime("23:00");
 
+        // Attached photos (List of image URLs / res names) for each restaurant
+        for (Restaurant r : new Restaurant[]{r1, r2, r3, r4, r5, r6, r7}) {
+            List<String> photos = new ArrayList<>();
+            photos.add("photo_menu_1");
+            photos.add("photo_menu_2");
+            photos.add("photo_space_1");
+            r.setAttachedPhotos(photos);
+        }
+
         allRestaurants.add(r1);
         allRestaurants.add(r2);
         allRestaurants.add(r3);
@@ -86,7 +95,7 @@ public class MockData {
         allRestaurants.add(r6);
         allRestaurants.add(r7);
 
-        // My Restaurants (Owner's)
+        // My Restaurants
         myRestaurantsList.add(r1);
         myRestaurantsList.add(r2);
         myRestaurantsList.add(r3);
@@ -97,14 +106,15 @@ public class MockData {
         savedRestaurantsList.add(r3);
 
         // Contributed Restaurants
-        contributedRestaurantsList.add(new Restaurant("Cơm nhà Góc Sân Trường", "Khu Phố 6, Linh Trung, Thủ Đức", 4.8, 128, 25000, 45000, "500 m", "Giá sinh viên"));
-        contributedRestaurantsList.add(new Restaurant("Quán Lẩu Sinh Viên 99k", "Làng Đại Học, Thủ Đức", 4.6, 42, 99000, 199000, "1.1 km", "Món lẩu"));
+        Restaurant c1 = new Restaurant("Cơm nhà Góc Sân Trường", "Khu Phố 6, Linh Trung, Thủ Đức", 4.8, 128, 25000, 45000, "500 m", "Giá sinh viên");
+        c1.getAttachedPhotos().add("photo_menu_1");
+        c1.getAttachedPhotos().add("photo_menu_2");
 
-        // Menus
-        menuList.add(new Menu("Cơm Tấm Sườn", "Sườn nướng, mỡ hành thơm lừng", 35000));
-        menuList.add(new Menu("Cơm Gà Xối Mỡ", "Da giòn, cơm vàng thơm ngon", 40000));
-        menuList.add(new Menu("Cơm Sườn Bì Chả", "Sườn nướng, bì, chả trứng hấp", 45000));
-        menuList.add(new Menu("Bún bò đặc biệt", "Nước dùng đậm đà, thịt bò tái nạm", 45000));
+        Restaurant c2 = new Restaurant("Quán Lẩu Sinh Viên 99k", "Làng Đại Học, Thủ Đức", 4.6, 42, 99000, 199000, "1.1 km", "Món lẩu");
+        c2.getAttachedPhotos().add("photo_menu_1");
+
+        contributedRestaurantsList.add(c1);
+        contributedRestaurantsList.add(c2);
 
         // Reviews
         List<ReviewPhoto> photos1 = new ArrayList<>();
@@ -136,6 +146,24 @@ public class MockData {
 
     public static List<User> getUsers() {
         return usersList;
+    }
+
+    public static User authenticate(String input, String password) {
+        if (input == null || input.trim().isEmpty()) return null;
+        String cleanInput = input.trim().toLowerCase();
+
+        for (User u : usersList) {
+            if ((u.getEmail() != null && u.getEmail().toLowerCase().equals(cleanInput)) ||
+                (u.getPhone() != null && u.getPhone().equals(cleanInput)) ||
+                (u.getName() != null && u.getName().toLowerCase().equals(cleanInput))) {
+                return u;
+            }
+        }
+        if (currentUser != null && ((currentUser.getEmail() != null && currentUser.getEmail().toLowerCase().equals(cleanInput)) ||
+            (currentUser.getPhone() != null && currentUser.getPhone().equals(cleanInput)))) {
+            return currentUser;
+        }
+        return null;
     }
 
     public static void addUser(User user) {

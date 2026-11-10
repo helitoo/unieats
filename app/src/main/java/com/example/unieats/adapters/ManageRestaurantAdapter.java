@@ -64,23 +64,27 @@ public class ManageRestaurantAdapter extends RecyclerView.Adapter<ManageRestaura
 
         // Status styling
         String status = item.getStatus() != null ? item.getStatus().toUpperCase() : "PENDING";
-        holder.tvStatusBadge.setText(status);
-
+        String statusDisplayName;
         switch (status) {
             case "APPROVED":
+                statusDisplayName = "Đã duyệt";
                 holder.tvStatusBadge.setTextColor(Color.parseColor("#16A34A"));
                 break;
             case "REJECTED":
+                statusDisplayName = "Đã từ chối";
                 holder.tvStatusBadge.setTextColor(Color.parseColor("#DC2626"));
                 break;
             case "CLOSED":
+                statusDisplayName = "Đã đóng cửa";
                 holder.tvStatusBadge.setTextColor(Color.parseColor("#737373"));
                 break;
             case "PENDING":
             default:
+                statusDisplayName = "Đang chờ";
                 holder.tvStatusBadge.setTextColor(Color.parseColor("#D97706"));
                 break;
         }
+        holder.tvStatusBadge.setText(statusDisplayName);
 
         // Expand/Collapse state
         if (item.isExpanded()) {

@@ -97,6 +97,8 @@ public class SearchFragment extends Fragment {
         updateResultCount();
     }
 
+    private String activeChipFilter = "";
+
     private void setupListeners(View view) {
         tvBack.setOnClickListener(v -> {
             if (getActivity() instanceof MainActivity) {
@@ -121,7 +123,6 @@ public class SearchFragment extends Fragment {
 
         tvSortOrder.setOnClickListener(v -> {
             isAscending = !isAscending;
-            sortList();
             if (isAscending) {
                 tvSortOrder.setText("Tăng dần (giá)");
                 Toast.makeText(requireContext(), "Sắp xếp giá tăng dần", Toast.LENGTH_SHORT).show();
@@ -129,6 +130,7 @@ public class SearchFragment extends Fragment {
                 tvSortOrder.setText("Giảm dần (giá)");
                 Toast.makeText(requireContext(), "Sắp xếp giá giảm dần", Toast.LENGTH_SHORT).show();
             }
+            filter(etSearchQuery.getText().toString());
         });
 
         setupChipListeners(view);
@@ -145,16 +147,23 @@ public class SearchFragment extends Fragment {
         for (TextView chip : chips) {
             if (chip != null) {
                 chip.setOnClickListener(v -> {
-                    for (TextView c : chips) {
-                        if (c != null) {
-                            c.setBackgroundResource(R.drawable.bg_chip_normal);
-                            c.setTextColor(getResources().getColor(R.color.neutral_700, requireActivity().getTheme()));
+                    String text = chip.getText().toString();
+                    if (text.equalsIgnoreCase(activeChipFilter)) {
+                        activeChipFilter = ""; // toggle off
+                        chip.setBackgroundResource(R.drawable.bg_chip_normal);
+                        chip.setTextColor(getResources().getColor(R.color.neutral_700, requireActivity().getTheme()));
+                    } else {
+                        activeChipFilter = text;
+                        for (TextView c : chips) {
+                            if (c != null) {
+                                c.setBackgroundResource(R.drawable.bg_chip_normal);
+                                c.setTextColor(getResources().getColor(R.color.neutral_700, requireActivity().getTheme()));
+                            }
                         }
+                        chip.setBackgroundResource(R.drawable.bg_chip_selected);
+                        chip.setTextColor(getResources().getColor(R.color.orange_500, requireActivity().getTheme()));
                     }
-                    chip.setBackgroundResource(R.drawable.bg_chip_selected);
-                    chip.setTextColor(getResources().getColor(R.color.orange_500, requireActivity().getTheme()));
-
-                    filter(chip.getText().toString());
+                    filter(etSearchQuery.getText().toString());
                 });
             }
         }
@@ -162,18 +171,40 @@ public class SearchFragment extends Fragment {
 
     private void filter(String query) {
         filteredList.clear();
-        if (query == null || query.trim().isEmpty()) {
-            filteredList.addAll(fullList);
-        } else {
-            String lowerQuery = query.toLowerCase(Locale.getDefault());
-            for (Restaurant item : fullList) {
-                if (item.getName().toLowerCase(Locale.getDefault()).contains(lowerQuery)
-                        || item.getAddress().toLowerCase(Locale.getDefault()).contains(lowerQuery)
-                        || (item.getTag() != null && item.getTag().toLowerCase(Locale.getDefault()).contains(lowerQuery))) {
-                    filteredList.add(item);
+        String lowerQuery = (query != null) ? query.toLowerCase(Locale.getDefault()).trim() : "";
+
+        for (Restaurant item : fullList) {
+            // Text search match
+            boolean matchesQuery = lowerQuery.isEmpty() ||
+                    (item.getName() != null && item.getName().toLowerCase(Locale.getDefault()).contains(lowerQuery)) ||
+                    (item.getAddress() != null && item.getAddress().toLowerCase(Locale.getDefault()).contains(lowerQuery)) ||
+                    (item.getTag() != null && item.getTag().toLowerCase(Locale.getDefault()).contains(lowerQuery));
+
+            if (!matchesQuery) continue;
+
+            // Chip filter match
+            boolean matchesChip = true;
+            if (!activeChipFilter.isEmpty()) {
+                String chipLower = activeChipFilter.toLowerCase(Locale.getDefault());
+                if (chipLower.contains("giá tốt")) {
+                    matchesChip = item.getPriceRangeMin() <= 35000;
+                } else if (chipLower.contains("đánh giá cao")) {
+                    matchesChip = item.getRatingAvg() >= 4.6;
+                } else if (chipLower.contains("gần tôi") || chipLower.contains("1 km")) {
+                    matchesChip = item.getDistance() != null && (item.getDistance().contains("m") || item.getDistance().contains("1.0"));
+                } else if (chipLower.contains("đang mở")) {
+                    matchesChip = !"CLOSED".equalsIgnoreCase(item.getStatus());
+                } else {
+                    matchesChip = (item.getTag() != null && item.getTag().toLowerCase(Locale.getDefault()).contains(chipLower))
+                            || (item.getName() != null && item.getName().toLowerCase(Locale.getDefault()).contains(chipLower));
                 }
             }
+
+            if (matchesChip) {
+                filteredList.add(item);
+            }
         }
+
         sortList();
         updateResultCount();
     }

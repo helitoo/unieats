@@ -4,9 +4,9 @@
 
 Trong kỷ nguyên số hóa hiện nay, ẩm thực không chỉ đơn thuần đáp ứng nhu cầu dinh dưỡng hàng ngày mà đã trở thành một phần trải nghiệm văn hóa và lối sống của người tiêu dùng, đặc biệt là giới trẻ và học sinh - sinh viên. Với sự bùng nổ của các địa điểm ăn uống, từ các quán ăn bình dân, xe đẩy lề đường cho đến các nhà hàng sang trọng, việc tìm kiếm một địa điểm phù hợp với túi tiền, vị trí địa lý, khẩu vị và thời gian hoạt động trở nên vô cùng phức tạp. Người tiêu dùng thường xuyên phải đối mặt với tình trạng thiếu thông tin minh bạch, đánh giá thiếu khách quan hoặc mất nhiều thời gian tra cứu trên nhiều nền tảng truyền thông xã hội khác nhau.
 
-Xuất phát từ thực tế đó, dự án **UniEats – Ứng dụng Tìm kiếm & Gợi ý Ẩm thực** được nghiên cứu và phát triển trên hệ điều hành Android nhằm tạo ra một nền tảng toàn diện, kết nối trực tiếp người dùng với các điểm đến ẩm thực xung quanh. Hệ thống tối ưu hóa quy trình tìm kiếm dựa trên đa tiêu chí như ngân sách (price range), vị trí địa lý (latitude/longitude), giờ mở cửa (opening/closing time) và xu hướng đánh giá từ cộng đồng (community rating & reviews).
+Xuất phát từ thực tế đó, dự án **UniEats – Ứng dụng Tìm kiếm & Gợi ý Ẩm thực** được nghiên cứu và phát triển trên hệ điều hành Android nhằm tạo ra một nền tảng toàn diện, kết nối trực tiếp người dùng với các điểm đến ẩm thực xung quanh. Hệ thống tối ưu hóa quy trình tìm kiếm dựa trên đa tiêu chí như ngân sách (price range), danh mục ẩm thực, giờ mở cửa (opening/closing time) và xu hướng đánh giá từ cộng đồng (community rating & reviews).
 
-Ngoài việc hỗ trợ người dùng cuối (Customer), **UniEats** còn tích hợp các phân hệ chức năng chuyên biệt dành cho Chủ quán ăn (Restaurant Owner) để quản lý danh sách nhà hàng cá nhân, thực đơn, chương trình khuyến mãi; đồng thời cung cấp công cụ quản trị mạnh mẽ cho Quản trị viên hệ thống (Admin/Moderator) trong việc kiểm duyệt nội dung, quản lý người dùng và theo dõi thống kê toàn hệ thống.
+Ngoài việc hỗ trợ người dùng cuối (Customer), **UniEats** còn cung cấp công cụ quản trị mạnh mẽ cho Quản trị viên hệ thống (Admin) trong việc kiểm duyệt địa điểm ẩm thực, quản lý người dùng, duyệt danh sách hình ảnh đính kèm và thống kê toàn hệ thống.
 
 Đề tài được xây dựng nhằm vận dụng các kiến thức chuyên sâu về lập trình ứng dụng di động Android (Java/Kotlin), kiến trúc phần mềm hiện đại MVVM, thiết kế giao diện tùy biến tối ưu, tích hợp kiến trúc Fragment điều hướng đa màn hình, kết hợp cùng dịch vụ điện toán đám mây Firebase Firestore, Firebase Authentication, giải pháp lưu trữ hình ảnh Cloudinary và bộ biểu tượng chuẩn **Heroicons** / **Lucide Icons**.
 
@@ -14,28 +14,26 @@ Ngoài việc hỗ trợ người dùng cuối (Customer), **UniEats** còn tíc
 
 Thực trạng tìm kiếm và lựa chọn địa điểm ẩm thực của người dùng hiện nay gặp phải nhiều thách thức:
 
-1. **Thiếu thông tin tập trung và minh bạch**: Thông tin về giá cả, thực đơn, giờ đóng/mở cửa của nhiều quán ăn nhỏ lẻ thường không được cập nhật thường xuyên hoặc phân tán rải rác trên các mạng xã hội.
-2. **Khó khăn trong tìm kiếm theo ngân sách và vị trí**: Đa số các ứng dụng hiện hữu tập trung vào mảng giao đồ ăn trực tuyến (Food Delivery) với chi phí dịch vụ cao, chưa có công cụ tối ưu cho việc tìm kiếm quán ăn tại chỗ (Dine-in) phù hợp với khoảng ngân sách cá nhân và bán kính di chuyển xung quanh.
+1. **Thiếu thông tin tập trung và minh bạch**: Thông tin về giá cả, hình ảnh thực đơn, giờ đóng/mở cửa của nhiều quán ăn nhỏ lẻ thường không được cập nhật thường xuyên hoặc phân tán rải rác trên các mạng xã hội.
+2. **Khó khăn trong tìm kiếm theo ngân sách và khu vực**: Đa số các ứng dụng hiện hữu tập trung vào mảng giao đồ ăn trực tuyến (Food Delivery) với chi phí dịch vụ cao, chưa có công cụ tối ưu cho việc tìm kiếm quán ăn tại chỗ (Dine-in) phù hợp với khoảng ngân sách cá nhân.
 3. **Chưa tối ưu hóa trải nghiệm tương tác cộng đồng**: Người dùng có nhu cầu chia sẻ hình ảnh thực tế, trải nghiệm ăn uống và đóng góp thông tin về các quán ăn mới chưa xuất hiện trên hệ thống.
-4. **Nhu cầu quản lý của chủ quán và ban quản trị**: Các chủ quán vừa và nhỏ cần một công cụ đơn giản để cập nhật thực đơn, tạo chương trình khuyến mãi thu hút khách hàng mà không tốn chi phí vận hành lớn. Bên cạnh đó, hệ thống cần cơ chế kiểm duyệt (Moderation) chặt chẽ để đảm bảo chất lượng dữ liệu và uy tín cộng đồng.
+4. **Nhu cầu đóng góp và ban quản trị**: Người dùng có nhu cầu đóng góp quán mới kèm 1 ảnh bìa đại diện và danh sách ảnh chụp thực đơn đính kèm để cộng đồng cùng trải nghiệm. Bên cạnh đó, Ban quản trị cần cơ chế kiểm duyệt (Moderation) chặt chẽ để duyệt thông tin quán ăn và đảm bảo chất lượng dữ liệu.
 
-Do đó, việc phát triển ứng dụng di động **UniEats** đáp ứng trọn vẹn các yêu cầu:
+Do đó, việc phát triển ứng dụng di động **UniEats** đáp ứng trôn vẹn các yêu cầu:
 
-- Tìm kiếm & lọc quán ăn thông minh theo địa điểm, danh mục và khoảng giá.
+- Tìm kiếm & lọc quán ăn thông minh theo tên, danh mục và khoảng giá.
 - Đánh giá khách quan kèm hình ảnh thực tế từ người dùng.
-- Quản lý thực đơn và ưu đãi linh hoạt cho chủ quán.
-- Cơ chế đóng góp quán mới và xét duyệt từ Admin/Moderator.
+- Cơ chế đóng góp quán mới kèm ảnh bìa & ảnh thực đơn đính kèm và xét duyệt từ Admin.
 - Đồng bộ dữ liệu thời gian thực trên mây và tối ưu hiệu năng thiết bị.
 
 ## 1.3 Phạm vi và chức năng chính
 
 ### 1.3.1 Phạm vi đề tài
 
-Đề tài tập trung nghiên cứu, thiết kế và phát triển ứng dụng di động chạy bản địa (Native Android App) trên hệ điều hành Android (hỗ trợ từ Android 7.0 - API level 24 trở lên đến Android 14/15 - API level 36), hướng tới 03 nhóm đối tượng mục tiêu chính:
+Đề tài tập trung nghiên cứu, thiết kế và phát triển ứng dụng di động chạy bản địa (Native Android App) trên hệ điều hành Android (hỗ trợ từ Android 7.0 - API level 24 trở lên đến Android 14/15 - API level 36), hướng tới 02 nhóm đối tượng mục tiêu chính:
 
-1. **Người dùng phổ thông (Users / Customers)**: Tìm kiếm địa điểm, xem chi tiết quán, xem thực đơn, đọc & viết đánh giá, đăng ảnh review, lưu danh sách yêu thích, đề xuất đóng góp quán mới.
-2. **Chủ quán ăn (Restaurant Owners)**: Quản lý nhà hàng cá nhân, xem danh sách và xóa quán ăn cá nhân, quản lý danh mục thực đơn (Menu), trạng thái món ăn (Còn/Hết món) và các chương trình khuyến mãi (Promotions).
-3. **Quản trị viên & Kiểm duyệt viên (Admin / Moderator)**: Quản lý danh sách người dùng (khóa/kích hoạt tài khoản), quản lý & phê duyệt quán ăn, xét duyệt các yêu cầu đóng góp quán mới (Contributions), theo dõi báo cáo thống kê toàn hệ thống.
+1. **Người dùng phổ thông (Users / Customers)**: Đăng ký/Đăng nhập, tìm kiếm địa điểm, lọc theo từ khóa/danh mục/khoảng giá/khoảng cách, xem chi tiết quán, xem bộ sưu tập hình ảnh thực đơn đính kèm, đọc & viết đánh giá (chỉnh sửa/xóa bài viết cá nhân), lưu/bỏ lưu quán yêu thích, định vị chỉ đường qua Google Maps và gửi đóng góp quán ăn mới (chọn 1 ảnh bìa đại diện và danh sách ảnh thực đơn đính kèm).
+2. **Quản trị viên (Admin)**: Quản lý danh sách người dùng (tìm kiếm người dùng theo tên/email/SĐT, phân quyền Role `USER`/`ADMIN`, chuyển đổi trạng thái hoạt động `ACTIVE`/`DISABLED`), kiểm duyệt quán ăn (`PENDING`, `APPROVED`, `REJECTED`, `CLOSED`), duyệt các đóng góp từ cộng đồng và xem chỉ số thống kê tổng quan hệ thống.
 
 **Giới hạn đề tài (Out of Scope)**:
 
@@ -45,7 +43,7 @@ Do đó, việc phát triển ứng dụng di động **UniEats** đáp ứng tr
 
 #### a) Phân hệ Xác thực & Quản lý tài khoản (Authentication & Account Management)
 
-- Đăng ký, đăng nhập hệ thống an toàn thông qua Email/Password tích hợp Firebase Authentication.
+- Đăng ký, đăng nhập hệ thống an toàn thông qua Email/Password tích hợp Firebase Authentication (kiểm tra tài khoản tồn tại trong hệ thống).
 - Tính năng khôi phục/đổi mật khẩu qua Email (Password Restore).
 - Bộ lọc kiểm tra ràng buộc dữ liệu đầu vào (Validation) tại Client (Email format, độ dài mật khẩu, số điện thoại).
 - Quản lý phiên đăng nhập (Session Management) bằng `SharedPreferences` và `AuthManager`, hỗ trợ duy trì đăng nhập và đăng xuất an toàn.
@@ -53,36 +51,38 @@ Do đó, việc phát triển ứng dụng di động **UniEats** đáp ứng tr
 
 #### b) Phân hệ Quản lý & Tìm kiếm Quán ăn (Restaurant Search & Discovery)
 
-- Hiển thị danh sách quán ăn nổi bật (Trending), quán ăn mới và đề xuất theo vị trí địa lý trên các màn hình Fragment.
-- Bộ lọc tìm kiếm nâng cao (Search & Filter): Tìm theo tên quán, từ khóa, danh mục ẩm thực, khoảng giá (min-max price), khoảng cách tọa độ (latitude/longitude) và giờ hoạt động.
-- Xem chi tiết quán ăn (Restaurant Detail): Thông tin địa chỉ, tọa độ bản đồ, giờ mở/đóng cửa, điểm rating trung bình, tổng lượt review, ảnh bìa (cover image), danh sách thực đơn và các bài đánh giá gần đây.
+- Hiển thị danh sách quán ăn nổi bật (Trending), quán ăn mới và đề xuất gần bạn trên các màn hình Fragment.
+- Bộ lọc tìm kiếm nâng cao (Search & Filter): Tìm theo tên quán, từ khóa, danh mục ẩm thực, khoảng giá (min-max price) và trạng thái hoạt động.
+- Xem chi tiết quán ăn (Restaurant Detail): Thông tin địa chỉ, giờ mở/đóng cửa, điểm rating trung bình, tổng lượt review, ảnh bìa đại diện (`cover_image_url`), định vị chỉ đường Google Maps, bộ sưu tập hình ảnh & thực đơn đính kèm (`attached_photos`) và các bài đánh giá từ cộng đồng.
 
-#### c) Phân hệ Quản lý Thực đơn & Danh mục (Menu & Category Management)
+#### c) Phân hệ Hình ảnh & Danh mục Quán ăn (Restaurant Photos & Category Management)
 
-- Phân loại danh mục ẩm thực (Món Việt, Món Hàn, Ăn vặt, Trà sữa, Cafe,...) đi kèm biểu tượng (icon) và mô tả.
-- Hiển thị chi tiết danh sách món ăn theo từng danh mục tại nhà hàng.
-- Chủ quán có thể Thêm / Sửa / Xóa món ăn, cập nhật giá tiền, hình ảnh món ăn và trạng thái còn/hết món (`is_available`).
+- Phân loại danh mục ẩm thực (Cơm, Bún/Phở/Mì, Ăn vặt, Trà sữa/Cà phê, Lẩu & Nướng) đi kèm biểu tượng (icon) và mô tả.
+- Mỗi quán ăn (Restaurant) quản lý 01 ảnh bìa đại diện nền quán (`coverImageUrl`) và tập hợp danh sách các hình ảnh đính kèm (`attachedPhotos` bao gồm ảnh bảng giá, thực đơn và không gian quán).
+- Hiển thị bộ sưu tập hình ảnh & thực đơn đính kèm cuộn ngang tại màn hình chi tiết nhà hàng (`DetailRestaurantActivity`).
+- Quy trình cập nhật thực đơn & hình ảnh: Người dùng gửi đóng góp quán mới chọn 1 ảnh bìa đại diện và chọn các ảnh thực đơn đính kèm (`ContributeRestaurantActivity`). Admin duyệt đóng góp và phê duyệt nhà hàng hiển thị chính thức trên ứng dụng.
 
 #### d) Phân hệ Đánh giá & Phản hồi (Reviews & Rating System)
 
 - Người dùng đã đăng nhập có thể viết bài đánh giá (Write Review) cho quán ăn gồm: Số sao chấm điểm (1 - 5 sao), nội dung nhận xét (comment).
 - Đính kèm và tải lên nhiều hình ảnh thực tế cho bài viết (Review Photos) qua Cloudinary Cloud Storage.
+- Phân định quyền sở hữu bài viết: Người dùng chỉ được phép chỉnh sửa hoặc xóa bài đánh giá do chính mình viết.
 - Tự động tính toán và cập nhật lại điểm đánh giá trung bình (`rating_avg`) và tổng số lượt đánh giá (`review_count`) của quán ăn trên hệ thống Firestore.
 - Hiển thị danh sách bài đánh giá (Review Adapter) kèm hình ảnh thumbnail và danh sách ảnh chụp tương ứng.
 
 #### e) Phân hệ Lưu trữ & Yêu thích (Saved Restaurants)
 
 - Người dùng có thể đánh dấu lưu/bỏ lưu các quán ăn yêu thích (`saved_restaurants`).
-- Quản lý danh sách quán ăn đã lưu riêng biệt giúp truy cập nhanh chóng.
+- Quản lý danh sách quán ăn đã lưu riêng biệt với nút **"Hủy lưu"** giúp quản lý dễ dàng.
 
 #### f) Phân hệ Đóng góp Quán ăn Mới (Contributions)
 
-- Người dùng có thể gửi yêu cầu đóng góp địa điểm ăn uống mới (Contribute Restaurant) bao gồm: Tên quán, địa chỉ, tọa độ GPS, ghi chú và hình ảnh thực đơn.
-- Yêu cầu sẽ ở trạng thái chờ duyệt (`PENDING`) cho đến khi được Admin/Moderator phê duyệt (`APPROVED`) hoặc từ chối (`REJECTED`).
+- Người dùng có thể gửi yêu cầu đóng góp địa điểm ăn uống mới (Contribute Restaurant) bao gồm: Tên quán, địa chỉ chi tiết, danh mục món ăn (Dropdown list), khoảng giá, chọn 1 ảnh bìa đại diện và tập hợp ảnh thực đơn đính kèm từ thư viện thiết bị.
+- Yêu cầu sẽ ở trạng thái chờ duyệt (`PENDING`) cho đến khi được Admin phê duyệt (`APPROVED`) hoặc từ chối (`REJECTED`).
 
-#### g) Phân hệ Quản trị & Xét duyệt (Admin / Moderator Dashboard)
+#### g) Phân hệ Quản trị & Xét duyệt (Admin Dashboard)
 
-- **Quản lý Người dùng (Manage User)**: Xem danh sách tài khoản, tìm kiếm, phân quyền (`USER`, `MODERATOR`, `ADMIN`), chuyển đổi trạng thái hoạt động (`ACTIVE` / `DISABLED`).
+- **Quản lý Người dùng (Manage User)**: Xem danh sách tài khoản, tìm kiếm người dùng theo tên/email/sđt thời gian thực, phân quyền (`USER`, `ADMIN`), chuyển đổi trạng thái hoạt động (`ACTIVE` / `DISABLED`).
 - **Quản lý Quán ăn (Manage Restaurant)**: Phê duyệt hoặc thay đổi trạng thái hoạt động của quán (`PENDING`, `APPROVED`, `REJECTED`, `CLOSED`).
 - **Duyệt Đóng góp**: Xem danh sách đóng góp từ cộng đồng, chuyển thông tin đóng góp hợp lệ thành quán ăn chính thức trên hệ thống.
 - **Thống kê Hệ thống (System Statistics)**: Các chỉ số tổng quan về số lượng người dùng, trạng thái tài khoản, tổng số quán ăn và tiến độ kiểm duyệt được tích hợp trực tiếp vào màn hình Quản lý Người dùng (`ManageUserActivity`) và Kiểm duyệt Quán ăn (`ManageRestaurantActivity`).
@@ -140,7 +140,20 @@ _Hình 1.1: Kiến trúc hệ thống UniEats và Mô hình xử lý dữ liệu
   - Toàn bộ giao diện được xây dựng bằng hệ thống mã nguồn XML tùy biến (Custom XML Layouts), không sử dụng bộ thư viện Google Material Components nhằm đảm bảo tính chủ động, tối ưu hóa kích thước file APK và đạt hiệu năng dựng hình mượt mà nhất.
   - Tích hợp **ViewBinding** giúp truy xuất và tương tác với các phần tử UI an toàn về kiểu dữ liệu (Type-safe) và loại bỏ hoàn toàn nguy cơ NullPointerException.
 
-- **RecyclerView & ViewHolder Pattern**: Hiển thị danh sách dữ liệu linh hoạt (Danh sách quán ăn, thực đơn, bài đánh giá, hình ảnh review) với cơ chế tái sử dụng View tối ưu bộ nhớ.
+- **RecyclerView & ViewHolder Pattern**: Hiển thị danh sách dữ liệu linh hoạt (Danh sách quán ăn, bộ sưu tập ảnh đính kèm, bài đánh giá, hình ảnh review) với cơ chế tái sử dụng View tối ưu bộ nhớ.
+
+- **Hệ thống các Thành phần Giao diện XML Layout (XML Layout Elements)**:
+  Hệ thống giao diện của UniEats được xây dựng hoàn toàn dựa trên mã nguồn XML tùy biến với sự kết hợp chặt chẽ của các thành phần giao diện nền tảng:
+  - **`LinearLayout`**: Quản lý và bố trí các thành phần giao diện theo một hướng duy nhất (chiều dọc `vertical` hoặc chiều ngang `horizontal`), ứng dụng trong việc dựng layout các mục danh sách, form nhập thông tin, các dòng thẻ thông tin và thanh tác vụ.
+  - **`RelativeLayout`**: Cho phép định vị và sắp xếp các View con phụ thuộc vào vị trí của View khác hoặc căn chỉnh linh hoạt so với View cha (`layout_centerInParent`, `layout_alignParentStart`, `layout_alignParentEnd`, `layout_toEndOf`...), giúp xây dựng thanh HeaderBar và ô tìm kiếm tối ưu.
+  - **`ScrollView` & `HorizontalScrollView`**: Cung cấp khả năng cuộn dọc và cuộn ngang dành cho các vùng nội dung vượt quá kích thước hiển thị của màn hình thiết bị (như form đóng góp, chi tiết nhà hàng, các chip danh mục ẩm thực cuộn ngang).
+  - **`CardView` (`androidx.cardview.widget.CardView`)**: Thành phần tạo các thẻ chứa nội dung nổi bật với tính năng bo tròn góc tùy biến (`cardCornerRadius`) và hiệu ứng bóng nổi 3D (`cardElevation`), ứng dụng trong các thẻ nhà hàng, thẻ đánh giá, thẻ thống kê và bộ sưu tập ảnh.
+  - **`RecyclerView` (`androidx.recyclerview.widget.RecyclerView`)**: Thành phần cuộn danh sách hiệu năng cao, tái sử dụng các View đã cuộn khỏi màn hình thông qua mô hình ViewHolder, dùng cho danh sách nhà hàng, danh sách tìm kiếm, danh sách người dùng và bộ sưu tập hình ảnh đính kèm.
+  - **`TextView`**: Hiển thị văn bản, tiêu đề, nhãn tag tùy biến, số liệu thống kê và đính kèm biểu tượng đồ họa linh hoạt (`app:drawableStartCompat`, `app:drawableEndCompat`, `android:drawablePadding`).
+  - **`EditText`**: Các ô nhập liệu họ tên, email, sđt, giá tiền min-max, ô tìm kiếm từ khóa thời gian thực có kết hợp xử lý sự kiện lắng nghe thay đổi văn bản (`TextWatcher`).
+  - **`ImageView`**: Hiển thị hình ảnh biểu tượng vector (`app:tint`), avatar tài khoản, ảnh bìa nhà hàng và các hình ảnh thực đơn đính kèm.
+  - **`AppCompatButton` (`androidx.appcompat.widget.AppCompatButton`)**: Nút bấm thao tác với background tùy biến bo tròn (`bg_button_orange`, `bg_button_google`), chữ viết hoa/thường tùy chỉnh (`textAllCaps="false"`).
+  - **`View`**: Thành phần vẽ đường kẻ phân cách mờ 1dp (`neutral_200`), khoảng trắng dãn layout và dải màu đè mờ gradient (overlay dark gradient).
 
 ### 1.4.4 Cơ sở dữ liệu và lưu trữ
 
@@ -190,10 +203,10 @@ _Hình 1.1: Kiến trúc hệ thống UniEats và Mô hình xử lý dữ liệu
 - **Yêu thích & Lưu vị trí**: Lưu quán ăn vào danh sách yêu thích (`SavedRestaurantsActivity`) để xem lại dễ dàng.
 - **Đóng góp quán ăn mới**: Gửi thông tin đóng góp quán ăn mới cho hệ thống (`ContributeRestaurantActivity`).
 
-#### b) Phân hệ Chủ quán ăn (Restaurant Owner)
+#### b) Phân hệ Đóng góp & Kiểm duyệt Thực đơn
 
-- **Quản lý nhà hàng cá nhân**: Xem danh sách các nhà hàng cá nhân thuộc sở hữu và thực hiện thao tác xóa quán ăn (`MyRestaurantActivity`).
-- **Quản lý Thực đơn (Menu Management)**: Thêm mới món ăn, chỉnh sửa tên món, giá tiền, ảnh món ăn, phân loại danh mục món và bật/tắt trạng thái hết hàng.
+- **Đóng góp thông tin & Ảnh thực đơn**: Người dùng chụp/tải ảnh thực đơn và vị trí khi đề xuất quán mới (`ContributeRestaurantActivity`).
+- **Cập nhật thực đơn chính thức**: Quản trị viên duyệt đóng góp từ người dùng và tạo thực đơn hiển thị tại trang chi tiết nhà hàng.
 
 #### c) Phân hệ Quản trị viên (Admin / Moderator)
 
@@ -228,11 +241,10 @@ _Hình 1.1: Kiến trúc hệ thống UniEats và Mô hình xử lý dữ liệu
 
 ### 2.2.1 Các Tác nhân (Actors)
 
-Hệ thống **UniEats** xác định 03 nhóm tác nhân chính:
+Hệ thống **UniEats** xác định 02 nhóm tác nhân chính:
 
-1. **Customer (Người dùng phổ thông)**: Người dùng đăng ký tài khoản trên ứng dụng để tìm kiếm quán ăn, xem thực đơn, đánh giá và lưu vị trí yêu thích.
-2. **Restaurant Owner (Chủ quán ăn)**: Kế thừa toàn bộ quyền của Customer, mở rộng thêm các chức năng quản lý nhà hàng cá nhân, thực đơn và chương trình khuyến mãi.
-3. **Admin / Moderator (Quản trị viên & Kiểm duyệt viên)**: Tác nhân quản trị hệ thống, có quyền kiểm duyệt nhà hàng, xét duyệt đóng góp từ cộng đồng, quản lý tài khoản người dùng và xem thống kê báo cáo.
+1. **Customer (Người dùng phổ thông)**: Đăng ký, đăng nhập theo danh sách tài khoản, tìm kiếm & lọc quán ăn, xem chi tiết & chỉ đường Google Maps, lưu/hủy lưu quán yêu thích, đánh giá & quản lý bài đánh giá cá nhân, đóng góp quán ăn mới (chọn 1 ảnh bìa đại diện và danh sách ảnh thực đơn đính kèm).
+2. **Admin (Quản trị viên hệ thống)**: Kiểm duyệt danh sách quán ăn (`PENDING`, `APPROVED`, `REJECTED`, `CLOSED`), quản lý & tìm kiếm người dùng (theo tên, email, sđt), duyệt đóng góp từ cộng đồng và xem chỉ số thống kê hệ thống.
 
 ---
 
@@ -240,7 +252,7 @@ Hệ thống **UniEats** xác định 03 nhóm tác nhân chính:
 
 - **Relationship Include**:
   - Chức năng _Viết đánh giá (Write Review)_ bắt buộc phải `<<include>>` hành vi _Chấm điểm Sao (Rating)_ và _Xác thực đăng nhập (Log In)_.
-  - Chức năng _Đóng góp quán mới (Contribute)_ bắt buộc `<<include>>` việc _Nhập vị trí địa chỉ_ và _Upload hình ảnh thực đơn_.
+  - Chức năng _Đóng góp quán mới (Contribute)_ bắt buộc `<<include>>` việc _Nhập thông tin quán_ và _Upload hình ảnh thực đơn đính kèm_.
 - **Relationship Extend**:
   - Chức năng _Xem chi tiết quán (View Detail)_ được `<<extend>>` bởi hành vi _Lưu vào danh sách yêu thích (Save Restaurant)_ và _Đính kèm ảnh review (Upload Review Photos)_.
   - Chức năng _Quản lý hệ thống (Admin System)_ được `<<extend>>` chi tiết bởi _Khóa tài khoản_, _Duyệt đóng góp_ và _Thay đổi trạng thái quán_.
@@ -254,20 +266,20 @@ _Bảng 2.1: Tổng hợp danh sách Use-case hệ thống UniEats_
 | Mã UC    | Tên Use-case                                | Actor chính       | Mô tả chức năng                                                                                |
 | :------- | :------------------------------------------ | :---------------- | :--------------------------------------------------------------------------------------------- |
 | **UC01** | Sign Up (Đăng ký)                           | Customer          | Cho phép người dùng khởi tạo tài khoản mới với Email, Mật khẩu, Họ tên và SĐT.                 |
-| **UC02** | Sign In (Đăng nhập)                         | Customer          | Xác thực thông tin người dùng vào hệ thống.                                                    |
+| **UC02** | Sign In (Đăng nhập)                         | Customer          | Xác thực thông tin người dùng vào hệ thống theo danh sách user sẵn có.                         |
 | **UC03** | Restore Password (Khôi phục mật khẩu)       | Customer          | Gửi email hướng dẫn đặt lại mật khẩu khi quên.                                                 |
 | **UC04** | Edit Profile (Sửa hồ sơ)                    | Customer          | Cập nhật tên, sđt và avatar cá nhân.                                                           |
-| **UC05** | Search & Filter (Tìm kiếm & Lọc)            | Customer          | Tìm kiếm quán ăn theo từ khóa, lọc theo danh mục, khoảng giá và đánh giá qua `SearchFragment`. |
-| **UC06** | View Restaurant Detail (Xem chi tiết quán)  | Customer          | Xem vị trí, thông tin liên hệ, thực đơn và bài đánh giá của quán.                              |
+| **UC05** | Search & Filter (Tìm kiếm & Lọc)            | Customer          | Tìm kiếm quán ăn theo từ khóa, lọc theo danh mục, khoảng giá và xếp giá qua `SearchFragment`.  |
+| **UC06** | View Restaurant Detail (Xem chi tiết quán)  | Customer          | Xem thông tin liên hệ, bộ sưu tập hình ảnh thực đơn đính kèm và bài đánh giá của quán.         |
 | **UC07** | Save / Favorite (Lưu yêu thích)             | Customer          | Đánh dấu hoặc hủy lưu quán ăn vào danh sách cá nhân.                                           |
-| **UC08** | Write Review (Viết đánh giá)                | Customer          | Gửi điểm số (1-5 sao), lời bình luận và đăng nhiều ảnh thực tế cho quán ăn.                    |
-| **UC09** | Contribute Restaurant (Đóng góp quán mới)   | Customer          | Gửi thông tin đề xuất địa điểm ăn uống mới cho Admin kiểm duyệt.                               |
-| **UC10** | Manage My Restaurant (Quản lý quán cá nhân) | Owner             | Xem danh sách và quản lý/xóa quán ăn cá nhân của chủ quán.                                     |
-| **UC11** | Manage Menu (Quản lý thực đơn)              | Owner             | Thêm/Sửa/Xóa món ăn, giá bán, ảnh món ăn và trạng thái còn món.                                |
-| **UC12** | Manage Users (Quản lý người dùng)           | Admin             | Xem danh sách tài khoản, khóa/mở khóa tài khoản, phân quyền Role.                              |
-| **UC13** | Manage Restaurants (Quản lý quán ăn)        | Admin / Moderator | Duyệt quán mới, đổi trạng thái (APPROVED/REJECTED/CLOSED).                                     |
-| **UC14** | Approve Contributions (Duyệt đóng góp)      | Admin / Moderator | Phê duyệt hoặc từ chối các yêu cầu đề xuất quán mới từ cộng đồng.                              |
-| **UC15** | View System Statistics (Xem thống kê)       | Admin             | Xem các chỉ số thống kê tổng quan (số lượng người dùng, số lượng quán ăn) tích hợp trong màn hình quản trị. |
+| **UC08** | Write Review (Viết đánh giá)                | Customer          | Gửi điểm số (1-5 sao), lời bình luận và đăng nhiều ảnh thực tế (chỉnh sửa/xóa bài cá nhân).    |
+| **UC09** | Contribute Restaurant (Đóng góp quán mới)   | Customer          | Gửi thông tin đề xuất quán ăn mới kèm ảnh bìa & ảnh thực đơn cho Admin kiểm duyệt.             |
+| **UC10** | Contribute Photos (Đóng góp ảnh đính kèm)   | Customer          | Người dùng chọn ảnh bìa đại diện và danh sách ảnh thực đơn đính kèm khi đề xuất quán mới.      |
+| **UC11** | Approve Photos (Duyệt hình ảnh quán)        | Admin             | Admin kiểm duyệt đóng góp và phê duyệt nhà hàng hiển thị chính thức.                           |
+| **UC12** | Manage Users (Quản lý người dùng)           | Admin             | Xem danh sách tài khoản, tìm kiếm người dùng thời gian thực, khóa/mở khóa tài khoản, Role.     |
+| **UC13** | Manage Restaurants (Quản lý quán ăn)        | Admin             | Duyệt quán mới, đổi trạng thái (APPROVED/REJECTED/CLOSED).                                     |
+| **UC14** | Approve Contributions (Duyệt đóng góp)      | Admin             | Phê duyệt hoặc từ chối các yêu cầu đề xuất quán mới từ cộng đồng.                              |
+| **UC15** | View System Statistics (Xem thống kê)       | Admin             | Xem các chỉ số thống kê tổng quan (số lượng người dùng, số lượng quán ăn) tích hợp trong quản trị. |
 
 ---
 
@@ -298,7 +310,7 @@ _Bảng 2.2: Cấu trúc bảng users_
 |  4  | `phone_number`  | VARCHAR(15)              | UNIQUE                                                         | Số điện thoại liên hệ                   |
 |  5  | `password_hash` | VARCHAR(255)             |                                                                | Mật khẩu đã được mã hóa (Firebase Auth) |
 |  6  | `avatar_url`    | TEXT                     |                                                                | Đường dẫn ảnh đại diện (Cloudinary URL) |
-|  7  | `role`          | VARCHAR(20)              | Mặc định: `'USER'`, CHECK (`'USER'`, `'MODERATOR'`, `'ADMIN'`) | Vai trò người dùng trong hệ thống       |
+|  7  | `role`          | VARCHAR(20)              | Mặc định: `'USER'`, CHECK (`'USER'`, `'ADMIN'`)                | Vai trò người dùng trong hệ thống       |
 |  8  | `is_active`     | BOOLEAN                  | Mặc định: `TRUE`                                               | Trạng thái tài khoản (Kích hoạt / Khóa) |
 |  9  | `created_at`    | TIMESTAMP WITH TIME ZONE | Mặc định: `CURRENT_TIMESTAMP`                                  | Thời gian khởi tạo tài khoản            |
 | 10  | `updated_at`    | TIMESTAMP WITH TIME ZONE | Mặc định: `CURRENT_TIMESTAMP`                                  | Thời gian cập nhật thông tin mới nhất   |
@@ -307,7 +319,7 @@ _Bảng 2.2: Cấu trúc bảng users_
 
 #### 2. Bảng `categories` (Danh mục ẩm thực)
 
-Quản lý các loại hình ẩm thực (Ăn sáng, Món Việt, Trà sữa, Đồ ăn vặt,...) để phân loại nhà hàng và món ăn.
+Quản lý các loại hình ẩm thực (Ăn sáng, Món Việt, Trà sữa, Đồ ăn vặt,...) để phân loại nhà hàng.
 
 _Bảng 2.3: Cấu trúc bảng categories_
 
@@ -321,7 +333,7 @@ _Bảng 2.3: Cấu trúc bảng categories_
 
 ---
 
-#### 3. Bảng `restaurants` (Quán ăn / Nhà hàng)
+#### 3. Bảng `restaurants` (Quán ăn / Nhà hàng - Đã hợp nhất từ Đóng góp)
 
 Lưu trữ thông tin chi tiết các địa điểm ăn uống trên hệ thống UniEats.
 
@@ -333,20 +345,17 @@ _Bảng 2.4: Cấu trúc bảng restaurants_
 |  2  | `name`            | VARCHAR(200)             | NOT NULL                                                                           | Tên quán ăn / nhà hàng                   |
 |  3  | `slug`            | VARCHAR(200)             | NOT NULL, UNIQUE                                                                   | Đường dẫn thân thiện                     |
 |  4  | `address`         | TEXT                     | NOT NULL                                                                           | Địa chỉ chi tiết của quán ăn             |
-|  5  | `latitude`        | DECIMAL(9, 6)            | NOT NULL                                                                           | Vĩ độ địa lý (GPS Latitude)              |
-|  6  | `longitude`       | DECIMAL(9, 6)            | NOT NULL                                                                           | Kinh độ địa lý (GPS Longitude)           |
-|  7  | `location`        | GEOGRAPHY(POINT, 4326)   |                                                                                    | Tọa độ PostGIS phục vụ tìm kiếm bán kính |
-|  8  | `price_range_min` | DECIMAL(10, 2)           | Mặc định: `0`                                                                      | Mức giá thấp nhất của các món ăn         |
-|  9  | `price_range_max` | DECIMAL(10, 2)           | Mặc định: `0`                                                                      | Mức giá cao nhất của các món ăn          |
-| 10  | `opening_time`    | TIME                     |                                                                                    | Giờ mở cửa hàng ngày                     |
-| 11  | `closing_time`    | TIME                     |                                                                                    | Giờ đóng cửa hàng ngày                   |
-| 12  | `rating_avg`      | DECIMAL(2, 1)            | Mặc định: `0.0`                                                                    | Điểm đánh giá trung bình (1.0 - 5.0)     |
-| 13  | `review_count`    | INT                      | Mặc định: `0`                                                                      | Tổng số lượt đánh giá từ người dùng      |
-| 14  | `cover_image_url` | TEXT                     |                                                                                    | Đường dẫn ảnh bìa không gian quán        |
-| 15  | `status`          | VARCHAR(20)              | Mặc định: `'PENDING'`, CHECK (`'PENDING'`, `'APPROVED'`, `'REJECTED'`, `'CLOSED'`) | Trạng thái duyệt và hoạt động của quán   |
-| 16  | `created_by`      | UUID / String            | FOREIGN KEY `users(user_id)` ON DELETE SET NULL                                    | Người tạo / Chủ sở hữu quán              |
-| 17  | `created_at`      | TIMESTAMP WITH TIME ZONE | Mặc định: `CURRENT_TIMESTAMP`                                                      | Thời gian tạo nhà hàng trên hệ thống     |
-| 18  | `updated_at`      | TIMESTAMP WITH TIME ZONE | Mặc định: `CURRENT_TIMESTAMP`                                                      | Thời gian cập nhật gần nhất              |
+|  5  | `price_range_min` | DECIMAL(10, 2)           | Mặc định: `0`                                                                      | Mức giá thấp nhất                        |
+|  6  | `price_range_max` | DECIMAL(10, 2)           | Mặc định: `0`                                                                      | Mức giá cao nhất                         |
+|  7  | `opening_time`    | TIME                     |                                                                                    | Giờ mở cửa hàng ngày                     |
+|  8  | `closing_time`    | TIME                     |                                                                                    | Giờ đóng cửa hàng ngày                   |
+|  9  | `rating_avg`      | DECIMAL(2, 1)            | Mặc định: `0.0`                                                                    | Điểm đánh giá trung bình (1.0 - 5.0)     |
+| 10  | `review_count`    | INT                      | Mặc định: `0`                                                                      | Tổng số lượt đánh giá từ người dùng      |
+| 11  | `cover_image_url` | TEXT                     |                                                                                    | 01 Ảnh bìa đại diện nền quán ăn          |
+| 12  | `status`          | VARCHAR(20)              | Mặc định: `'PENDING'`, CHECK (`'PENDING'`, `'APPROVED'`, `'REJECTED'`, `'CLOSED'`) | Trạng thái duyệt và hoạt động của quán   |
+| 13  | `created_by`      | UUID / String            | FOREIGN KEY `users(user_id)` ON DELETE SET NULL                                    | Người tạo / Người đóng góp               |
+| 14  | `created_at`      | TIMESTAMP WITH TIME ZONE | Mặc định: `CURRENT_TIMESTAMP`                                                      | Thời gian tạo nhà hàng trên hệ thống     |
+| 15  | `updated_at`      | TIMESTAMP WITH TIME ZONE | Mặc định: `CURRENT_TIMESTAMP`                                                      | Thời gian cập nhật gần nhất              |
 
 ---
 
@@ -363,23 +372,18 @@ _Bảng 2.5: Cấu trúc bảng restaurant_categories_
 
 ---
 
-#### 5. Bảng `menus` (Thực đơn / Món ăn)
+#### 5. Bảng `restaurant_photos` (Hình ảnh đính kèm của Quán ăn)
 
-Lưu trữ danh sách các món ăn, thức uống thuộc thực đơn của từng quán ăn.
+Lưu trữ tập hợp đường dẫn các hình ảnh thực đơn, bảng giá và không gian quán đính kèm của từng nhà hàng.
 
-_Bảng 2.6: Cấu trúc bảng menus_
+_Bảng 2.6: Cấu trúc bảng restaurant_photos_
 
-| STT | Tên thuộc tính  | Kiểu dữ liệu             | Ràng buộc / Giá trị mặc định                                         | Mô tả thuộc tính                      |
-| :-: | :-------------- | :----------------------- | :------------------------------------------------------------------- | :------------------------------------ |
-|  1  | `menu_id`       | UUID / String            | PRIMARY KEY, Mặc định: `gen_random_uuid()`                           | Mã định danh món ăn                   |
-|  2  | `restaurant_id` | UUID / String            | NOT NULL, FOREIGN KEY `restaurants(restaurant_id)` ON DELETE CASCADE | Mã quán ăn sở hữu món                 |
-|  3  | `name`          | VARCHAR(150)             | NOT NULL                                                             | Tên món ăn / thức uống                |
-|  4  | `description`   | TEXT                     |                                                                      | Mô tả thành phần, hương vị món ăn     |
-|  5  | `price`         | DECIMAL(10, 2)           | NOT NULL                                                             | Giá bán niêm yết của món ăn           |
-|  6  | `image_url`     | TEXT                     |                                                                      | Đường dẫn hình ảnh minh họa món ăn    |
-|  7  | `is_available`  | BOOLEAN                  | Mặc định: `TRUE`                                                     | Trạng thái món ăn (Còn món / Hết món) |
-|  8  | `category_id`   | INT                      | FOREIGN KEY `categories(category_id)` ON DELETE SET NULL             | Danh mục nhóm món ăn                  |
-|  9  | `created_at`    | TIMESTAMP WITH TIME ZONE | Mặc định: `CURRENT_TIMESTAMP`                                        | Thời điểm thêm món vào thực đơn       |
+| STT | Tên thuộc tính  | Kiểu dữ liệu             | Ràng buộc / Giá trị mặc định                                         | Mô tả thuộc tính                          |
+| :-: | :-------------- | :----------------------- | :------------------------------------------------------------------- | :---------------------------------------- |
+|  1  | `photo_id`      | UUID / String            | PRIMARY KEY, Mặc định: `gen_random_uuid()`                           | Mã định danh hình ảnh quán                |
+|  2  | `restaurant_id` | UUID / String            | NOT NULL, FOREIGN KEY `restaurants(restaurant_id)` ON DELETE CASCADE | Mã quán ăn sở hữu hình ảnh                |
+|  3  | `photo_url`     | TEXT                     | NOT NULL                                                             | Đường dẫn hình ảnh (Cloudinary CDN / Uri) |
+|  4  | `created_at`    | TIMESTAMP WITH TIME ZONE | Mặc định: `CURRENT_TIMESTAMP`                                        | Thời điểm tải hình ảnh lên                |
 
 ---
 
@@ -464,12 +468,10 @@ _Bảng 2.11: Cấu trúc bảng contributions_
 |  2  | `user_id`         | UUID / String            | NOT NULL, FOREIGN KEY `users(user_id)` ON DELETE CASCADE               | Mã người dùng gửi đề xuất                 |
 |  3  | `restaurant_name` | VARCHAR(200)             | NOT NULL                                                               | Tên quán ăn được đề xuất                  |
 |  4  | `address`         | TEXT                     | NOT NULL                                                               | Địa chỉ địa điểm đề xuất                  |
-|  5  | `latitude`        | DECIMAL(9, 6)            |                                                                        | Vĩ độ địa lý đề xuất                      |
-|  6  | `longitude`       | DECIMAL(9, 6)            |                                                                        | Kinh độ địa lý đề xuất                    |
-|  7  | `menu_images`     | JSONB / Array            |                                                                        | Mảng danh sách đường dẫn URL ảnh thực đơn |
-|  8  | `note`            | TEXT                     |                                                                        | Ghi chú thêm từ người đóng góp            |
-|  9  | `status`          | VARCHAR(20)              | Mặc định: `'PENDING'`, CHECK (`'PENDING'`, `'APPROVED'`, `'REJECTED'`) | Trạng thái kiểm duyệt của bài đóng góp    |
-| 10  | `created_at`      | TIMESTAMP WITH TIME ZONE | Mặc định: `CURRENT_TIMESTAMP`                                          | Thời điểm gửi đề xuất đóng góp            |
+|  5  | `menu_images`     | JSONB / Array            |                                                                        | Mảng danh sách đường dẫn URL ảnh thực đơn |
+|  6  | `note`            | TEXT                     |                                                                        | Ghi chú thêm từ người đóng góp            |
+|  7  | `status`          | VARCHAR(20)              | Mặc định: `'PENDING'`, CHECK (`'PENDING'`, `'APPROVED'`, `'REJECTED'`) | Trạng thái kiểm duyệt của bài đóng góp    |
+|  8  | `created_at`      | TIMESTAMP WITH TIME ZONE | Mặc định: `CURRENT_TIMESTAMP`                                          | Thời điểm gửi đề xuất đóng góp            |
 
 ---
 
@@ -605,16 +607,16 @@ _Bảng 3.2: Danh sách chi tiết các biến kích thước và khoảng cách
 1. **Màn hình Trang chủ (`HomeFragment`)**: Hiển thị thanh tìm kiếm nhanh, banner khuyến mãi nổi bật, danh mục ẩm thực cuộn ngang và danh sách quán ăn đề xuất gần bạn.
 2. **Màn hình Tìm kiếm (`SearchFragment`)**: Cho phép nhập từ khóa tìm kiếm, chọn lọc theo khoảng giá, thời gian hoạt động và danh mục tương ứng.
 3. **Màn hình Xu hướng (`TrendingFragment`)**: Liệt kê các nhà hàng có điểm đánh giá cao nhất và số lượng bài review áp đảo trong tuần.
-4. **Màn hình Chi tiết Quán ăn (`DetailRestaurantActivity`)**: Hiển thị đầy đủ ảnh bìa, tên quán, địa chỉ, khoảng giá, các nút chức năng (_Lưu yêu thích_, _Đánh giá_, _Chỉ đường_), Tab xem Thực đơn và Tab xem Đánh giá.
+4. **Màn hình Chi tiết Quán ăn (`DetailRestaurantActivity`)**: Hiển thị đầy đủ ảnh bìa đại diện, tên quán, địa chỉ, khoảng giá, các nút chức năng (_Lưu yêu thích_, _Đánh giá_, _Chỉ đường trên Google Maps_), và bộ sưu tập Hình ảnh & Thực đơn đính kèm cuộn ngang (`rvAttachedPhotos`).
 5. **Màn hình Quán ăn đã lưu (`SavedRestaurantsActivity`)**: Quản lý danh sách các địa điểm mà người dùng đã bấm lưu.
 6. **Màn hình Hồ sơ cá nhân (`ProfileFragment`)**: Hiển thị thông tin cá nhân, nút truy cập _Sửa hồ sơ_, _Lịch sử đánh giá_, _Chuyển sang chế độ Chủ quán/Admin_ và _Đăng xuất_.
 
 ---
 
-### 3.2.2 Giao diện Dành cho Chủ quán ăn (Restaurant Owner Mode)
+### 3.2.2 Giao diện Đóng góp & Quản lý Quán ăn cá nhân
 
-1. **Màn hình Quán ăn của tôi (`MyRestaurantActivity`)**: Cho phép chủ quán xem danh sách nhà hàng cá nhân và thực hiện thao tác xóa quán ăn.
-2. **Màn hình Quản lý Thực đơn (Menu Management)**: Giao diện dạng danh sách các món ăn (`MenuAdapter`), hỗ trợ các nút thao tác _Thêm món mới_, _Sửa thông tin món_, _Xóa món_ và nút công tắc bật/tắt _Trạng thái còn món_.
+1. **Màn hình Đóng góp Quán mới (`ContributeRestaurantActivity`)**: Form nhập thông tin quán ăn đề xuất, chọn danh mục món ăn từ danh sách xổ xuống (Dropdown list) và tải ảnh không gian/thực đơn.
+2. **Màn hình Quán ăn của tôi (`MyRestaurantActivity`)**: Hiển thị danh sách các quán ăn cá nhân đã đăng ký hoặc được cấp quyền quản lý, hỗ trợ thao tác xóa.
 
 ---
 
@@ -644,11 +646,11 @@ _Bảng 3.2: Danh sách chi tiết các biến kích thước và khoảng cách
     (Chưa)                      (Đã Đăng nhập)
      /                             \
 [SigninActivity]             <Kiểm tra Role người dùng>
-     |                             /       |       \
-     +--> [SignupActivity]      USER    OWNER     ADMIN
-     |                            |        |        |
-     +--> [PasswordRestore]       v        v        v
-                                [Home]  [MyRest] [AdminDash]
+     |                             /               \
+     +--> [SignupActivity]      USER              ADMIN
+     |                            |                 |
+     +--> [PasswordRestore]       v                 v
+                                [Home]         [AdminDash]
                               (Fragments)
 ```
 
@@ -679,7 +681,7 @@ Hệ thống kết hợp **Firebase Authentication** và **SharedPreferences** q
 Dữ liệu nhà hàng và thực đơn được quản lý trên **Cloud Firestore**:
 
 - `FirebaseManager` cung cấp các phương thức truy xuất Collection Reference (`getRestaurantsRef()`, `getMenusRef()`).
-- Khi chủ quán tải ảnh món ăn hoặc ảnh bìa nhà hàng, ứng dụng gọi `CloudinaryManager.uploadImage()`. Ảnh được đẩy trực tiếp lên Cloudinary, trả về URL CDN an toàn lưu vào Firestore document.
+- Khi người dùng tải ảnh món ăn hoặc ảnh bìa nhà hàng khi đóng góp, ứng dụng gọi `CloudinaryManager.uploadImage()`. Ảnh được đẩy trực tiếp lên Cloudinary, trả về URL CDN an toàn lưu vào Firestore document.
 
 ---
 
@@ -731,7 +733,7 @@ Sau quá trình nghiên cứu lý thuyết, phân tích hệ thống và tiến 
    - Phân hệ Tìm kiếm, Lọc quán ăn thông minh qua `SearchFragment` theo đa tiêu chí.
    - Phân hệ Đánh giá (Review), Chấm điểm sao và Upload nhiều hình ảnh thực tế qua Cloudinary.
    - Phân hệ Lưu danh sách quán yêu thích và Đóng góp quán mới từ cộng đồng.
-   - Phân hệ Quản lý Nhà hàng & Thực đơn linh hoạt cho Chủ quán.
+   - Phân hệ Đóng góp & Kiểm duyệt Thực đơn/Nhà hàng.
    - Phân hệ Quản trị & Xét duyệt nội dung dành cho Admin/Moderator.
 3. **Chuẩn hóa kiến trúc mã nguồn & Cơ sở dữ liệu**:
    - Áp dụng thành công mô hình MVVM kết hợp Fragment & Helper Pattern giúp mã nguồn rõ ràng, dễ bảo trì.
@@ -747,7 +749,7 @@ Sau quá trình nghiên cứu lý thuyết, phân tích hệ thống và tiến 
 - **Kiến trúc Fragment & Tùy biến UI linh hoạt**: Sử dụng các Fragment (`HomeFragment`, `SearchFragment`, `TrendingFragment`, `ProfileFragment`) giúp chuyển đổi màn hình cực nhanh, không hao tốn tài nguyên thiết bị và không phụ thuộc thư viện bên ngoài.
 - **Bộ biểu tượng sắc nét (Heroicons & Lucide Icons)**: Đồng bộ thiết kế icon hiện đại, tối ưu chuẩn Vector Drawable.
 - **Trải nghiệm người dùng (UX) tối ưu**: Giao diện trực quan, tìm kiếm linh hoạt, hình ảnh hiển thị sinh động.
-- **Phân quyền người dùng chặt chẽ (Role-Based Access Control)**: Phân định rành mạch quyền hạn giữa Người dùng cuối, Chủ nhà hàng và Ban quản trị hệ thống.
+- **Phân quyền người dùng chặt chẽ (Role-Based Access Control)**: Phân định rành mạch quyền hạn giữa Người dùng cuối và Ban quản trị hệ thống.
 
 ---
 
@@ -755,7 +757,7 @@ Sau quá trình nghiên cứu lý thuyết, phân tích hệ thống và tiến 
 
 Mặc dù đạt được nhiều kết quả tích cực, ứng dụng vẫn còn một số điểm hạn chế cần cải thiện:
 
-- **Chưa tích hợp bản đồ trực tuyến (Google Maps API)**: Việc hiển thị vị trí hiện tại mới dừng lại ở tọa độ GPS (latitude/longitude) và địa chỉ dạng văn bản, chưa trực quan hóa đường đi trực tiếp trên bản đồ tương tác.
+- **Chưa tích hợp bản đồ trực tuyến (Google Maps API)**: Việc hiển thị vị trí hiện tại mới dừng lại ở địa chỉ dạng văn bản, chưa trực quan hóa đường đi trực tiếp trên bản đồ tương tác.
 - **Thuật toán gợi ý ở mức cơ bản**: Việc đề xuất quán ăn chủ yếu dựa trên điểm số đánh giá và lượt review, chưa áp dụng các mô hình Học máy (Machine Learning / Recommendation System) để phân tích sâu thói quen tiêu dùng cá nhân.
 - **Ứng dụng thuần Native Android**: Chưa hỗ trợ nền tảng iOS hoặc phiên bản Web Dashboard cho chủ quán quản trị trên máy tính.
 

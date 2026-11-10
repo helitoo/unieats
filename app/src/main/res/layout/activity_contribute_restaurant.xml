@@ -101,19 +101,6 @@
                 android:textColorHint="@color/neutral_300"
                 android:textSize="14sp" />
 
-            <!-- Select Coordinates Button -->
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnSelectCoordinates"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/bg_button_google"
-                android:text="Chọn tọa độ trên bản đồ"
-                android:textAllCaps="false"
-                android:textColor="@color/orange_500"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
             <!-- Field 3: Danh mục -->
             <TextView
                 android:layout_width="wrap_content"

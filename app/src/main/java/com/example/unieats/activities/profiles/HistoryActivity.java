@@ -48,6 +48,13 @@ public class HistoryActivity extends AppCompatActivity {
         switchTab(true);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setupAdapters();
+        switchTab(isReviewTab);
+    }
+
     private void initViews() {
         tvBack = findViewById(R.id.tvBack);
         btnTabReviews = findViewById(R.id.btnTabReviews);

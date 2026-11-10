@@ -117,7 +117,7 @@ public class ManageRestaurantActivity extends AppCompatActivity {
     private void filterByStatus(String status, TextView selectedChip) {
         resetChipStyles();
         selectedChip.setBackgroundResource(R.drawable.bg_chip_selected);
-        selectedChip.setTextColor(ContextCompat.getColor(this, R.color.neutral_0));
+        selectedChip.setTextColor(ContextCompat.getColor(this, R.color.orange_500));
 
         filteredList.clear();
         if (status == null) {

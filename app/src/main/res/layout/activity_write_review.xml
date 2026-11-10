@@ -144,15 +144,6 @@
                     app:tint="@color/neutral_300" />
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
-                android:text="Chi phí  ·  Chất lượng món  ·  Phục vụ  ·  Vệ sinh"
-                android:textColor="@color/neutral_900"
-                android:textSize="13sp" />
-
             <!-- Comment Card ("Đánh giá của bạn") -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"

@@ -17,7 +17,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.unieats.R;
 import com.example.unieats.activities.MainActivity;
+import com.example.unieats.entities.User;
 import com.example.unieats.helpers.AuthManager;
+import com.example.unieats.helpers.MockData;
 
 public class SigninActivity extends AppCompatActivity {
 
@@ -68,11 +70,25 @@ public class SigninActivity extends AppCompatActivity {
         });
 
         btnSignin.setOnClickListener(v -> {
-            AuthManager.setLoggedIn(SigninActivity.this, true);
-            Toast.makeText(SigninActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(SigninActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
+            String input = etEmailPhone.getText().toString().trim();
+            String pass = etPassword.getText().toString().trim();
+
+            if (input.isEmpty()) {
+                etEmailPhone.setError("Vui lòng nhập Email hoặc SĐT");
+                return;
+            }
+
+            User authenticatedUser = MockData.authenticate(input, pass);
+            if (authenticatedUser != null) {
+                MockData.setCurrentUser(authenticatedUser);
+                AuthManager.setLoggedIn(SigninActivity.this, true);
+                Toast.makeText(SigninActivity.this, String.format("Xin chào %s! Đăng nhập thành công", authenticatedUser.getName()), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(SigninActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                Toast.makeText(SigninActivity.this, "Tài khoản không tồn tại! Gợi ý: phuong@example.com hoặc hoangdung@gmail.com", Toast.LENGTH_LONG).show();
+            }
         });
 
         btnGoogle.setOnClickListener(v -> 

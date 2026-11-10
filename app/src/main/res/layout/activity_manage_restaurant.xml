@@ -218,7 +218,7 @@
                 android:paddingHorizontal="14dp"
                 android:paddingVertical="8dp"
                 android:text="Tất cả"
-                android:textColor="@color/neutral_0"
+                android:textColor="@color/orange_500"
                 android:textSize="13sp"
                 android:textStyle="bold" />
 
@@ -232,7 +232,7 @@
                 android:focusable="true"
                 android:paddingHorizontal="14dp"
                 android:paddingVertical="8dp"
-                android:text="PENDING"
+                android:text="Đang chờ"
                 android:textColor="@color/neutral_700"
                 android:textSize="13sp"
                 android:textStyle="bold" />
@@ -247,7 +247,7 @@
                 android:focusable="true"
                 android:paddingHorizontal="14dp"
                 android:paddingVertical="8dp"
-                android:text="APPROVED"
+                android:text="Đã duyệt"
                 android:textColor="@color/neutral_700"
                 android:textSize="13sp"
                 android:textStyle="bold" />
@@ -262,7 +262,7 @@
                 android:focusable="true"
                 android:paddingHorizontal="14dp"
                 android:paddingVertical="8dp"
-                android:text="REJECTED"
+                android:text="Đã từ chối"
                 android:textColor="@color/neutral_700"
                 android:textSize="13sp"
                 android:textStyle="bold" />
@@ -276,7 +276,7 @@
                 android:focusable="true"
                 android:paddingHorizontal="14dp"
                 android:paddingVertical="8dp"
-                android:text="CLOSED"
+                android:text="Đã đóng cửa"
                 android:textColor="@color/neutral_700"
                 android:textSize="13sp"
                 android:textStyle="bold" />

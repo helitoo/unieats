@@ -33,9 +33,13 @@ public class UserShortAdapter extends RecyclerView.Adapter<UserShortAdapter.View
         User item = userList.get(position);
         holder.tvUserName.setText(item.getName());
 
-        String roleStatus = String.format("%s · %s",
-                item.getRole() != null ? item.getRole() : "User",
-                item.getStatus() != null ? item.getStatus() : "Đang hoạt động");
+        String rawRole = item.getRole() != null ? item.getRole() : "User";
+        String roleStr = ("ADMIN".equalsIgnoreCase(rawRole) || "ADMINISTRATOR".equalsIgnoreCase(rawRole)) ? "Quản trị viên" : "Người dùng";
+
+        String rawStatus = item.getStatus() != null ? item.getStatus() : "Đang hoạt động";
+        String statusStr = ("DISABLED".equalsIgnoreCase(rawStatus) || "INACTIVE".equalsIgnoreCase(rawStatus) || "Tạm dừng".equalsIgnoreCase(rawStatus)) ? "Tạm dừng" : "Đang hoạt động";
+
+        String roleStatus = String.format("%s · %s", roleStr, statusStr);
         holder.tvUserRoleStatus.setText(roleStatus);
     }
 

@@ -18,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.unieats.R;
 import com.example.unieats.activities.restaurants.WriteReviewActivity;
 import com.example.unieats.entities.Review;
+import com.example.unieats.entities.User;
+import com.example.unieats.helpers.MockData;
 
 import java.util.List;
 import java.util.Locale;
@@ -80,8 +82,12 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
             holder.rvReviewPhotos.setVisibility(View.GONE);
         }
 
-        // Author Actions (Edit / Delete) - Shown if user is author of review
-        if (item.isAuthor() && holder.llAuthorActions != null) {
+        // Author Actions (Edit / Delete) - Shown ONLY if user is author of review
+        User currentUser = MockData.getCurrentUser();
+        boolean isCurrentAuthor = item.isAuthor() || (currentUser != null && item.getUserName() != null && 
+                (item.getUserName().contains(currentUser.getName()) || (item.getUserId() != null && item.getUserId().equals(currentUser.getUserId()))));
+
+        if (isCurrentAuthor && holder.llAuthorActions != null) {
             holder.llAuthorActions.setVisibility(View.VISIBLE);
 
             if (holder.btnEditReview != null) {
@@ -98,7 +104,8 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
                 holder.btnDeleteReview.setOnClickListener(v -> {
                     int currentPos = holder.getBindingAdapterPosition();
                     if (currentPos != RecyclerView.NO_POSITION && currentPos < reviewList.size()) {
-                        reviewList.remove(currentPos);
+                        Review removedReview = reviewList.get(currentPos);
+                        MockData.deleteReview(removedReview);
                         notifyItemRemoved(currentPos);
                         notifyItemRangeChanged(currentPos, reviewList.size());
                         Toast.makeText(v.getContext(), "Đã xóa đánh giá của bạn!", Toast.LENGTH_SHORT).show();

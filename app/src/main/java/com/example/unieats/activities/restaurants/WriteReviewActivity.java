@@ -1,5 +1,6 @@
 package com.example.unieats.activities.restaurants;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -8,6 +9,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -15,10 +18,12 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.unieats.R;
 import com.example.unieats.entities.Review;
+import com.example.unieats.entities.ReviewPhoto;
 import com.example.unieats.entities.User;
 import com.example.unieats.helpers.MockData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class WriteReviewActivity extends AppCompatActivity {
 
@@ -28,6 +33,20 @@ public class WriteReviewActivity extends AppCompatActivity {
     private EditText etReviewComment;
     private Button btnPostReview;
     private int selectedRating = 4;
+    private TextView lastClickedPhotoBox;
+    private final List<ReviewPhoto> selectedReviewPhotos = new ArrayList<>();
+
+    private final ActivityResultLauncher<String> pickPhotoLauncher =
+            registerForActivityResult(new ActivityResultContracts.GetContent(), uri -> {
+                if (uri != null) {
+                    selectedReviewPhotos.add(new ReviewPhoto(uri.toString()));
+                    if (lastClickedPhotoBox != null) {
+                        lastClickedPhotoBox.setText("✓ Đã chọn ảnh");
+                        lastClickedPhotoBox.setTextColor(getResources().getColor(R.color.orange_500, getTheme()));
+                    }
+                    Toast.makeText(this, "Đã chọn ảnh từ thư viện!", Toast.LENGTH_SHORT).show();
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,9 +101,12 @@ public class WriteReviewActivity extends AppCompatActivity {
 
         TextView[] photoBoxes = new TextView[]{tvAddPhoto1, tvAddPhoto2, tvAddPhoto3};
         for (TextView box : photoBoxes) {
-            box.setOnClickListener(v -> 
-                Toast.makeText(WriteReviewActivity.this, "Chọn ảnh từ thư viện", Toast.LENGTH_SHORT).show()
-            );
+            if (box != null) {
+                box.setOnClickListener(v -> {
+                    lastClickedPhotoBox = box;
+                    pickPhotoLauncher.launch("image/*");
+                });
+            }
         }
 
         btnPostReview.setOnClickListener(v -> {
@@ -96,7 +118,7 @@ public class WriteReviewActivity extends AppCompatActivity {
             User currentUser = MockData.getCurrentUser();
             String authorName = (currentUser != null && currentUser.getName() != null) ? currentUser.getName() + " (Tôi)" : "Phương (Tôi)";
 
-            Review newReview = new Review(authorName, comment, selectedRating, true, new ArrayList<>());
+            Review newReview = new Review(authorName, comment, selectedRating, true, new ArrayList<>(selectedReviewPhotos));
             MockData.addReview(newReview);
 
             Toast.makeText(WriteReviewActivity.this, "Đăng đánh giá thành công!", Toast.LENGTH_SHORT).show();

@@ -1,5 +1,7 @@
 package com.example.unieats.activities.restaurants;
 
+import android.app.AlertDialog;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -8,6 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -22,7 +26,29 @@ public class ContributeRestaurantActivity extends AppCompatActivity {
     private ImageView tvBack;
     private TextView tvUploadCover, tvUploadMenu;
     private EditText etName, etAddress, etCategory, etPriceMin, etPriceMax;
-    private Button btnSelectCoordinates, btnSubmit;
+    private Button btnSubmit;
+    private Uri coverUri = null;
+    private Uri menuUri = null;
+
+    private final ActivityResultLauncher<String> pickCoverLauncher =
+            registerForActivityResult(new ActivityResultContracts.GetContent(), uri -> {
+                if (uri != null) {
+                    coverUri = uri;
+                    tvUploadCover.setText("✓ Đã chọn ảnh bìa quán");
+                    tvUploadCover.setTextColor(getResources().getColor(R.color.orange_500, getTheme()));
+                    Toast.makeText(this, "Đã chọn ảnh bìa từ thư viện thiết bị!", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+    private final ActivityResultLauncher<String> pickMenuLauncher =
+            registerForActivityResult(new ActivityResultContracts.GetContent(), uri -> {
+                if (uri != null) {
+                    menuUri = uri;
+                    tvUploadMenu.setText("✓ Đã chọn ảnh thực đơn");
+                    tvUploadMenu.setTextColor(getResources().getColor(R.color.orange_500, getTheme()));
+                    Toast.makeText(this, "Đã chọn ảnh menu/bảng giá từ thư viện thiết bị!", Toast.LENGTH_SHORT).show();
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,24 +74,21 @@ public class ContributeRestaurantActivity extends AppCompatActivity {
         etCategory = findViewById(R.id.etCategory);
         etPriceMin = findViewById(R.id.etPriceMin);
         etPriceMax = findViewById(R.id.etPriceMax);
-        btnSelectCoordinates = findViewById(R.id.btnSelectCoordinates);
         btnSubmit = findViewById(R.id.btnSubmit);
+
+        // Make category click-only dropdown
+        etCategory.setFocusable(false);
+        etCategory.setClickable(true);
     }
 
     private void setupListeners() {
         tvBack.setOnClickListener(v -> finish());
 
-        btnSelectCoordinates.setOnClickListener(v -> 
-            Toast.makeText(ContributeRestaurantActivity.this, "Đã chọn tọa độ trên bản đồ (10.87, 106.80)", Toast.LENGTH_SHORT).show()
-        );
+        etCategory.setOnClickListener(v -> showCategorySelectionDialog());
 
-        tvUploadCover.setOnClickListener(v -> 
-            Toast.makeText(ContributeRestaurantActivity.this, "Chọn ảnh không gian quán", Toast.LENGTH_SHORT).show()
-        );
+        tvUploadCover.setOnClickListener(v -> pickCoverLauncher.launch("image/*"));
 
-        tvUploadMenu.setOnClickListener(v -> 
-            Toast.makeText(ContributeRestaurantActivity.this, "Chọn ảnh menu / bảng giá", Toast.LENGTH_SHORT).show()
-        );
+        tvUploadMenu.setOnClickListener(v -> pickMenuLauncher.launch("image/*"));
 
         btnSubmit.setOnClickListener(v -> {
             String name = etName.getText().toString().trim();
@@ -86,13 +109,33 @@ public class ContributeRestaurantActivity extends AppCompatActivity {
             double minPrice = minStr.isEmpty() ? 25000 : Double.parseDouble(minStr);
             double maxPrice = maxStr.isEmpty() ? 50000 : Double.parseDouble(maxStr);
 
-            Restaurant newRest = new Restaurant(name, address, 5.0, 1, minPrice, maxPrice, "500 m", category.isEmpty() ? "Mới tạo" : category);
+            Restaurant newRest = new Restaurant(name, address, 5.0, 1, minPrice, maxPrice, "500 m", category.isEmpty() ? "Món Việt" : category);
             newRest.setStatus("PENDING");
+            if (coverUri != null) {
+                newRest.setCoverImageUrl(coverUri.toString());
+            } else {
+                newRest.setCoverImageUrl("cover_photo.jpg");
+            }
+
+            if (menuUri != null) {
+                newRest.getAttachedPhotos().add(menuUri.toString());
+            } else {
+                newRest.getAttachedPhotos().add("photo_menu_1");
+            }
+            newRest.getAttachedPhotos().add("photo_menu_2");
 
             MockData.addContributedRestaurant(newRest);
 
-            Toast.makeText(ContributeRestaurantActivity.this, "Đã gửi thông tin quán chờ duyệt!", Toast.LENGTH_LONG).show();
+            Toast.makeText(ContributeRestaurantActivity.this, "Đã gửi đóng góp quán & ảnh menu thành công! Quán đang chờ Admin kiểm duyệt.", Toast.LENGTH_LONG).show();
             finish();
         });
+    }
+
+    private void showCategorySelectionDialog() {
+        String[] categories = new String[]{"Cơm", "Bún / Phở / Mì", "Ăn vặt", "Trà sữa / Cà phê", "Lẩu & Nướng", "Đồ ăn nhanh"};
+        new AlertDialog.Builder(this)
+                .setTitle("Chọn danh mục món ăn")
+                .setItems(categories, (dialog, which) -> etCategory.setText(categories[which]))
+                .show();
     }
 }

@@ -1,12 +1,13 @@
 package com.example.unieats.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Restaurant {
     private String restaurantId;
     private String name;
     private String slug;
     private String address;
-    private double latitude;
-    private double longitude;
     private double priceRangeMin;
     private double priceRangeMax;
     private String openingTime;
@@ -18,7 +19,10 @@ public class Restaurant {
     private String createdBy;
     private String createdAt;
     private String updatedAt;
-    
+
+    // List of attached photos (menu photos, space photos)
+    private List<String> attachedPhotos = new ArrayList<>();
+
     // UI Helpers
     private String distance;
     private String tag;
@@ -56,12 +60,6 @@ public class Restaurant {
 
     public String getAddress() { return address; }
     public void setAddress(String address) { this.address = address; }
-
-    public double getLatitude() { return latitude; }
-    public void setLatitude(double latitude) { this.latitude = latitude; }
-
-    public double getLongitude() { return longitude; }
-    public void setLongitude(double longitude) { this.longitude = longitude; }
 
     public double getPriceRangeMin() { return priceRangeMin; }
     public void setPriceRangeMin(double priceRangeMin) { this.priceRangeMin = priceRangeMin; }
@@ -101,6 +99,17 @@ public class Restaurant {
 
     public String getTag() { return tag; }
     public void setTag(String tag) { this.tag = tag; }
+
+    public List<String> getAttachedPhotos() {
+        if (attachedPhotos == null) {
+            attachedPhotos = new ArrayList<>();
+        }
+        return attachedPhotos;
+    }
+
+    public void setAttachedPhotos(List<String> attachedPhotos) {
+        this.attachedPhotos = attachedPhotos;
+    }
 
     private boolean expanded = false;
     public boolean isExpanded() { return expanded; }

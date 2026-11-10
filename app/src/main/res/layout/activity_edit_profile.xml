@@ -136,7 +136,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:gravity="center_vertical"
-                android:text="Đổi mật khẩu / Khôi phục mật khẩu"
+                android:text="Đổi mật khẩu"
                 android:textColor="@color/orange_500"
                 android:textSize="13sp"
                 android:textStyle="bold"

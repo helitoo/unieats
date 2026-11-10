@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.unieats.R;
@@ -38,8 +39,12 @@ public class ManageUserAdapter extends RecyclerView.Adapter<ManageUserAdapter.Vi
 
         holder.tvUserName.setText(user.getName() != null ? user.getName() : "Người dùng");
         
-        String roleStr = user.getRole() != null ? user.getRole() : "User";
-        String statusStr = user.getStatus() != null ? user.getStatus() : "Đang hoạt động";
+        String rawRole = user.getRole() != null ? user.getRole() : "User";
+        String roleStr = ("ADMIN".equalsIgnoreCase(rawRole) || "ADMINISTRATOR".equalsIgnoreCase(rawRole)) ? "Quản trị viên" : "Người dùng";
+
+        String rawStatus = user.getStatus() != null ? user.getStatus() : "Đang hoạt động";
+        String statusStr = ("DISABLED".equalsIgnoreCase(rawStatus) || "INACTIVE".equalsIgnoreCase(rawStatus) || "Tạm dừng".equalsIgnoreCase(rawStatus)) ? "Tạm dừng" : "Đang hoạt động";
+
         holder.tvUserRoleStatus.setText(String.format("%s · %s", roleStr, statusStr));
 
         holder.tvUserEmail.setText(String.format("Email: %s", user.getEmail() != null ? user.getEmail() : "N/A"));
@@ -52,11 +57,13 @@ public class ManageUserAdapter extends RecyclerView.Adapter<ManageUserAdapter.Vi
             holder.tvStatusBadge.setTextColor(Color.parseColor("#16A34A"));
             holder.btnToggleStatus.setText("Tạm dừng");
             holder.btnToggleStatus.setBackgroundResource(R.drawable.bg_button_orange);
+            holder.btnToggleStatus.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.neutral_0));
         } else {
             holder.tvStatusBadge.setText("Tạm dừng");
             holder.tvStatusBadge.setTextColor(Color.parseColor("#DC2626"));
             holder.btnToggleStatus.setText("Kích hoạt");
             holder.btnToggleStatus.setBackgroundResource(R.drawable.bg_button_google);
+            holder.btnToggleStatus.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.orange_500));
         }
 
         // Expandable visibility

@@ -53,7 +53,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="ADMIN"
+                    android:text="Quản trị viên"
                     android:textColor="@color/neutral_500"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -302,7 +302,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Section "Quản lý" (ADMIN / MODERATOR) -->
+        <!-- Section "Quản lý" (ADMIN only) -->
         <LinearLayout
             android:id="@+id/llManagementSection"
             android:layout_width="match_parent"
@@ -378,7 +378,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Manage Option 2: Kiểm duyệt quán ăn (ADMIN & MODERATOR) -->
+            <!-- Manage Option 2: Kiểm duyệt quán ăn (ADMIN only) -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvManageRestaurants"
                 android:layout_width="match_parent"

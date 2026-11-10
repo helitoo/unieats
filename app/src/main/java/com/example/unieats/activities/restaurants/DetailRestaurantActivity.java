@@ -18,8 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.unieats.R;
-import com.example.unieats.adapters.MenuAdapter;
-import com.example.unieats.entities.Menu;
+import com.example.unieats.adapters.RestaurantImageAdapter;
 import com.example.unieats.entities.Restaurant;
 import com.example.unieats.helpers.FooterHelper;
 import com.example.unieats.helpers.MockData;
@@ -31,11 +30,12 @@ import java.util.Locale;
 public class DetailRestaurantActivity extends AppCompatActivity {
 
     private ImageView tvBack, tvBookmark;
-    private TextView tvDetailName, tvDetailAddress, tvRatingScore, tvReviewCountText;
+    private TextView tvDetailName, tvDetailAddress, tvRatingScore, tvReviewCountText, tvPhotosCount;
     private View cvRatingCard, llWriteReviewPrompt;
     private Button btnSubmitReview, btnDirections;
-    private RecyclerView rvMenu;
+    private RecyclerView rvAttachedPhotos;
     private String restaurantName;
+    private Restaurant currentRestaurant;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +51,7 @@ public class DetailRestaurantActivity extends AppCompatActivity {
         initViews();
         readIntentData();
         setupFooter();
-        setupMenu();
+        setupAttachedPhotos();
         setupListeners();
     }
 
@@ -62,13 +62,14 @@ public class DetailRestaurantActivity extends AppCompatActivity {
         tvDetailAddress = findViewById(R.id.tvDetailAddress);
         tvRatingScore = findViewById(R.id.tvRatingScore);
         tvReviewCountText = findViewById(R.id.tvReviewCountText);
+        tvPhotosCount = findViewById(R.id.tvPhotosCount);
         cvRatingCard = findViewById(R.id.cvRatingCard);
         llWriteReviewPrompt = findViewById(R.id.llWriteReviewPrompt);
         btnSubmitReview = findViewById(R.id.btnSubmitReview);
         btnDirections = findViewById(R.id.btnDirections);
-        rvMenu = findViewById(R.id.rvMenu);
+        rvAttachedPhotos = findViewById(R.id.rvAttachedPhotos);
 
-        rvMenu.setLayoutManager(new LinearLayoutManager(this));
+        rvAttachedPhotos.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
     }
 
     private void readIntentData() {
@@ -88,17 +89,37 @@ public class DetailRestaurantActivity extends AppCompatActivity {
 
         int reviewCount = getIntent().getIntExtra("EXTRA_RESTAURANT_REVIEW_COUNT", 120);
         tvReviewCountText.setText(String.format(Locale.getDefault(), "%d+ Đánh giá", reviewCount));
+
+        // Find match in MockData
+        for (Restaurant r : MockData.getRestaurants()) {
+            if (r.getName().equalsIgnoreCase(restaurantName)) {
+                currentRestaurant = r;
+                break;
+            }
+        }
     }
 
     private void setupFooter() {
         FooterHelper.setupFooter(this, FooterHelper.Tab.HOME);
     }
 
-    private void setupMenu() {
-        List<Menu> menuList = MockData.getMenus();
+    private void setupAttachedPhotos() {
+        List<String> photosList;
+        if (currentRestaurant != null && !currentRestaurant.getAttachedPhotos().isEmpty()) {
+            photosList = currentRestaurant.getAttachedPhotos();
+        } else {
+            photosList = new ArrayList<>();
+            photosList.add("photo_menu_1");
+            photosList.add("photo_menu_2");
+            photosList.add("photo_space_1");
+        }
 
-        MenuAdapter adapter = new MenuAdapter(menuList);
-        rvMenu.setAdapter(adapter);
+        if (tvPhotosCount != null) {
+            tvPhotosCount.setText(String.format(Locale.getDefault(), "%d ảnh đính kèm", photosList.size()));
+        }
+
+        RestaurantImageAdapter adapter = new RestaurantImageAdapter(photosList);
+        rvAttachedPhotos.setAdapter(adapter);
     }
 
     private void setupListeners() {

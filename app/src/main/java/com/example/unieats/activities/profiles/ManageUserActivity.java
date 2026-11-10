@@ -1,8 +1,10 @@
 package com.example.unieats.activities.profiles;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
 import android.widget.ImageView;
-
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -18,13 +20,19 @@ import com.example.unieats.adapters.ManageUserAdapter;
 import com.example.unieats.entities.User;
 import com.example.unieats.helpers.MockData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ManageUserActivity extends AppCompatActivity {
 
     private ImageView tvBack;
+    private EditText etUserSearch;
     private RecyclerView rvUsers;
     private TextView tvTotalUsersCount, tvActiveUsersCount, tvDisabledUsersCount;
+
+    private List<User> fullUserList;
+    private List<User> displayUserList;
+    private ManageUserAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +52,7 @@ public class ManageUserActivity extends AppCompatActivity {
 
     private void initViews() {
         tvBack = findViewById(R.id.tvBack);
+        etUserSearch = findViewById(R.id.etUserSearch);
         rvUsers = findViewById(R.id.rvUsers);
         rvUsers.setLayoutManager(new LinearLayoutManager(this));
 
@@ -53,12 +62,33 @@ public class ManageUserActivity extends AppCompatActivity {
     }
 
     private void setupUserList() {
-        List<User> userList = MockData.getUsers();
+        fullUserList = MockData.getUsers();
+        displayUserList = new ArrayList<>(fullUserList);
 
-        updateStatistics(userList);
+        updateStatistics(fullUserList);
 
-        ManageUserAdapter adapter = new ManageUserAdapter(userList);
+        adapter = new ManageUserAdapter(displayUserList);
         rvUsers.setAdapter(adapter);
+    }
+
+    private void filterUsers(String query) {
+        displayUserList.clear();
+        if (query == null || query.trim().isEmpty()) {
+            displayUserList.addAll(fullUserList);
+        } else {
+            String lower = query.trim().toLowerCase();
+            for (User u : fullUserList) {
+                if ((u.getName() != null && u.getName().toLowerCase().contains(lower)) ||
+                    (u.getEmail() != null && u.getEmail().toLowerCase().contains(lower)) ||
+                    (u.getPhone() != null && u.getPhone().contains(lower)) ||
+                    (u.getRole() != null && u.getRole().toLowerCase().contains(lower))) {
+                    displayUserList.add(u);
+                }
+            }
+        }
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
     }
 
     private void updateStatistics(List<User> userList) {
@@ -81,5 +111,20 @@ public class ManageUserActivity extends AppCompatActivity {
 
     private void setupListeners() {
         tvBack.setOnClickListener(v -> finish());
+
+        if (etUserSearch != null) {
+            etUserSearch.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    filterUsers(s.toString());
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {}
+            });
+        }
     }
 }

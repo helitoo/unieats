@@ -70,7 +70,9 @@ public class ProfileFragment extends Fragment {
         currentUser = MockData.getCurrentUser();
         if (currentUser != null) {
             tvUserName.setText(String.format("Xin chào, %s!", currentUser.getName()));
-            tvUserRole.setText(currentUser.getRole());
+            String rawRole = currentUser.getRole();
+            String displayRole = (rawRole != null && rawRole.toUpperCase().contains("ADMIN")) ? "Quản trị viên" : "Người dùng";
+            tvUserRole.setText(displayRole);
             applyRolePermissions(currentUser.getRole());
         }
     }
@@ -82,10 +84,6 @@ public class ProfileFragment extends Fragment {
         if (upperRole.contains("ADMIN")) {
             llManagementSection.setVisibility(View.VISIBLE);
             cvManageUsers.setVisibility(View.VISIBLE);
-            cvManageRestaurants.setVisibility(View.VISIBLE);
-        } else if (upperRole.contains("MODERATOR")) {
-            llManagementSection.setVisibility(View.VISIBLE);
-            cvManageUsers.setVisibility(View.GONE);
             cvManageRestaurants.setVisibility(View.VISIBLE);
         } else {
             llManagementSection.setVisibility(View.GONE);

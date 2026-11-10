@@ -217,7 +217,7 @@
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Section "Thực đơn" -->
+            <!-- Section "Hình ảnh & Thực đơn đính kèm" -->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -225,31 +225,33 @@
                 android:layout_marginTop="24dp">
 
                 <TextView
-                    android:id="@+id/tvHeaderMenu"
+                    android:id="@+id/tvHeaderAttachedPhotos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:text="Thực đơn"
+                    android:text="Hình ảnh"
                     android:textColor="@color/neutral_900"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvMenuCount"
+                    android:id="@+id/tvPhotosCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:text="3 món ngon"
+                    android:text="3 ảnh đính kèm"
                     android:textColor="@color/neutral_500"
                     android:textSize="13sp" />
             </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvMenu"
+                android:id="@+id/rvAttachedPhotos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
+                android:clipToPadding="false"
+                android:paddingHorizontal="16dp"
                 android:nestedScrollingEnabled="false" />
 
             <!-- Section "Chia sẻ trải nghiệm của bạn" -->
