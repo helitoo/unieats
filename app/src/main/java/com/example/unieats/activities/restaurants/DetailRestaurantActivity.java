@@ -29,7 +29,7 @@ import java.util.Locale;
 
 public class DetailRestaurantActivity extends AppCompatActivity {
 
-    private ImageView tvBack, tvBookmark;
+    private ImageView tvBack, tvBookmark, ivCover;
     private TextView tvDetailName, tvDetailAddress, tvRatingScore, tvReviewCountText, tvPhotosCount;
     private View cvRatingCard, llWriteReviewPrompt;
     private Button btnSubmitReview, btnDirections;
@@ -51,12 +51,14 @@ public class DetailRestaurantActivity extends AppCompatActivity {
         initViews();
         readIntentData();
         setupFooter();
+        com.example.unieats.helpers.ImageHelper.loadDrawable(ivCover, currentRestaurant != null ? currentRestaurant.getCoverImageUrl() : null);
         setupAttachedPhotos();
         setupListeners();
     }
 
     private void initViews() {
         tvBack = findViewById(R.id.tvBack);
+        ivCover = findViewById(R.id.ivCover);
         tvBookmark = findViewById(R.id.tvBookmark);
         tvDetailName = findViewById(R.id.tvDetailName);
         tvDetailAddress = findViewById(R.id.tvDetailAddress);

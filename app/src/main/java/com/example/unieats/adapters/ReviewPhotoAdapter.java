@@ -31,7 +31,8 @@ public class ReviewPhotoAdapter extends RecyclerView.Adapter<ReviewPhotoAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ReviewPhoto item = photoList.get(position);
-        // Photo binding placeholder / URL loading
+        // Photo binding -> load local drawable
+        com.example.unieats.helpers.ImageHelper.loadDrawable(holder.ivReviewPhoto, item.getPhotoUrl());
     }
 
     @Override

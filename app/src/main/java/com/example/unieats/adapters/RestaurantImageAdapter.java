@@ -31,7 +31,7 @@ public class RestaurantImageAdapter extends RecyclerView.Adapter<RestaurantImage
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String photo = photoList.get(position);
         if (holder.ivRestaurantPhoto != null) {
-            holder.ivRestaurantPhoto.setImageResource(R.mipmap.ic_launcher);
+        com.example.unieats.helpers.ImageHelper.loadDrawable(holder.ivRestaurantPhoto, photo);
         }
     }
 

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -48,6 +49,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Restaurant item = restaurantList.get(position);
         holder.tvRestaurantName.setText(item.getName());
+        com.example.unieats.helpers.ImageHelper.loadDrawable(holder.ivRestaurantCover, item.getCoverImageUrl());
 
         String ratingText = String.format(Locale.getDefault(), "%.1f", item.getRatingAvg());
         holder.tvRating.setText(ratingText);
@@ -99,11 +101,13 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView ivRestaurantCover;
         TextView tvRestaurantName, tvRating, tvReviewCountDistance, tvPriceRange, tvTag;
         Button btnUnsave;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            ivRestaurantCover = itemView.findViewById(R.id.ivRestaurantCover);
             tvRestaurantName = itemView.findViewById(R.id.tvRestaurantName);
             tvRating = itemView.findViewById(R.id.tvRating);
             tvReviewCountDistance = itemView.findViewById(R.id.tvReviewCountDistance);

@@ -38,6 +38,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
 
         DecimalFormat formatter = new DecimalFormat("#,###đ");
         holder.tvMenuPrice.setText(formatter.format(item.getPrice()));
+        com.example.unieats.helpers.ImageHelper.loadDrawable(holder.ivMenuImage, item.getImageUrl());
     }
 
     @Override

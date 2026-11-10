@@ -47,34 +47,41 @@ public class MockData {
         r1.setStatus("APPROVED");
         r1.setOpeningTime("06:30");
         r1.setClosingTime("21:30");
+        r1.setCoverImageUrl("img_com_nha_goc_san_truong");
 
         Restaurant r2 = new Restaurant("Bún bò Cô Ba", "Làng Đại Học, Thủ Đức", 4.7, 96, 30000, 45000, "800 m", "Được yêu thích");
         r2.setStatus("APPROVED");
         r2.setOpeningTime("07:00");
         r2.setClosingTime("21:00");
+        r2.setCoverImageUrl("img_bun_bo_co_ba");
 
         Restaurant r3 = new Restaurant("Trà sữa Gong Cha", "Đường Võ Văn Ngân, Thủ Đức", 4.5, 210, 35000, 60000, "1.2 km", "Giảm 20%");
         r3.setStatus("APPROVED");
         r3.setOpeningTime("08:00");
         r3.setClosingTime("22:30");
+        r3.setCoverImageUrl("img_tra_sua_gong_cha");
 
         Restaurant r4 = new Restaurant("Bún đậu Mắm Tôm Phố Cổ", "Đường Đặng Văn Bi, Thủ Đức", 4.6, 85, 35000, 70000, "1.5 km", "Món Bắc");
+        r4.setCoverImageUrl("img_bun_dau_pho_co");
         r4.setStatus("PENDING");
         r4.setOpeningTime("10:00");
         r4.setClosingTime("22:00");
 
         Restaurant r5 = new Restaurant("Cơm Tấm Ba Ghiền", "Xa Lộ Hà Nội, Thủ Đức", 4.9, 340, 40000, 75000, "2.0 km", "Nổi tiếng");
         r5.setStatus("APPROVED");
+        r5.setCoverImageUrl("img_com_tam_ba_ghien");
         r5.setOpeningTime("06:00");
         r5.setClosingTime("22:00");
 
         Restaurant r6 = new Restaurant("Lẩu Thái Xóm Trọ", "45 Đường Số 8, Linh Trung, Thủ Đức", 4.2, 18, 70000, 150000, "2.3 km", "Lẩu nướng");
         r6.setStatus("REJECTED");
+        r6.setCoverImageUrl("img_lau_thai_xom_tro");
         r6.setOpeningTime("10:00");
         r6.setClosingTime("22:00");
 
         Restaurant r7 = new Restaurant("Gà Rán Chợ Đêm", "Cổng A Làng Đại Học, Thủ Đức", 4.3, 45, 30000, 60000, "600 m", "Ăn vặt");
         r7.setStatus("PENDING");
+        r7.setCoverImageUrl("img_ga_ran_cho_dem");
         r7.setOpeningTime("15:00");
         r7.setClosingTime("23:00");
 
@@ -107,10 +114,12 @@ public class MockData {
 
         // Contributed Restaurants
         Restaurant c1 = new Restaurant("Cơm nhà Góc Sân Trường", "Khu Phố 6, Linh Trung, Thủ Đức", 4.8, 128, 25000, 45000, "500 m", "Giá sinh viên");
+        c1.setCoverImageUrl("img_com_nha_goc_san_truong");
         c1.getAttachedPhotos().add("photo_menu_1");
         c1.getAttachedPhotos().add("photo_menu_2");
 
         Restaurant c2 = new Restaurant("Quán Lẩu Sinh Viên 99k", "Làng Đại Học, Thủ Đức", 4.6, 42, 99000, 199000, "1.1 km", "Món lẩu");
+        c2.setCoverImageUrl("img_lau_sinh_vien_99k");
         c2.getAttachedPhotos().add("photo_menu_1");
 
         contributedRestaurantsList.add(c1);
@@ -133,6 +142,21 @@ public class MockData {
         reviewShortList.add(new ReviewShort("Cơm nhà Góc Sân Trường", "Khu Phố 6, Linh Trung, Thủ Đức", 5, "Cơm tấm ngon tuyệt vời!"));
         reviewShortList.add(new ReviewShort("Bún bò Cô Ba", "Làng Đại Học, Thủ Đức", 4, "Nước dùng đậm đà hợp khẩu vị."));
         reviewShortList.add(new ReviewShort("Bún bò Huế An Nhiên", "Làng Đại học, Thủ Đức", 5, "Quán sạch sẽ, phục vụ chu đáo."));
+
+        // Sample Menus
+        menuList.add(createMenu("m1", "Cơm Tấm Sườn Bì Chả", "Sườn nướng mật ong, bì, chả trứng", 35000, "menu_com_tam_suon"));
+        menuList.add(createMenu("m2", "Bún Bò Huế Đặc Biệt", "Bắp bò, chả cua, giò heo, nước dùng đậm đà", 40000, "menu_bun_bo_hue"));
+        menuList.add(createMenu("m3", "Trà Sữa Trân Châu Đường Đen", "Sữa tươi thanh trùng kết hợp trân châu đường đen", 38000, "menu_tra_sua_tran_chau"));
+        menuList.add(createMenu("m4", "Bún Đậu Mắm Tôm Thập Cẩm", "Đậu hũ chiên giòn, chả cốm, nem chua rán, thịt luộc", 55000, "menu_bun_dau_thap_cam"));
+        menuList.add(createMenu("m5", "Lẩu Thái Hải Sản", "Tôm, mực, nghêu, nấm và rau ăn kèm", 129000, "menu_lau_thai_hai_san"));
+        menuList.add(createMenu("m6", "Gà Rán Giòn Cay", "Đùi gà chiên giòn rụm kèm khoai tây chiên", 39000, "menu_ga_ran_gion"));
+    }
+
+    private static Menu createMenu(String id, String name, String description, double price, String imageUrl) {
+        Menu menu = new Menu(name, description, price);
+        menu.setMenuId(id);
+        menu.setImageUrl(imageUrl);
+        return menu;
     }
 
     // --- USER CRUD ---
